@@ -4,7 +4,7 @@
 
 CREATE OR REPLACE TABLE Races (
     race_id int NOT NULL AUTO_INCREMENT,
-    name varchar(255) UNIQUE NOT NULL,
+    name varchar(255) NOT NULL,
     description text,
     PRIMARY KEY (race_id)
     -- CONSTRAINT race_name UNIQUE (race_id,name)
@@ -32,20 +32,22 @@ CREATE OR REPLACE TABLE Actions (
     -- CONSTRAINT action_name UNIQUE (action_id, name)
 );
 
-CREATE OR REPLACE TABLE DifficultyClasses (
-    difficulty_class_id int NOT NULL AUTO_INCREMENT,
+CREATE OR REPLACE TABLE EventDifficulties (
+    difficulty_id int NOT NULL AUTO_INCREMENT,
     value int UNIQUE NOT NULL, -- placed unique identifier here instead
     description text,
-    PRIMARY KEY (difficulty_class_id)
+    PRIMARY KEY (difficulty_id)
     -- CONSTRAINT difficulty_type UNIQUE (difficulty_class_id, value)
 );
 
 CREATE OR REPLACE TABLE Items (
     item_id int NOT NULL AUTO_INCREMENT,
     name varchar(255) UNIQUE NOT NULL,
+    quantity int NOT NULL DEFAULT 1,
     item_type_id int,
     PRIMARY KEY (item_id),  -- composite key 
     FOREIGN KEY (item_type_id) REFERENCES ItemTypes(item_type_id)
+    ON DELETE SET NULL
     -- CONSTRAINT item_identity UNIQUE (name, item_type_id)
 );
 
@@ -62,8 +64,10 @@ CREATE OR REPLACE TABLE Characters (
     race_id int,
     class_id int,
     PRIMARY KEY (character_id),
-    FOREIGN KEY (race_id) REFERENCES Races (race_id),
+    FOREIGN KEY (race_id) REFERENCES Races (race_id)
+    ON DELETE SET NULL,
     FOREIGN KEY (class_id) REFERENCES Classes (class_id)
+    ON DELETE SET NULL
 );
 
 -- CREATE OR REPLACE TABLE CharacterDetails (
@@ -78,9 +82,10 @@ CREATE OR REPLACE TABLE SkillChecks (
     skill_check_id int NOT NULL AUTO_INCREMENT,
     description text,
     roll_result int NOT NULL,
-    difficulty_class_id int,
+    difficulty_id int,
     PRIMARY KEY (skill_check_id),
-    FOREIGN KEY (difficulty_class_id) REFERENCES DifficultyClasses (difficulty_class_id)
+    FOREIGN KEY (difficulty_id) REFERENCES EventDifficulties (difficulty_id)
+    ON DELETE SET NULL
 );
 
 CREATE OR REPLACE TABLE SkillCheckDetails (
@@ -89,12 +94,15 @@ CREATE OR REPLACE TABLE SkillCheckDetails (
     character_id int,
     item_id int,
     skill_check_id int,
-    skill_check_success tinyint NOT NULL DEFAULT 0,
     PRIMARY KEY (skill_check_details_id),
-    FOREIGN KEY (action_id) REFERENCES Actions (action_id),
-    FOREIGN KEY (character_id) REFERENCES Characters (character_id),
-    FOREIGN KEY (item_id) REFERENCES Items (item_id),
+    FOREIGN KEY (action_id) REFERENCES Actions (action_id)
+    ON DELETE SET NULL,
+    FOREIGN KEY (character_id) REFERENCES Characters (character_id)
+    ON DELETE SET NULL,
+    FOREIGN KEY (item_id) REFERENCES Items (item_id)
+    ON DELETE SET NULL,
     FOREIGN KEY (skill_check_id) REFERENCES SkillChecks (skill_check_id)
+    ON DELETE CASCADE
 );
 
 
@@ -103,40 +111,42 @@ CREATE OR REPLACE TABLE SkillCheckDetails (
 
 -----------------------POPULATING RACES TABLE--------------------------------------
 INSERT INTO Races (
-    name
+    name,
+    description
 )
 VALUES 
-    ("Dwarf"),
-    ("Dragonborn"),
-    ("Drow"),
-    ("Elf"),
-    ("Gnome"),
-    ("Githyanki"),
-    ("Half-Elf"),
-    ("Half-Orc"),
-    ("Halfling"),
-    ("Human"),
-    ("Tiefling"),
-    ("Orc");
+    ("Dwarf", "STR Proficiency"),
+    ("Dragonborn", "CON Proficiency"),
+    ("Drow", "DEX Proefiency"),
+    ("Elf", "DEX Proficiency"),
+    ("Gnome", "DEX Proficiency"),
+    ("Githyanki", "WIS Proficiency"),
+    ("Half-Elf", "DEX Proficiency"),
+    ("Half-Orc", "CON Proficiency"),
+    ("Halfling", "DEX Proficiency"),
+    ("Human", "CHR Proficiency"),
+    ("Tiefling", "CON Profiency"),
+    ("Orc", "STR Profiency");
 
 ------------------------------POPULATING CLASSES TABLE---------------------------
 INSERT INTO Classes (
-    name
+    name,
+    description
 )
 VALUES
-    ("Rogue"),
-    ("Ranger"),
-    ("Warlock"),
-    ("Wizard"),
-    ("Barbarian"),
-    ("Fighter"),
-    ("Druid"),
-    ("Paladin"),
-    ("Cleric"),
-    ("Sorceror"),
-    ("Monk"),
-    ("Artificier"),
-    ("Bard");
+    ("Rogue", "Persuasion/Deception Prof."),
+    ("Ranger", "Survival/Nature Prof."),
+    ("Warlock", "Arcana/Persuasion Prof."),
+    ("Wizard", "Arcana/History Prof."),
+    ("Barbarian", "Intimidation/Athletics Prof."),
+    ("Fighter", "Athletics/Intimidation Prof."),
+    ("Druid", "Nature/Arcana Prof."),
+    ("Paladin", "Persuasion/Intimidation Prof."),
+    ("Cleric", "Arcana/Religion Prof." ),
+    ("Sorceror", "Arcana/History Prof."),
+    ("Monk", "Performance/Athletics Prof."),
+    ("Artificier", "History/Perfomance Prof."),
+    ("Bard", "Performance/Persuasion Prof.");
 
 ---------------------------POPULATING ITEMTYPES TABLE------------------------------
 INSERT INTO ItemTypes (
@@ -166,7 +176,7 @@ VALUES
 
 
 ------------------------POPULATING DIFFICULTYCLASSES TABLE----------------------
-INSERT INTO DifficultyClasses (
+INSERT INTO EventDifficulties (
     value,
     description
 )
@@ -287,7 +297,7 @@ VALUES
 INSERT INTO SkillChecks (
     description,
     roll_result,
-    difficulty_class_id
+    difficulty_id
 )
 VALUES
     ("Attempt to Cross Icy Bridge", 1, 4),
@@ -352,7 +362,7 @@ VALUES
 -- SkillCheckDetails.item_id = 2 -> "Boots of Speed" 
         ---> Items.item_type_id = 3 -> "Armor"
 -- SkillCheckDetails.skill_check_id = 1 
-        ---> SkillChecks.difficulty_class_id = 4 -> "Difficult"
+        ---> SkillChecks.difficulty_id = 4 -> "Difficult"
         ---> SkillChecks.description = ""Attempt to Cross Icy Bridge""
 
 
@@ -368,7 +378,7 @@ VALUES
 -- SkillCheckDetails.item_id = 4 -> "Scroll of Charm" 
         ---> Items.item_type_id = 2 -> "Scroll"
 -- SkillCheckDetails.skill_check_id = 2 
-        ---> SkillChecks.difficulty_class_id = 6 -> "Extreme"
+        ---> SkillChecks.difficulty_id = 6 -> "Extreme"
         ---> SkillChecks.description = ""Attempt to Initmidate Bronze Dragon""
 
 
@@ -384,7 +394,7 @@ VALUES
 -- SkillCheckDetails.item_id = 6 -> "Ring of Invisibility" 
         ---> Items.item_type_id = 6 -> "Ring"
 -- SkillCheckDetails.skill_check_id = 3 
-        ---> SkillChecks.difficulty_class_id = 5 -> "Very Difficult"
+        ---> SkillChecks.difficulty_id = 5 -> "Very Difficult"
         ---> SkillChecks.description = ""Attempt to Sneak Past Spectator""
 
 
@@ -445,3 +455,15 @@ VALUES
 -- DELETE FROM Items WHERE Items.item_id = 1;
 -- select * from Items; -- confirm deletion of item 
 -- select * from ItemTypes; -- check for alterations in ItemsTypes table
+
+-- clear database
+-- set foreign_key_checks = 0;
+-- drop table Actions;
+-- drop table Characters;
+-- drop table Classes;
+-- drop table EventDifficulties;
+-- drop table ItemTypes;
+-- drop table Items;
+-- drop table Races;
+-- drop table SkillCheckDetails;
+-- drop table SkillChecks;
