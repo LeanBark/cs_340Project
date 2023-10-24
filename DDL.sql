@@ -8,7 +8,7 @@ SET AUTOCOMMIT = 0;
 
 CREATE OR REPLACE TABLE Races (
     race_id int NOT NULL AUTO_INCREMENT,
-    name varchar(255) NOT NULL,
+    name varchar(255) UNIQUE NOT NULL,
     description text,
     PRIMARY KEY (race_id)
 );
@@ -63,7 +63,7 @@ CREATE OR REPLACE TABLE Items (
 
 CREATE OR REPLACE TABLE Characters (
     character_id int NOT NULL AUTO_INCREMENT,
-    name varchar(255) UNIQUE NOT NULL,
+    name varchar(255) NOT NULL,
     level int NOT NULL DEFAULT 1,
     strength int NOT NULL DEFAULT 10,
     dexterity int NOT NULL DEFAULT 10,
