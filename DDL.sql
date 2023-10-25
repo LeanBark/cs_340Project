@@ -56,7 +56,7 @@ CREATE OR REPLACE TABLE Items (
     item_type_id int,
     PRIMARY KEY (item_id),
     FOREIGN KEY (item_type_id) REFERENCES ItemTypes(item_type_id)
-    ON DELETE SET NULL
+    ON DELETE RESTRICT
 );
 
 -----------------------------CREATE CHARACTERS TABLE-------------------
@@ -75,9 +75,9 @@ CREATE OR REPLACE TABLE Characters (
     class_id int,
     PRIMARY KEY (character_id),
     FOREIGN KEY (race_id) REFERENCES Races (race_id)
-    ON DELETE SET NULL,
+    ON DELETE RESTRICT,
     FOREIGN KEY (class_id) REFERENCES Classes (class_id)
-    ON DELETE SET NULL
+    ON DELETE RESTRICT
 );
 
 -----------------------------CREATE SKILLCHECKS TABLE-------------------
@@ -89,7 +89,7 @@ CREATE OR REPLACE TABLE SkillChecks (
     difficulty_id int,
     PRIMARY KEY (skill_check_id),
     FOREIGN KEY (difficulty_id) REFERENCES EventDifficulties (difficulty_id)
-    ON DELETE SET NULL
+    ON DELETE RESTRICT
 );
 
 -----------------------------CREATE SKILLCHECKDETAILS TABLE-------------------
@@ -102,11 +102,11 @@ CREATE OR REPLACE TABLE SkillCheckDetails (
     skill_check_id int,
     PRIMARY KEY (skill_check_details_id),
     FOREIGN KEY (action_id) REFERENCES Actions (action_id)
-    ON DELETE SET NULL,
+    ON DELETE RESTRICT,
     FOREIGN KEY (character_id) REFERENCES Characters (character_id)
-    ON DELETE SET NULL,
+    ON DELETE RESTRICT,
     FOREIGN KEY (item_id) REFERENCES Items (item_id)
-    ON DELETE SET NULL,
+    ON DELETE RESTRICT,
     FOREIGN KEY (skill_check_id) REFERENCES SkillChecks (skill_check_id)
     ON DELETE CASCADE
 );
