@@ -10,8 +10,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 PORT        = 8181;                 // Set a port number at the top so it's easy to change in the future
 
-// Handlebars template
-// app.js
+
 
 const { engine } = require('express-handlebars');
 var exphbs = require("express-handlebars");     // Import express-handlebars
@@ -26,9 +25,22 @@ var db = require('./db-connector')
 /*
     ROUTES
 */
-// app.js
 
-app.get('/', function(req, res)
+//-------------Retrieve Character Information to populate Character Table----------------------------------------//
+
+app.get('/', function(req,res){
+    res.render('home');
+});
+
+app.get('/actions', function(req, res){
+    res.render('actions');
+});
+
+app.get('/events', function(req,res){
+    res.render('events');
+});
+
+app.get('/characters', function(req, res)
     {
         let query1 = "SELECT * FROM Characters;";
         let query2 = "SELECT * FROM Races;";
@@ -37,6 +49,9 @@ app.get('/', function(req, res)
             let characters = rows;
             db.pool.query(query2, (err, rows, fields) => {
                 let races = rows;
+
+                //commented out section(s) between queries to be used if we wanted to use array.map to search for a character by a set criteria
+
                 // let raceMap = {}
                 // races.map(race => {
                 //     let race_id = parseInt(race.race_id, 10);
@@ -49,6 +64,7 @@ app.get('/', function(req, res)
                     let classes = rows;
                     return res.render('index', {data: characters, races: races, classes: classes});
                 })
+
                 // db.pool.query(query3, (err, rows, fields) => {
                 //     let classes = rows;
                 //     let classMap = {};
@@ -65,6 +81,8 @@ app.get('/', function(req, res)
             })
         })
     });
+
+//------------------Creates New Character from Input Data-------------------------------//
 
 app.post('/add-character', function(req, res)
 {
@@ -127,7 +145,74 @@ app.post('/add-character', function(req, res)
             })
         }
     })
-});                                         // will process this file, before sending the finished HTML to the client.
+});
+
+
+//-------------------Updates Selected Character's Information according to input data------------------------------//
+
+app.put('/update-character', function (req, res, next){
+    let data = req.body;
+    let character = parseInt(data.name);
+
+    let level = parseInt(data.level);
+    if (isNaN(level)){
+        level = 1;
+    }
+    let strength = parseInt(data.strength);
+    if (isNaN(strength)){
+        strength = 10;
+    }
+    let dexterity = parseInt(data.dexterity);
+    if (isNaN(dexterity)){
+        dexterity = 10;
+    }
+    let constitution = parseInt(data.constitution);
+    if (isNaN(constitution)){
+        constitution = 10;
+    }
+    let intelligence = parseInt(data.intelligence);
+    if (isNaN(intelligence)){
+        intelligence = 10;
+    }
+    let wisdom = parseInt(data.wisdom);
+    if (isNaN(wisdom)){
+        wisdom = 10;
+    }
+    let charisma = parseInt(data.charisma);
+    if (isNaN(charisma)){
+        charisma = 10;
+    }
+    let race_id = parseInt(data.race_id);
+    if (isNaN(race_id)){
+        race_id = NULL;
+    }
+    let class_id = parseInt(data.class_id);
+    if (isNaN(class_id)){
+        class_id = NULL;
+    }
+
+    let queryUpdateMaster = `UPDATE Characters SET level = ?, strength = ?, dexterity = ?, constitution = ?, intelligence = ?, wisdom = ?, charisma = ?,
+     race_id = ?, class_id = ? WHERE Characters.character_id = ?;`;
+    let selectCharacter = `SELECT * FROM Characters WHERE character_id = ?;`;
+
+    db.pool.query(queryUpdateMaster, [level, strength, dexterity, constitution, intelligence, wisdom, charisma, race_id, class_id, character], function(error, rows, fields){
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            db.pool.query(selectCharacter, [character], function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
 // /*
 //     LISTENER
 // */

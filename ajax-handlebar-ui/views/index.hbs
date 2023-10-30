@@ -1,0 +1,132 @@
+<!-- index.hbs -->
+
+{{!-- ------------------------Character Table Heading Display------------------------- --}}
+<h1>Characters Table</h1>
+<table id="characters-table">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    
+    {{!-- -------------------Character Table Row Display---------------------------- --}}
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.character_id}}>
+            <td>{{this.character_id}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.level}}</td>
+            <td>{{this.strength}}</td>
+            <td>{{this.dexterity}}</td>
+            <td>{{this.constitution}}</td>
+            <td>{{this.intelligence}}</td>
+            <td>{{this.wisdom}}</td>
+            <td>{{this.charisma}}</td>
+            <td>{{this.race_id}}</td>
+            <td>{{this.class_id}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- --------------------------- Add Character Input Form Display------------------------ --}}
+<h2>Add A New Character to your Party</h2> 
+<form id="add-character-form">
+    <label for="input-name">Character Name: </label>
+    <input type="text" name="input-name" id="input-name">
+
+    <label for="input-lvl">Character Level: </label>
+    <input type="number" name="input-lvl" id="input-lvl">
+
+    <label for="input-str">Strength: </label>
+    <input type="number" name="input-str" id="input-str">
+
+    <label for="input-dex">Dexterity: </label>
+    <input type="number" name="input-dex" id="input-dex">
+
+    <label for="input-con">Constitution: </label>
+    <input type="number" name="input-con" id="input-con">
+
+    <label for="input-int">Intelligence: </label>
+    <input type="number" name="input-int" id="input-int">
+
+    <label for="input-wis">Wisdom: </label>
+    <input type="number" name="input-wis" id="input-wis">
+
+    <label for="input-chr">Charisma: </label>
+    <input type="number" name="input-chr" id="input-chr">
+
+    <select name="input-race" id="input-race">
+        <option value="">Select Race</option>
+        {{#each races}}
+        <option value="{{this.race_id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <select name="input-class" id="input-class">
+        <option value="">Select Class</option>
+        {{#each classes}}
+        <option value="{{this.class_id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+</form>
+{{!-------------Ajax Request Script for adding new character to database-------------}}
+<script src="./js/add_character.js"></script>
+
+
+{{!-- -----------Updating Character Information Form-------------------------------- --}}
+<h2>Edit Character Information</h2>
+<form id="update-character-form">
+    <label for="input-character-name">Character Name: </label>
+    <select name="input-character-name" id="selected-character">
+        <option value="test">Select A Character</option>
+        {{#each data}}
+        <option value="{{this.character_id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-lvl">Character Level: </label>
+    <input type="number" name="input-lvl" id="input-lvl-update">
+
+    <label for="input-str">Strength: </label>
+    <input type="number" name="input-str" id="input-str-update">
+
+    <label for="input-dex">Dexterity: </label>
+    <input type="number" name="input-dex" id="input-dex-update">
+
+    <label for="input-con">Constitution: </label>
+    <input type="number" name="input-con" id="input-con-update">
+
+    <label for="input-int">Intelligence: </label>
+    <input type="number" name="input-int" id="input-int-update">
+
+    <label for="input-wis">Wisdom: </label>
+    <input type="number" name="input-wis" id="input-wis-update">
+
+    <label for="input-chr">Charisma: </label>
+    <input type="number" name="input-chr" id="input-chr-update">
+
+    <label for="input-character-race">Race: </label>
+    <select name="input-character-race" id="input-race-update">
+        <option>Select A New Race</option>
+        {{#each races}}
+        <option value="{{this.race_id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-character-class">Class: </label>
+    <select name="input-character-class" id="input-class-update">
+        <option>Select A New Class</option>
+        {{#each classes}}
+        <option value="{{this.class_id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">   
+</form>
+<script src="./js/update_character.js"></script>
