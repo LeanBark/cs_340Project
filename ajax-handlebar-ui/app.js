@@ -33,11 +33,35 @@ app.get('/', function(req,res){
 });
 
 app.get('/actions', function(req, res){
-    res.render('actions');
+    let query1 = "SELECT * FROM Actions;";
+    db.pool.query(query1, function(err, rows, fields){
+        res.render('actions', {data: rows});
+    })
 });
 
-app.get('/events', function(req,res){
-    res.render('events');
+app.get('/events', function(req, res){
+    let query1 = "SELECT * FROM SkillChecks;";
+    let query2 = "SELECT * FROM EventDifficulties;";
+    db.pool.query(query1, function(err, rows, fields){
+        let checkEvents = rows;
+        db.pool.query(query2, function(err, rows, fields){
+            let difficulties = rows;
+            return res.render('events', {data: checkEvents, difficulties: difficulties});
+        })
+    })
+});
+
+app.get('/items', function(req,res){
+    let query1 = "SELECT * FROM Items;";
+    let query2 = "SELECT * FROM ItemTypes;";
+    db.pool.query(query1, function(err, rows, fields){
+        let items = rows;
+        db.pool.query(query2, function(err, rows, fields){
+            let types = rows;
+            return res.render('items', {data: items, types: types});
+        })
+        
+    })
 });
 
 app.get('/characters', function(req, res)
@@ -147,6 +171,88 @@ app.post('/add-character', function(req, res)
     })
 });
 
+app.post('/add-action', function(req, res){
+    let data = req.body;
+    let query2 = `INSERT INTO Actions (name) VALUES ('${data.name}');`;
+    db.pool.query(query2, function (error, rows, fields){
+        if (error){
+            console.log(error);
+            res.sendStatus(400);
+        } else 
+        {
+            let query3 = `SELECT * FROM Actions;`;
+            db.pool.query(query3, function(error, rows, fields){
+                if(error){
+                    console.log(error);
+                    res.sendStatus(400);
+                } else 
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+app.post('/add-event', function(req, res){
+    let data = req.body;
+    let roll_result = parseInt(data.roll_result);
+    if (isNaN(roll_result)){
+        roll_result = 1;
+    }
+    let difficulty_id = parseInt(data.difficulty_id);
+    if (isNaN(difficulty_id)){
+        difficulty_id = NULL;
+    }
+    let query2 = `INSERT INTO SkillChecks (description, roll_result, difficulty_id) VALUES ('${data.description}','${roll_result}', '${difficulty_id}');`;
+    db.pool.query(query2, function (error, rows, fields){
+        if (error){
+            console.log(error);
+            res.sendStatus(400);
+        } else 
+        {
+            let query3 = `SELECT * FROM SkillChecks;`;
+            db.pool.query(query3, function(error, rows, fields){
+                if(error){
+                    console.log(error);
+                    res.sendStatus(400);
+                } else 
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+app.post('/add-item', function(req, res)
+{
+    let data = req.body;
+    let quantity = parseInt(data.quantity);
+    if (isNaN(quantity)){
+        quantity = 1;
+    }
+
+    let query2 = `INSERT INTO Items (name, quantity, item_type_id) VALUES ('${data.name}','${data.quantity}','${data.item_type_id}');`;
+    db.pool.query(query2, function(error, rows, fields){
+        if (error){
+            console.log(error);
+            res.sendStatus(400);
+        } else 
+        {
+            let query3 = `SELECT * FROM Items;`;
+            db.pool.query(query3, function(error, rows, fields){
+                if(error){
+                    console.log(error);
+                    res.sendStatus(400);
+                } else 
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 //-------------------Updates Selected Character's Information according to input data------------------------------//
 
