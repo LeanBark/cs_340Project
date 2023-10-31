@@ -1,2 +1,31 @@
 <h1>Available Actions Table</h1>
-<p>Coming to you soon...</p>
+<table id="actions-table">.
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.action_id}}</td>
+            <td>{{this.name}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<h2>Add A New Character Action</h2>
+<form id="add-action-form">
+    <label for="input-action-name">New Action: </label>
+    <input type="text" name="input-action-name" id="input-action-name" placeholder="Enter Action">
+
+    <input type="submit">
+</form>
+
+<script src="./js/add_action.js"></script>

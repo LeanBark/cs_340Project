@@ -37,28 +37,28 @@
 <h2>Add A New Character to your Party</h2> 
 <form id="add-character-form">
     <label for="input-name">Character Name: </label>
-    <input type="text" name="input-name" id="input-name">
+    <input type="text" name="input-name" id="input-name" placeholder="Name">
 
-    <label for="input-lvl">Character Level: </label>
-    <input type="number" name="input-lvl" id="input-lvl">
+    <label for="input-lvl">Level: </label>
+    <input type="number" name="input-lvl" id="input-lvl" placeholder="Level Value">
 
     <label for="input-str">Strength: </label>
-    <input type="number" name="input-str" id="input-str">
+    <input type="number" name="input-str" id="input-str" placeholder="STR Value">
 
     <label for="input-dex">Dexterity: </label>
-    <input type="number" name="input-dex" id="input-dex">
+    <input type="number" name="input-dex" id="input-dex" placeholder="DEX Value">
 
     <label for="input-con">Constitution: </label>
-    <input type="number" name="input-con" id="input-con">
+    <input type="number" name="input-con" id="input-con" placeholder="CON Value">
 
     <label for="input-int">Intelligence: </label>
-    <input type="number" name="input-int" id="input-int">
+    <input type="number" name="input-int" id="input-int" placeholder="INT Value">
 
     <label for="input-wis">Wisdom: </label>
-    <input type="number" name="input-wis" id="input-wis">
+    <input type="number" name="input-wis" id="input-wis" placeholder="WIS Value">
 
     <label for="input-chr">Charisma: </label>
-    <input type="number" name="input-chr" id="input-chr">
+    <input type="number" name="input-chr" id="input-chr" placeholder="CHR Value">
 
     <select name="input-race" id="input-race">
         <option value="">Select Race</option>
@@ -83,7 +83,7 @@
 {{!-- -----------Updating Character Information Form-------------------------------- --}}
 <h2>Edit Character Information</h2>
 <form id="update-character-form">
-    <label for="input-character-name">Character Name: </label>
+    <label for="input-character-name"></label>
     <select name="input-character-name" id="selected-character">
         <option value="test">Select A Character</option>
         {{#each data}}
@@ -91,26 +91,26 @@
         {{/each}}
     </select>
 
-    <label for="input-lvl">Character Level: </label>
-    <input type="number" name="input-lvl" id="input-lvl-update">
+    <label for="input-lvl">Level: </label>
+    <input type="number" name="input-lvl" id="input-lvl-update" placeholder="Level Value">
 
     <label for="input-str">Strength: </label>
-    <input type="number" name="input-str" id="input-str-update">
+    <input type="number" name="input-str" id="input-str-update" placeholder="STR Value">
 
     <label for="input-dex">Dexterity: </label>
-    <input type="number" name="input-dex" id="input-dex-update">
+    <input type="number" name="input-dex" id="input-dex-update" placeholder="DEX Value">
 
     <label for="input-con">Constitution: </label>
-    <input type="number" name="input-con" id="input-con-update">
+    <input type="number" name="input-con" id="input-con-update" placeholder="CON Value">
 
     <label for="input-int">Intelligence: </label>
-    <input type="number" name="input-int" id="input-int-update">
+    <input type="number" name="input-int" id="input-int-update" placeholder="INT Value">
 
     <label for="input-wis">Wisdom: </label>
-    <input type="number" name="input-wis" id="input-wis-update">
+    <input type="number" name="input-wis" id="input-wis-update" placeholder="WIS Value">
 
     <label for="input-chr">Charisma: </label>
-    <input type="number" name="input-chr" id="input-chr-update">
+    <input type="number" name="input-chr" id="input-chr-update" placeholder="CHR Value"> 
 
     <label for="input-character-race">Race: </label>
     <select name="input-character-race" id="input-race-update">
