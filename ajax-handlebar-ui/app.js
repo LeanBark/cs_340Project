@@ -3,7 +3,7 @@
 */
 
 // Express
-var express = require('express');   // We are using the express library for the web server
+var express = require('express');   
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -26,44 +26,15 @@ var db = require('./db-connector')
     ROUTES
 */
 
-//-------------Retrieve Character Information to populate Character Table----------------------------------------//
+//-----------------------------------------------------------HOME PAGE ROUTES-------------------------------------------------//
 
 app.get('/', function(req,res){
     res.render('home');
 });
 
-app.get('/actions', function(req, res){
-    let query1 = "SELECT * FROM Actions;";
-    db.pool.query(query1, function(err, rows, fields){
-        res.render('actions', {data: rows});
-    })
-});
+//-------------------------------------------------------CHARACTERS PAGE ROUTES-----------------------------------------------//
 
-app.get('/events', function(req, res){
-    let query1 = "SELECT * FROM SkillChecks;";
-    let query2 = "SELECT * FROM EventDifficulties;";
-    db.pool.query(query1, function(err, rows, fields){
-        let checkEvents = rows;
-        db.pool.query(query2, function(err, rows, fields){
-            let difficulties = rows;
-            return res.render('events', {data: checkEvents, difficulties: difficulties});
-        })
-    })
-});
-
-app.get('/items', function(req,res){
-    let query1 = "SELECT * FROM Items;";
-    let query2 = "SELECT * FROM ItemTypes;";
-    db.pool.query(query1, function(err, rows, fields){
-        let items = rows;
-        db.pool.query(query2, function(err, rows, fields){
-            let types = rows;
-            return res.render('items', {data: items, types: types});
-        })
-        
-    })
-});
-
+//----------------------------------------READ CHARACTER INFORMATION----------------------------------//
 app.get('/characters', function(req, res)
     {
         let query1 = "SELECT * FROM Characters;";
@@ -73,44 +44,21 @@ app.get('/characters', function(req, res)
             let characters = rows;
             db.pool.query(query2, (err, rows, fields) => {
                 let races = rows;
-
-                //commented out section(s) between queries to be used if we wanted to use array.map to search for a character by a set criteria
-
-                // let raceMap = {}
-                // races.map(race => {
-                //     let race_id = parseInt(race.race_id, 10);
-                //     raceMap[race_id] = race["name"];
-                // })
-                // characters = characters.map(character => {
-                //     return Object.assign(character, {race_id: raceMap[character.race_id]})
-                // })
                 db.pool.query(query3, (err, rows, fields) => {
                     let classes = rows;
-                    return res.render('index', {data: characters, races: races, classes: classes});
+                    return res.render('characters', {data: characters, races: races, classes: classes});
                 })
-
-                // db.pool.query(query3, (err, rows, fields) => {
-                //     let classes = rows;
-                //     let classMap = {};
-                //     classes.map(classy => {
-                //         let class_id = parseInt(classy.class_id, 10);
-                //         classMap[class_id] = classy["name"];
-                //     });
-                //     characters = characters.map(character => {
-                //         return Object.assign(character, {race_id : raceMap[character.race_id]}, {class_id: classMap[character.class_id]});
-                //     });
-                //     return res.render('index', {data: characters, races: races, classes: classes});
-                // })
                                 
             })
         })
     });
 
-//------------------Creates New Character from Input Data-------------------------------//
-
+//-------------------------------------------------ADD/CREATE CHARACTER INFORMATION-------------------------------//    
 app.post('/add-character', function(req, res)
 {
     let data = req.body;
+
+    // SANITIZE/FILTER INPUTS
     let level = parseInt(data.level);
     if (isNaN(level)){
         level = 1;
@@ -148,6 +96,7 @@ app.post('/add-character', function(req, res)
         class_id = NULL;
     }
 
+    // NESTED QUERIES
     query2 = `INSERT INTO Characters (name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, race_id, class_id)
     VALUES ('${data.name}','${data.level}','${data.strength}','${data.dexterity}', '${data.constitution}', '${data.intelligence}', '${data.wisdom}',
     '${data.charisma}', '${data.race_id}', '${data.class_id}');`;
@@ -171,95 +120,13 @@ app.post('/add-character', function(req, res)
     })
 });
 
-app.post('/add-action', function(req, res){
-    let data = req.body;
-    let query2 = `INSERT INTO Actions (name) VALUES ('${data.name}');`;
-    db.pool.query(query2, function (error, rows, fields){
-        if (error){
-            console.log(error);
-            res.sendStatus(400);
-        } else 
-        {
-            let query3 = `SELECT * FROM Actions;`;
-            db.pool.query(query3, function(error, rows, fields){
-                if(error){
-                    console.log(error);
-                    res.sendStatus(400);
-                } else 
-                {
-                    res.send(rows);
-                }
-            })
-        }
-    })
-});
-
-app.post('/add-event', function(req, res){
-    let data = req.body;
-    let roll_result = parseInt(data.roll_result);
-    if (isNaN(roll_result)){
-        roll_result = 1;
-    }
-    let difficulty_id = parseInt(data.difficulty_id);
-    if (isNaN(difficulty_id)){
-        difficulty_id = NULL;
-    }
-    let query2 = `INSERT INTO SkillChecks (description, roll_result, difficulty_id) VALUES ('${data.description}','${roll_result}', '${difficulty_id}');`;
-    db.pool.query(query2, function (error, rows, fields){
-        if (error){
-            console.log(error);
-            res.sendStatus(400);
-        } else 
-        {
-            let query3 = `SELECT * FROM SkillChecks;`;
-            db.pool.query(query3, function(error, rows, fields){
-                if(error){
-                    console.log(error);
-                    res.sendStatus(400);
-                } else 
-                {
-                    res.send(rows);
-                }
-            })
-        }
-    })
-});
-
-app.post('/add-item', function(req, res)
-{
-    let data = req.body;
-    let quantity = parseInt(data.quantity);
-    if (isNaN(quantity)){
-        quantity = 1;
-    }
-
-    let query2 = `INSERT INTO Items (name, quantity, item_type_id) VALUES ('${data.name}','${data.quantity}','${data.item_type_id}');`;
-    db.pool.query(query2, function(error, rows, fields){
-        if (error){
-            console.log(error);
-            res.sendStatus(400);
-        } else 
-        {
-            let query3 = `SELECT * FROM Items;`;
-            db.pool.query(query3, function(error, rows, fields){
-                if(error){
-                    console.log(error);
-                    res.sendStatus(400);
-                } else 
-                {
-                    res.send(rows);
-                }
-            })
-        }
-    })
-});
-
-//-------------------Updates Selected Character's Information according to input data------------------------------//
-
+//--------------------------------------------UPDATE/EDIT CHARACTER INFORMATION------------------------------------//
 app.put('/update-character', function (req, res, next){
     let data = req.body;
+    
+    // SANITIE/FILTER INPUTS
     let character = parseInt(data.name);
-
+    
     let level = parseInt(data.level);
     if (isNaN(level)){
         level = 1;
@@ -297,6 +164,7 @@ app.put('/update-character', function (req, res, next){
         class_id = NULL;
     }
 
+    // NESTED DATABASE QUERIES
     let queryUpdateMaster = `UPDATE Characters SET level = ?, strength = ?, dexterity = ?, constitution = ?, intelligence = ?, wisdom = ?, charisma = ?,
      race_id = ?, class_id = ? WHERE Characters.character_id = ?;`;
     let selectCharacter = `SELECT * FROM Characters WHERE character_id = ?;`;
@@ -317,12 +185,148 @@ app.put('/update-character', function (req, res, next){
         }
     })
 });
+//-------------------------------------------------------ACTIONS PAGE ROUTES------------------------------------------------------------//
 
+//-------------------------------------READ/DISPLAY ACTIONS TABLE INFORMATION-----------------------------//
+app.get('/actions', function(req, res){
+    let query1 = "SELECT * FROM Actions;";
+    db.pool.query(query1, function(err, rows, fields){
+        res.render('actions', {data: rows});
+    })
+});
+
+//--------------------------------------CREATE/ADD ACTIONS----------------------------------------------//
+app.post('/add-action', function(req, res){
+    let data = req.body;
+
+    // NESTED DATABASE QUERIES
+    let query2 = `INSERT INTO Actions (name) VALUES ('${data.name}');`;
+    db.pool.query(query2, function (error, rows, fields){
+        if (error){
+            console.log(error);
+            res.sendStatus(400);
+        } else 
+        {
+            let query3 = `SELECT * FROM Actions;`;
+            db.pool.query(query3, function(error, rows, fields){
+                if(error){
+                    console.log(error);
+                    res.sendStatus(400);
+                } else 
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
+//--------------------------------------------------------------SKILL CHECK EVENTS PAGE ROUTES--------------------------------------------//
+
+//------------------------------------------READ/DISPLAY SKILL CHECKS TABLE INFORMATION---------------------//
+app.get('/events', function(req, res){
+    let query1 = "SELECT * FROM SkillChecks;";
+    let query2 = "SELECT * FROM EventDifficulties;";
+    db.pool.query(query1, function(err, rows, fields){
+        let checkEvents = rows;
+        db.pool.query(query2, function(err, rows, fields){
+            let difficulties = rows;
+            return res.render('events', {data: checkEvents, difficulties: difficulties});
+        })
+    })
+});
+
+//----------------------------------------CREATE/ADD SKILL CHECK EVENT INFORMATION---------------------------//
+app.post('/add-event', function(req, res){
+    let data = req.body;
+
+    // SANITIE/FILTER INPUTS
+    let roll_result = parseInt(data.roll_result);
+    if (isNaN(roll_result)){
+        roll_result = 1;
+    }
+    let difficulty_id = parseInt(data.difficulty_id);
+    if (isNaN(difficulty_id)){
+        difficulty_id = NULL;
+    }
+
+    //NESTED DATABASE QUERIES
+    let query2 = `INSERT INTO SkillChecks (description, roll_result, difficulty_id) VALUES ('${data.description}','${roll_result}', '${difficulty_id}');`;
+    db.pool.query(query2, function (error, rows, fields){
+        if (error){
+            console.log(error);
+            res.sendStatus(400);
+        } else 
+        {
+            let query3 = `SELECT * FROM SkillChecks;`;
+            db.pool.query(query3, function(error, rows, fields){
+                if(error){
+                    console.log(error);
+                    res.sendStatus(400);
+                } else 
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+//--------------------------------------------------------------ITEMS PAGE ROUTES--------------------------------------------------------------//
+
+
+//-------------------------------------------------------READ/DISPLAY ITEMS TABLE INFORMATION----------------------------------//
+app.get('/items', function(req,res){
+    let query1 = "SELECT * FROM Items;";
+    let query2 = "SELECT * FROM ItemTypes;";
+    db.pool.query(query1, function(err, rows, fields){
+        let items = rows;
+        db.pool.query(query2, function(err, rows, fields){
+            let types = rows;
+            return res.render('items', {data: items, types: types});
+        })
+        
+    })
+});
+
+//-------------------------------------------------------CREATE/ADD ITEM INFORMATION--------------------------------------//
+app.post('/add-item', function(req, res)
+{
+    let data = req.body;
+
+    // SANITIE/FILTER INPUTS
+    let quantity = parseInt(data.quantity);
+    if (isNaN(quantity)){
+        quantity = 1;
+    }
+
+    // NESTED DATABASE QUERIES
+    let query2 = `INSERT INTO Items (name, quantity, item_type_id) VALUES ('${data.name}','${data.quantity}','${data.item_type_id}');`;
+    db.pool.query(query2, function(error, rows, fields){
+        if (error){
+            console.log(error);
+            res.sendStatus(400);
+        } else 
+        {
+            let query3 = `SELECT * FROM Items;`;
+            db.pool.query(query3, function(error, rows, fields){
+                if(error){
+                    console.log(error);
+                    res.sendStatus(400);
+                } else 
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 // /*
 //     LISTENER
 // */
-app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
+app.listen(PORT, function(){            
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });
 
