@@ -7,8 +7,17 @@
     <meta charset="utf-8">
     <title>Faeru Adventures</title>
     <style>
-        h1{
+        body{
+            background-color: rgb(135, 173, 255);
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            color:rgb(44, 95, 44);
+            margin: 10px;
+            padding: 20px;
+        }
+        #home-title{
             color:blue;
+            position: relative;
+            left: 850px;
         }
         h2{
             color:brown;
@@ -18,31 +27,58 @@
             border-style: solid;
             border-color: black;
         }
-        td{
-            border-style: solid;
-            border-color: black;
-            padding: 10px;
-        }
-        tr{
-            border-bottom: solid black;
-            border-left: solid black;
-            border-right: solid black;
-            padding: 10px;
-        }
-        th{
-            border-bottom: solid black;
-            border-right: solid black;
-            border-right: solid black;
-            padding: 10px;
-            background-color: gold; 
+        td, tr{
+            size: 40px;
+            padding: 8px;
+            background-color: antiquewhite;
+            text-align: center;
         }
 
-        input{
-            padding: 5px;
+        td, th {
+            border: solid #ddd;
+            color: rgb(31, 63, 63);
+        }
+
+        th {
+              padding: 12px;
+            text-align: center;
+            background-color: #05583a;
+            color: white;
+        }
+
+        form,button{
+            color: rgb(28, 32, 28);
+            padding-top: 5px;
+            padding-bottom: 5px;
+            position: relative;
+            size: 30px;
+        }
+        input, select{
+            size:30px;
+        }
+        a{
+            position: relative;
+            top: 150px;
+            left: 400px;
+            margin: 10px;
+            padding: 20px;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        }
+        p{
+            position: relative;
+            top: 150px;
+            left: 700px;
+            margin: 10px;
+            padding: 20px;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
         }
         footer{
             position: relative;
             top: 150px;
+            left: 400px;
+            margin: 10px;
+            padding: 20px;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
         }
     </style>
 </head>
@@ -55,5 +91,6 @@
 <a href="/characters">Character Table</a>
 <a href="/actions">Actions Table</a>
 <a href="/events">Skill Check Events</a>
+<a href="/items">Party Inventory</a>
 </footer>
 </html>
