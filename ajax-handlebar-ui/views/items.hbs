@@ -1,5 +1,4 @@
-<!-- Defines the body of the Items web page -->
-
+<!-- Show the Items table -->
 <h1>Party Inventory List</h1>
 <table id="items-table">
     <thead>
@@ -24,6 +23,7 @@
     </tbody>
 </table>
 
+<!-- Add row to Items table -->
 <h2>Add A New Item</h2>
 <form id="add-item-form">
     <label for="input-item-name">New Item Name: </label>
@@ -44,8 +44,7 @@
 
 <script src="./js/add_item.js"></script>
 
-{{!------------ UPDATING ITEM INFORMATION FORM -----------------}}
-
+<!-- Update row in Items table-->
 <h2>Edit Item Information</h2>
 <form id="update-item-form">
     <label for="update-item-name"></label>
@@ -68,6 +67,6 @@
     </select>
 
     <input type="submit">
-   
 </form>
+
 <script src="./js/update_item.js"></script>

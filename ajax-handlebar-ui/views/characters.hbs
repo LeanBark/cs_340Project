@@ -1,6 +1,4 @@
-
-
-{{!-- ------------------------Character Table Heading Display------------------------- --}}
+<!-- Show the Characters table -->
 <h1>Characters Table</h1>
 <table id="characters-table">
     <thead>
@@ -13,7 +11,6 @@
         </tr>
     </thead>
     
-    {{!-- -------------------Character Table Row Display---------------------------- --}}
     <tbody>
         {{#each data}}
         <tr data-value={{this.character_id}}>
@@ -33,7 +30,7 @@
     </tbody>
 </table>
 
-{{!-- --------------------------- Add Character Input Form Display------------------------ --}}
+<!-- Add row to Characters table --> 
 <h2>Add A New Character to your Party</h2> 
 <form id="add-character-form">
     <label for="input-name">Character Name: </label>
@@ -76,11 +73,11 @@
 
     <input type="submit">
 </form>
-{{!-------------Ajax Request Script for adding new character to database-------------}}
+
 <script src="./js/add_character.js"></script>
 
 
-{{!-- -----------Updating Character Information Form-------------------------------- --}}
+<!-- Update row in Characters table -->
 <h2>Edit Character Information</h2>
 <form id="update-character-form">
     <label for="input-character-name"></label>
@@ -129,4 +126,5 @@
     </select>
     <input type="submit">   
 </form>
+
 <script src="./js/update_character.js"></script>
