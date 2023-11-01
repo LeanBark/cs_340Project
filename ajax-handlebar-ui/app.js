@@ -20,7 +20,7 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 
 
 // Database
-var db = require('./db-connector')
+var db = require('./database/db-connector')
 
 /*
     ROUTES
