@@ -1,4 +1,4 @@
-<!-- main.hbs-->
+<!-- Defines the layout and style for web pages-->
 
 <!DOCTYPE html>
 <html>
@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <title>Faeru Adventures</title>
     <style>
-        body{
+        body {
             background-color: rgb(135, 173, 255);
             font-family:Verdana, Geneva, Tahoma, sans-serif;
             color:rgb(44, 95, 44);
@@ -16,18 +16,17 @@
         }
         #home-title{
             color:blue;
-            position: relative;
-            left: 850px;
+            padding: 40px;
         }
-        h2{
+        h2 {
             color:brown;
         }
-        table{
+        table {
             align-content: center;
             border-style: solid;
             border-color: black;
         }
-        td, tr{
+        td, tr {
             size: 40px;
             padding: 8px;
             background-color: antiquewhite;
@@ -40,57 +39,77 @@
         }
 
         th {
-              padding: 12px;
+            padding: 12px;
             text-align: center;
             background-color: #05583a;
             color: white;
         }
 
-        form,button{
+        form, button {
             color: rgb(28, 32, 28);
             padding-top: 5px;
             padding-bottom: 5px;
             position: relative;
             size: 30px;
         }
-        input, select{
+        input, select {
             size:30px;
         }
-        a{
+        a {
+            display: block;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        }
+        p {
             position: relative;
-            top: 150px;
-            left: 400px;
             margin: 10px;
             padding: 20px;
             font-family:Verdana, Geneva, Tahoma, sans-serif;
         }
-        p{
+        footer {
             position: relative;
-            top: 150px;
-            left: 700px;
-            margin: 10px;
+            margin: auto;
             padding: 20px;
+            top: 50px;
             font-family:Verdana, Geneva, Tahoma, sans-serif;
         }
-        footer{
-            position: relative;
-            top: 150px;
-            left: 400px;
-            margin: 10px;
-            padding: 20px;
-            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        ul {
+            list-style-type: none;
+            display: inline-block;
+            margin: 0px;
+            padding: 0px;
+            width: 60%;
+            text-align: center;
+            overflow: auto;
+        }
+        li {
+            float: left;
+            width: 20%;
+        }
+        .center-img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;            
+        }
+        .center-text {
+            margin: auto;
+            text-align: center;
         }
     </style>
 </head>
+
 <body>
     {{{body}}}
 </body>
 <footer>
-<p>Select a Link Below</p>
-<a href="/">Home</a>
-<a href="/characters">Character Table</a>
-<a href="/actions">Actions Table</a>
-<a href="/events">Skill Check Events</a>
-<a href="/items">Party Inventory</a>
+    <div class="center-text">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/characters">Characters</a></li>
+            <li><a href="/actions">Actions</a></li>
+            <li><a href="/events">Skill Checks</a></li>
+            <li><a href="/items">Inventory</a></li>
+        </ul>
+    </div>
 </footer>
+
 </html>
