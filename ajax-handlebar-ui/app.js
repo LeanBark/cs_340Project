@@ -31,7 +31,7 @@ app.get('/', function(req,res){
 // Characters Table - Show 
 app.get('/characters', function(req, res)
     {
-        let query1 = "SELECT * FROM Characters ORDER BY character_id ASC;";
+        let query1 = "SELECT character_id, Characters.name AS Name, level AS Level, strength AS Strength, dexterity AS Dexterity, constitution AS Constitution, intelligence AS Intelligence, wisdom AS Wisdom, charisma AS Charisma, Races.name AS Race, Classes.name AS Class FROM Characters JOIN Races on Characters.Race_Id = Races.Race_Id JOIN Classes on Characters.Class_Id = Classes.Class_Id ORDER BY character_id ASC;"
         let query2 = "SELECT * FROM Races ORDER BY race_id ASC;";
         let query3 = "SELECT * FROM Classes ORDER BY class_id ASC;";
         db.pool.query(query1, function(err, rows, fields){
@@ -182,7 +182,7 @@ app.put('/update-character', function (req, res, next){
 
 // Actions Table - Show
 app.get('/actions', function(req, res){
-    let query1 = "SELECT * FROM Actions ORDER BY action_id ASC;";
+    let query1 = "SELECT action_id, Actions.name AS Name FROM Actions ORDER BY action_id ASC;";
     db.pool.query(query1, function(err, rows, fields){
         res.render('actions', {data: rows});
     })
@@ -214,19 +214,9 @@ app.post('/add-action', function(req, res){
     })
 });
 
-// Skill Check Details Table - Show
-app.get('/event-details', function(req, res){
-    let query1 = "SELECT * FROM SkillCheckDetails ORDER BY skill_check_details_id ASC";
-    db.pool.query(query1, function(err, rows, fields){
-        let checkEventDetails = rows;
-        return res.render('event-details', {data: checkEventDetails});
-    })
-});
-
-
 // Skill Checks Table - Show
 app.get('/events', function(req, res){
-    let query1 = "SELECT * FROM SkillChecks ORDER BY skill_check_id ASC;";
+    let query1 = "SELECT skill_check_id, SkillChecks.description AS Description, roll_result AS \"Roll Result\", EventDifficulties.description AS Difficulty, EventDifficulties.value AS \"Difficulty Value\" FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id ORDER BY skill_check_id ASC;";
     let query2 = "SELECT * FROM EventDifficulties ORDER BY difficulty_id ASC;";
     db.pool.query(query1, function(err, rows, fields){
         let checkEvents = rows;
@@ -270,6 +260,15 @@ app.post('/add-event', function(req, res){
                 }
             })
         }
+    })
+});
+
+// Skill Check Details Table - Show
+app.get('/event-details', function(req, res){
+    let query1 = "SELECT * FROM SkillCheckDetails ORDER BY skill_check_details_id ASC";
+    db.pool.query(query1, function(err, rows, fields){
+        let checkEventDetails = rows;
+        return res.render('event-details', {data: checkEventDetails});
     })
 });
 

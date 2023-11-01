@@ -13,9 +13,9 @@
     
     <tbody>
         {{#each data}}
-        <tr>
+        <tr data-value={{this.action_id}}>
             <td>{{this.action_id}}</td>
-            <td>{{this.name}}</td>
+            <td>{{this.Name}}</td>
         </tr>
         {{/each}}
     </tbody>

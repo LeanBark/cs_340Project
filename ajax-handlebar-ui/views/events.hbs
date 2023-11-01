@@ -14,10 +14,12 @@
     <tbody>
         {{#each data}}
         <tr data-value={{this.skill_check_id}}>
+            console.log(this)
             <td>{{this.skill_check_id}}</td>
-            <td>{{this.description}}</td>
-            <td>{{this.roll_result}}</td>
-            <td>{{this.difficulty_id}}</td>
+            <td>{{this.Description}}</td>
+            <td>{{[Roll Result]}}</td>            
+            <td>{{this.Difficulty}}</td>
+            <td>{{[Difficulty Value]}}</td>
         </tr>
         {{/each}}
     </tbody>
