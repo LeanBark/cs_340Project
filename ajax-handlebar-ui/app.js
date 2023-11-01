@@ -323,6 +323,44 @@ app.post('/add-item', function(req, res)
     })
 });
 
+//---------------------------UPDATE/EDIT ITEM INFORMATION----------------------------//
+
+app.put('/update-item', function (req, res, next){
+    let data = req.body;
+    
+    // SANITIZE/FILTER INPUTS
+    let item = parseInt(data.name);
+    let quantity = parseInt(data.quantity);
+    if (isNaN(quantity)){
+        quantity=1;
+    }
+    let item_type = parseInt(data.item_type_id);
+    if(isNaN(item_type)){
+        item_type = NULL;
+    }
+
+    // NESTED DATABASE QUERIES
+    let queryUpdateMaster = `UPDATE Items SET quantity = ?, item_type_id = ? WHERE Items.item_id = ?;`;
+    let selectItem = `SELECT * FROM Items WHERE item_id = ?;`;
+
+    db.pool.query(queryUpdateMaster, [quantity, item_type, item], function(error, rows, fields){
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            db.pool.query(selectItem, [item], function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
 // /*
 //     LISTENER
 // */
