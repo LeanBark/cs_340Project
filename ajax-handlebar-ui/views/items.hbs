@@ -12,7 +12,7 @@
     
     <tbody>
         {{#each data}}
-        <tr>
+        <tr data-value={{this.item_id}}>
             <td>{{this.item_id}}</td>
             <td>{{this.name}}</td>
             <td>{{this.quantity}}</td>
@@ -41,3 +41,31 @@
 </form>
 
 <script src="./js/add_item.js"></script>
+
+{{!------------ UPDATING ITEM INFORMATION FORM -----------------}}
+
+<h2>Edit Item Information</h2>
+<form id="update-item-form">
+    <label for="update-item-name"></label>
+    <select name="update-item-name" id="selected-item">
+        <option value="">Select An Item</option>
+        {{#each data}}
+        <option value="{{this.item_id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="update-quantity"> Item Quantity: </label>
+    <input type="number" name="update-quantity" id="input-quantity-update" placeholder="Quantity Value"> 
+
+    <label for="update-item-type">Select Item Type </label>
+    <select name="update-item-type" id="input-type-update">
+        <option value="">Select Item Type</option>
+        {{#each types}}
+        <option value="{{this.item_type_id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+   
+</form>
+<script src="./js/update_item.js"></script>
