@@ -62,12 +62,13 @@ addRowToTable = (data) => {
     row.appendChild(quantityCell);
     row.appendChild(typeCell);
 
-    // row.setAttribute("data-value", newRow.character_id)
+    
+    row.setAttribute("data-value", newRow.item_id)
 
     currentTable.appendChild(row);
+    let selectMenu = document.getElementById("selected-item");
+    let selectOption = document.createElement("option");
+    selectOption.text = newRow.name;
+    selectOption.value = newRow.item_id;
+    selectMenu.add(selectOption);
 }
-    // let selectMenu = document.getElementById("selected-character");
-    // let selectOption = document.createElement("option");
-    // selectOption.text = newRow.name;
-    // selectOption.value = newRow.character_id;
-    // selectMenu.add(selectOption);//
