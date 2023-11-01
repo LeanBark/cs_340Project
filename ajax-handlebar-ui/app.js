@@ -1,45 +1,39 @@
 /*
-    SETUP
+    SETUP WEB APP
 */
 
-// Express
+// Setup Express
 var express = require('express');   
-var app     = express();            // We need to instantiate an express object to interact with the server in our code
-app.use(express.json());
+var app     = express();                        // We need to instantiate an express object to interact with the server in our code
+app.use(express.json());                        // Allow express to handle JSON data
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
-PORT        = 8181;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 8181;                             // Set a port number at the top so it's easy to change in the future
 
-
-
+// Setup Handlebars
 const { engine } = require('express-handlebars');
 var exphbs = require("express-handlebars");     // Import express-handlebars
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
-
-
-// Database
+// Setup Database
 var db = require('./database/db-connector')
 
 /*
-    ROUTES
+    DEFINE ROUTES
 */
 
-//-----------------------------------------------------------HOME PAGE ROUTES-------------------------------------------------//
-
+// Show Home Page
 app.get('/', function(req,res){
     res.render('home');
 });
 
-//-------------------------------------------------------CHARACTERS PAGE ROUTES-----------------------------------------------//
-
-//----------------------------------------READ CHARACTER INFORMATION----------------------------------//
+// Characters Table - Show 
 app.get('/characters', function(req, res)
     {
-        let query1 = "SELECT * FROM Characters;";
-        let query2 = "SELECT * FROM Races;";
-        let query3 = "SELECT * FROM Classes;";
+        let query1 = "SELECT * FROM Characters ORDER BY character_id ASC;";
+        let query2 = "SELECT * FROM Races ORDER BY race_id ASC;";
+        let query3 = "SELECT * FROM Classes ORDER BY class_id ASC;";
         db.pool.query(query1, function(err, rows, fields){
             let characters = rows;
             db.pool.query(query2, (err, rows, fields) => {
@@ -53,7 +47,7 @@ app.get('/characters', function(req, res)
         })
     });
 
-//-------------------------------------------------ADD/CREATE CHARACTER INFORMATION-------------------------------//    
+// Characters Table - Insert Row    
 app.post('/add-character', function(req, res)
 {
     let data = req.body;
@@ -106,7 +100,7 @@ app.post('/add-character', function(req, res)
             res.sendStatus(400);
         } else 
         {
-            query3 = `SELECT * FROM Characters;`;
+            query3 = `SELECT * FROM Characters ORDER BY character_id ASC;`;
             db.pool.query(query3, function(error, rows, fields){
                 if(error){
                     console.log(error);
@@ -120,7 +114,7 @@ app.post('/add-character', function(req, res)
     })
 });
 
-//--------------------------------------------UPDATE/EDIT CHARACTER INFORMATION------------------------------------//
+// Characters Table - Update Row 
 app.put('/update-character', function (req, res, next){
     let data = req.body;
     
@@ -185,17 +179,16 @@ app.put('/update-character', function (req, res, next){
         }
     })
 });
-//-------------------------------------------------------ACTIONS PAGE ROUTES------------------------------------------------------------//
 
-//-------------------------------------READ/DISPLAY ACTIONS TABLE INFORMATION-----------------------------//
+// Actions Table - Show
 app.get('/actions', function(req, res){
-    let query1 = "SELECT * FROM Actions;";
+    let query1 = "SELECT * FROM Actions ORDER BY action_id ASC;";
     db.pool.query(query1, function(err, rows, fields){
         res.render('actions', {data: rows});
     })
 });
 
-//--------------------------------------CREATE/ADD ACTIONS----------------------------------------------//
+// Actions Table - Insert Row
 app.post('/add-action', function(req, res){
     let data = req.body;
 
@@ -207,7 +200,7 @@ app.post('/add-action', function(req, res){
             res.sendStatus(400);
         } else 
         {
-            let query3 = `SELECT * FROM Actions;`;
+            let query3 = `SELECT * FROM Actions ORDER BY action_id ASC;`;
             db.pool.query(query3, function(error, rows, fields){
                 if(error){
                     console.log(error);
@@ -222,12 +215,10 @@ app.post('/add-action', function(req, res){
 });
 
 
-//--------------------------------------------------------------SKILL CHECK EVENTS PAGE ROUTES--------------------------------------------//
-
-//------------------------------------------READ/DISPLAY SKILL CHECKS TABLE INFORMATION---------------------//
+// Skill Checks Table - Show
 app.get('/events', function(req, res){
-    let query1 = "SELECT * FROM SkillChecks;";
-    let query2 = "SELECT * FROM EventDifficulties;";
+    let query1 = "SELECT * FROM SkillChecks ORDER BY skill_check_id ASC;";
+    let query2 = "SELECT * FROM EventDifficulties ORDER BY difficulty_id ASC;";
     db.pool.query(query1, function(err, rows, fields){
         let checkEvents = rows;
         db.pool.query(query2, function(err, rows, fields){
@@ -237,7 +228,7 @@ app.get('/events', function(req, res){
     })
 });
 
-//----------------------------------------CREATE/ADD SKILL CHECK EVENT INFORMATION---------------------------//
+// Skill Check Table - Insert Row
 app.post('/add-event', function(req, res){
     let data = req.body;
 
@@ -259,7 +250,7 @@ app.post('/add-event', function(req, res){
             res.sendStatus(400);
         } else 
         {
-            let query3 = `SELECT * FROM SkillChecks;`;
+            let query3 = `SELECT * FROM SkillChecks ORDER BY skill_check_id ASC;`;
             db.pool.query(query3, function(error, rows, fields){
                 if(error){
                     console.log(error);
@@ -273,13 +264,10 @@ app.post('/add-event', function(req, res){
     })
 });
 
-//--------------------------------------------------------------ITEMS PAGE ROUTES--------------------------------------------------------------//
-
-
-//-------------------------------------------------------READ/DISPLAY ITEMS TABLE INFORMATION----------------------------------//
+// Items Table - Show
 app.get('/items', function(req,res){
-    let query1 = "SELECT * FROM Items;";
-    let query2 = "SELECT * FROM ItemTypes;";
+    let query1 = "SELECT * FROM Items ORDER BY item_id ASC;";
+    let query2 = "SELECT * FROM ItemTypes ORDER BY item_type_id ASC;";
     db.pool.query(query1, function(err, rows, fields){
         let items = rows;
         db.pool.query(query2, function(err, rows, fields){
@@ -290,7 +278,7 @@ app.get('/items', function(req,res){
     })
 });
 
-//-------------------------------------------------------CREATE/ADD ITEM INFORMATION--------------------------------------//
+// Items Table - Insert Row
 app.post('/add-item', function(req, res)
 {
     let data = req.body;
@@ -309,7 +297,7 @@ app.post('/add-item', function(req, res)
             res.sendStatus(400);
         } else 
         {
-            let query3 = `SELECT * FROM Items;`;
+            let query3 = `SELECT * FROM Items ORDER BY item_id ASC;`;
             db.pool.query(query3, function(error, rows, fields){
                 if(error){
                     console.log(error);
@@ -323,8 +311,7 @@ app.post('/add-item', function(req, res)
     })
 });
 
-//---------------------------UPDATE/EDIT ITEM INFORMATION----------------------------//
-
+// Items Table - Update Row
 app.put('/update-item', function (req, res, next){
     let data = req.body;
     
@@ -360,13 +347,9 @@ app.put('/update-item', function (req, res, next){
     })
 });
 
-
-// /*
-//     LISTENER
-// */
+/*
+     DEFINE LISTENER
+*/
 app.listen(PORT, function(){            
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });
-
-
-                
