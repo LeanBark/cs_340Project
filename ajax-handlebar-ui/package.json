@@ -1,0 +1,15 @@
+{
+  "name": "ajax-handlebar-ui",
+  "version": "1.0.0",
+  "description": "340 portfolio project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Parsons and Jonathan Reuter",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "forever": "^4.0.3"
+  }
+}
