@@ -8,55 +8,61 @@ SET AUTOCOMMIT = 0;
 
 CREATE OR REPLACE TABLE Races (
     race_id int NOT NULL AUTO_INCREMENT,
-    name varchar(255) UNIQUE NOT NULL,
+    name varchar(255) NOT NULL,
     description text,
-    PRIMARY KEY (race_id)
+    PRIMARY KEY (race_id),
+    UNIQUE (name)
 );
 
 -----------------------------CREATE CLASSES TABLE-------------------
 
 CREATE OR REPLACE TABLE Classes (
     class_id int NOT NULL AUTO_INCREMENT,
-    name varchar(255) UNIQUE NOT NULL,
+    name varchar(255) NOT NULL,
     description text,
-    PRIMARY KEY (class_id)
+    PRIMARY KEY (class_id),
+    UNIQUE (name)
 );
 
 -----------------------------CREATE ITEMTYPES TABLE-------------------
 
 CREATE OR REPLACE TABLE ItemTypes (
     item_type_id int NOT NULL AUTO_INCREMENT,
-    name varchar(255) UNIQUE NOT NULL,
-    PRIMARY KEY (item_type_id)
+    name varchar(255) NOT NULL,
+    PRIMARY KEY (item_type_id),
+    UNIQUE (name)
 );
 
 -----------------------------CREATE ACTIONS TABLE-------------------
 
 CREATE OR REPLACE TABLE Actions (
     action_id int NOT NULL AUTO_INCREMENT,
-    name varchar(255) UNIQUE NOT NULL,
-    PRIMARY KEY (action_id)
+    name varchar(255) NOT NULL,
+    PRIMARY KEY (action_id),
+    UNIQUE (name)
 );
 
 -----------------------------CREATE EVENTDIFFICULTIES TABLE-------------------
 
 CREATE OR REPLACE TABLE EventDifficulties (
     difficulty_id int NOT NULL AUTO_INCREMENT,
-    value int UNIQUE NOT NULL,
+    value int NOT NULL,
     description text,
-    PRIMARY KEY (difficulty_id)
+    PRIMARY KEY (difficulty_id),
+    UNIQUE (value)
 );
 
 -----------------------------CREATE ITEMS TABLE-------------------
 
 CREATE OR REPLACE TABLE Items (
     item_id int NOT NULL AUTO_INCREMENT,
-    name varchar(255) UNIQUE NOT NULL,
+    name varchar(255) NOT NULL,
     quantity int NOT NULL DEFAULT 1,
     item_type_id int,
     PRIMARY KEY (item_id),
     FOREIGN KEY (item_type_id) REFERENCES ItemTypes(item_type_id)
-    ON DELETE RESTRICT
+    ON DELETE RESTRICT,
+    UNIQUE (name)
 );
 
 -----------------------------CREATE CHARACTERS TABLE-------------------
