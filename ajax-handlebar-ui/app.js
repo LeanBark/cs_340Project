@@ -214,6 +214,15 @@ app.post('/add-action', function(req, res){
     })
 });
 
+// Skill Check Details Table - Show
+app.get('/event-details', function(req, res){
+    let query1 = "SELECT * FROM SkillCheckDetails ORDER BY skill_check_details_id ASC";
+    db.pool.query(query1, function(err, rows, fields){
+        let checkEventDetails = rows;
+        return res.render('event-details', {data: checkEventDetails});
+    })
+});
+
 
 // Skill Checks Table - Show
 app.get('/events', function(req, res){

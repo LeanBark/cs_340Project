@@ -1,0 +1,25 @@
+<!-- Show Skill Checks Details table -->
+<h1>Skill Check Event Details</h1>
+<table id="event-details-table">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.skill_check_details_id}}>
+            <td>{{this.skill_check_details_id}}</td>
+            <td>{{this.action_id}}</td>
+            <td>{{this.character_id}}</td>
+            <td>{{this.item_id}}</td>
+            <td>{{this.skill_check_id}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
