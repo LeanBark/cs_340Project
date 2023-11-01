@@ -265,7 +265,7 @@ app.post('/add-event', function(req, res){
 
 // Skill Check Details Table - Show
 app.get('/event-details', function(req, res){
-    let query1 = "SELECT * FROM SkillCheckDetails ORDER BY skill_check_details_id ASC";
+    let query1 = "SELECT skill_check_details_id, Actions.name AS \"Action\", Characters.name AS \"Character\", Items.name AS \"Item\", SkillChecks.description AS \"Description\" FROM SkillCheckDetails JOIN Actions ON SkillCheckDetails.action_id = Actions.action_id JOIN Characters ON SkillCheckDetails.character_id = Characters.character_id JOIN Items ON SkillCheckDetails.item_id = Items.item_id JOIN SkillChecks ON SkillCheckDetails.skill_check_id = SkillChecks.skill_check_id ORDER BY skill_check_details_id ASC;";
     db.pool.query(query1, function(err, rows, fields){
         let checkEventDetails = rows;
         return res.render('event-details', {data: checkEventDetails});
@@ -274,7 +274,7 @@ app.get('/event-details', function(req, res){
 
 // Items Table - Show
 app.get('/items', function(req,res){
-    let query1 = "SELECT * FROM Items ORDER BY item_id ASC;";
+    let query1 = "SELECT item_id, Items.name AS Name, quantity as Quantity, ItemTypes.name As \"Item Type\" FROM Items JOIN ItemTypes ON Items.item_type_id = ItemTypes.item_type_id ORDER BY item_id ASC;";
     let query2 = "SELECT * FROM ItemTypes ORDER BY item_type_id ASC;";
     db.pool.query(query1, function(err, rows, fields){
         let items = rows;
