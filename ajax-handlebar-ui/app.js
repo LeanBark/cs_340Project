@@ -272,6 +272,25 @@ app.get('/event-details', function(req, res){
     })
 });
 
+// Skill Check Details Table - Delete
+app.delete('/delete-event-details-ajax', function(req,res,next){
+    let data = req.body;
+    let skill_check_details_id = parseInt(data.id);
+    let query1 = "DELETE FROM SkillCheckDetails WhERE skill_check_details_id = ?";
+
+    // Run query
+    db.pool.query(query1, [skill_check_details_id], function(error, rows, fields){
+        if (error) {
+
+            // Log the error to the terminal and send a 400 error
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else {
+            res.sendStatus(204);
+        }
+})});
+
 // Items Table - Show
 app.get('/items', function(req,res){
     let query1 = "SELECT item_id, Items.name AS Name, quantity as Quantity, ItemTypes.name As \"Item Type\" FROM Items JOIN ItemTypes ON Items.item_type_id = ItemTypes.item_type_id ORDER BY item_id ASC;";

@@ -8,6 +8,7 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th></th>
         </tr>
     </thead>
     
@@ -19,7 +20,10 @@
             <td>{{this.Character}}</td>
             <td>{{this.Item}}</td>
             <td>{{this.Description}}</td>
+            <td><button onclick="deleteEventDetails({{this.skill_check_details_id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+<script src="./js/delete_event_details.js"></script>
