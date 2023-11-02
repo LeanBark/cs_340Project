@@ -44,7 +44,6 @@ addRowToTable = (data) => {
     row.appendChild(idCell);
     row.appendChild(nameCell);
 
-    // row.setAttribute("data-value", newRow.action_id);
     currentTable.appendChild(row);
 
 }

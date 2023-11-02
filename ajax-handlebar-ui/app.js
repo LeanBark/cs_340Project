@@ -94,6 +94,7 @@ app.post('/add-character', function(req, res)
     query2 = `INSERT INTO Characters (name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, race_id, class_id)
     VALUES ('${data.name}','${data.level}','${data.strength}','${data.dexterity}', '${data.constitution}', '${data.intelligence}', '${data.wisdom}',
     '${data.charisma}', '${data.race_id}', '${data.class_id}');`;
+    query2 = "SELECT * FROM Characters"
     db.pool.query(query2, function(error, rows, fields){
         if (error){
             console.log(error);

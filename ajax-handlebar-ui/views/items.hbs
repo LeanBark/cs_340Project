@@ -39,7 +39,8 @@
         {{/each}}
     </select>
 
-    <input type="submit">
+    <!-- Disabled add Item -->
+    <input type="submit" disabled="true">
 </form>
 
 <script src="./js/add_item.js"></script>
@@ -51,7 +52,7 @@
     <select name="update-item-name" id="selected-item">
         <option value="">Select An Item</option>
         {{#each data}}
-        <option value="{{this.item_id}}">{{this.name}}</option>
+        <option value="{{this.item_id}}">{{this.Name}}</option>
         {{/each}}
     </select>
 
@@ -66,7 +67,8 @@
         {{/each}}
     </select>
 
-    <input type="submit">
+    <!-- Disabled update Item -->
+    <input type="submit" disabled="true">
 </form>
 
 <script src="./js/update_item.js"></script>

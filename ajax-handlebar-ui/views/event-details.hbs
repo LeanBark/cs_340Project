@@ -20,7 +20,8 @@
             <td>{{this.Character}}</td>
             <td>{{this.Item}}</td>
             <td>{{this.Description}}</td>
-            <td><button onclick="deleteEventDetails({{this.skill_check_details_id}})">Delete</button></td>
+            <!--Disabled skill check details delete-->
+            <td><button onclick="deleteEventDetails({{this.skill_check_details_id}})" disabled="true">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>

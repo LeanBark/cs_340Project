@@ -71,7 +71,8 @@
         {{/each}}
     </select>
 
-    <input type="submit">
+    <!-- Disabled add character -->
+    <input type="submit" disabled="true">
 </form>
 
 <script src="./js/add_character.js"></script>
@@ -84,7 +85,7 @@
     <select name="input-character-name" id="selected-character">
         <option value="test">Select A Character</option>
         {{#each data}}
-        <option value="{{this.character_id}}">{{this.name}}</option>
+        <option value="{{this.character_id}}">{{this.Name}}</option>
         {{/each}}
     </select>
 
@@ -124,7 +125,9 @@
         <option value="{{this.class_id}}">{{this.name}}</option>
         {{/each}}
     </select>
-    <input type="submit">   
+
+    <!-- Disabled update character -->
+    <input type="submit" disabled="true">   
 </form>
 
 <script src="./js/update_character.js"></script>
