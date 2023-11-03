@@ -1,3 +1,8 @@
+// Citation for the following file:
+// Date: 11/2/2023
+// Adapted from OSU CS340 NodeJS Starter App
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 function deleteEventDetails(skill_check_details_id) {
     // Put our data we want to send in a JavaScript object
     let data = {
