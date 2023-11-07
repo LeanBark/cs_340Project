@@ -186,6 +186,43 @@ app.put('/update-character', function (req, res, next){
     })
 });
 
+
+// Races Table - display all races
+app.get('/races', function(req,res){
+    let query1 = 'SELECT race_id, Races.name AS Name, Races.description AS Description FROM Races ORDER BY race_id ASC';
+    db.pool.query(query1, function(err, rows, fields){
+        res.render('races', {data:rows});
+    })
+});
+
+// Races Table - add a new race
+app.post('/add-race', function(req, res)
+{
+    let data = req.body;
+
+    // NESTED QUERIES
+    query2 = `INSERT INTO Races (name, description) VALUES ('${data.name}','${data.description}');`;
+    db.pool.query(query2, function(error, rows, fields){
+        if (error){
+            console.log(error);
+            res.sendStatus(400);
+        } else 
+        {
+            query3 = `SELECT * FROM Races ORDER BY race_id ASC;`;
+            db.pool.query(query3, function(error, rows, fields){
+                if(error){
+                    console.log(error);
+                    res.sendStatus(400);
+                } else 
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
 // Actions Table - Show
 app.get('/actions', function(req, res){
     let query1 = "SELECT action_id, Actions.name AS Name FROM Actions ORDER BY action_id ASC;";
