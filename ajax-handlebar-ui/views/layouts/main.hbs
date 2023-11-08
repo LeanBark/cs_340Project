@@ -1,6 +1,6 @@
 <!-- 
 // Citation for the following file:
-// Date: 11/2/2023
+// Date: 11/7/2023
 // Adapted from OSU CS340 NodeJS Starter App
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 -->
@@ -17,21 +17,27 @@
         body {
             background-color: rgb(135, 173, 255);
             font-family:Verdana, Geneva, Tahoma, sans-serif;
-            color:rgb(44, 95, 44);
-            margin: 10px;
-            padding: 20px;
+        }
+        h1, h2{
+        margin-left: auto;
+        margin-right:auto;
+        width: 50%;
+        text-align: center;
+        padding: 10px;
+        color:darkred;
         }
         #home-title{
             color:blue;
             padding: 40px;
         }
-        h2 {
-            color:brown;
-        }
         table {
             align-content: center;
             border-style: solid;
             border-color: black;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center
+            vertical-align: auto;
         }
         td, tr {
             size: 40px;
@@ -101,6 +107,22 @@
             margin: auto;
             text-align: center;
         }
+    legend{
+        size 150px;
+    }
+
+
+    fieldset{
+        margin-left: auto;
+        margin-right:auto;
+        width: 50%;
+        border: solid black 2px;
+        padding: 50px;
+        text-align:center;
+        vertical-align: auto;
+        color:darkred;
+    }
+
     </style>
 </head>
 
@@ -116,6 +138,7 @@
             <li><a href="/events">Skill Checks</a></li>
             <li><a href="/event-details">Skill Checks Details</a></li>
             <li><a href="/items">Inventory</a></li>
+            <li><a href="/races">Races</a></li>
         </ul>
     </div>
 </footer>

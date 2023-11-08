@@ -1,6 +1,6 @@
 <!-- 
 // Citation for the following file:
-// Date: 11/2/2023
+// Date: 11/7/2023
 // Adapted from OSU CS340 NodeJS Starter App
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 -->
@@ -31,11 +31,14 @@
 <!-- Add row to Actions table -->
 <h2>Add A New Character Action</h2>
 <form id="add-action-form">
-    <label for="input-action-name">New Action: </label>
-    <input type="text" name="input-action-name" id="input-action-name" placeholder="Enter Action">
+    <fieldset>
+        <label>Add Action</label>
+        <label for="input-action-name">New Action: </label>
+        <input type="text" name="input-action-name" id="input-action-name" placeholder="Enter Action">
 
-    <!-- Disabled add Action -->
-    <input type="submit" disabled="true">
+        <!-- Disabled add Action -->
+        <input type="submit" disabled="true">
+    </fieldset>
 </form>
 
 <script src="./js/add_action.js"></script>

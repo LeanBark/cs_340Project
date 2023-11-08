@@ -1,6 +1,6 @@
 <!-- 
 // Citation for the following file:
-// Date: 11/2/2023
+// Date: 11/7/2023
 // Adapted from OSU CS340 NodeJS Starter App
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 -->
@@ -34,21 +34,24 @@
 <!-- Add row to Skill Check table -->
 <h2>Add A New Skill Check Event</h2> 
 <form id="add-event-form">
-    <label for="input-description">Event Description: </label>
-    <input type="text" name="input-description" id="input-description" placeholder="Enter Description">
+    <fieldset>
+        <legend>Add Event</legend>
+        <label for="input-description">Event Description: </label>
+        <input type="text" name="input-description" id="input-description" placeholder="Enter Description">
 
-    <label for="input-roll-value">Player Roll Value: </label>
-    <input type="number" name="input-roll-value" id="input-roll-value" placeholder="Enter Roll Value">
+        <label for="input-roll-value">Player Roll Value: </label>
+        <input type="number" name="input-roll-value" id="input-roll-value" placeholder="Enter Roll Value">
 
-    <select name="input-difficulty" id="input-difficulty">
-        <option value="">Select Difficulty</option>
-        {{#each difficulties}}
-        <option value="{{this.difficulty_id}}">{{this.description}}: {{this.value}}</option>
-        {{/each}}
-    </select>
+        <select name="input-difficulty" id="input-difficulty">
+            <option value="">Select Difficulty</option>
+            {{#each difficulties}}
+            <option value="{{this.difficulty_id}}">{{this.description}}: {{this.value}}</option>
+            {{/each}}
+        </select>
 
-    <!-- Disabled add skill check -->
-    <input type="submit" disabled="true">
+        <!-- Disabled add skill check -->
+        <input type="submit" disabled="true">
+    </fieldset>
 </form>
 
 <script src="./js/add_event.js"></script>

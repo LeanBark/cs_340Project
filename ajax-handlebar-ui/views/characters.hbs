@@ -1,6 +1,6 @@
 <!-- 
 // Citation for the following file:
-// Date: 11/2/2023
+// Date: 11/7/2023
 // Adapted from OSU CS340 NodeJS Starter App
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 -->
@@ -40,46 +40,51 @@
 <!-- Add row to Characters table --> 
 <h2>Add A New Character to your Party</h2> 
 <form id="add-character-form">
-    <label for="input-name">Character Name: </label>
-    <input type="text" name="input-name" id="input-name" placeholder="Name">
+    <fieldset>
+        <legend>Add A New Character</legend>
+        <label for="input-name">Character Name: </label>
+        <input type="text" name="input-name" id="input-name" placeholder="Name">
 
-    <label for="input-lvl">Level: </label>
-    <input type="number" name="input-lvl" id="input-lvl" placeholder="Level Value">
+        <label for="input-lvl">Level: </label>
+        <input type="number" name="input-lvl" id="input-lvl" placeholder="Level Value">
 
-    <label for="input-str">Strength: </label>
-    <input type="number" name="input-str" id="input-str" placeholder="STR Value">
+        <label for="input-str">Strength: </label>
+        <input type="number" name="input-str" id="input-str" placeholder="STR Value">
 
-    <label for="input-dex">Dexterity: </label>
-    <input type="number" name="input-dex" id="input-dex" placeholder="DEX Value">
+        <label for="input-dex">Dexterity: </label>
+        <input type="number" name="input-dex" id="input-dex" placeholder="DEX Value">
+        <br>
 
-    <label for="input-con">Constitution: </label>
-    <input type="number" name="input-con" id="input-con" placeholder="CON Value">
+        <label for="input-con">Constitution: </label>
+        <input type="number" name="input-con" id="input-con" placeholder="CON Value">
 
-    <label for="input-int">Intelligence: </label>
-    <input type="number" name="input-int" id="input-int" placeholder="INT Value">
+        <label for="input-int">Intelligence: </label>
+        <input type="number" name="input-int" id="input-int" placeholder="INT Value">
 
-    <label for="input-wis">Wisdom: </label>
-    <input type="number" name="input-wis" id="input-wis" placeholder="WIS Value">
+        <label for="input-wis">Wisdom: </label>
+        <input type="number" name="input-wis" id="input-wis" placeholder="WIS Value">
 
-    <label for="input-chr">Charisma: </label>
-    <input type="number" name="input-chr" id="input-chr" placeholder="CHR Value">
+        <label for="input-chr">Charisma: </label>
+        <input type="number" name="input-chr" id="input-chr" placeholder="CHR Value">
+        <br>
 
-    <select name="input-race" id="input-race">
-        <option value="">Select Race</option>
-        {{#each races}}
-        <option value="{{this.race_id}}">{{this.name}}</option>
-        {{/each}}
-    </select>
+        <select name="input-race" id="input-race">
+            <option value="">Select Race</option>
+            {{#each races}}
+            <option value="{{this.race_id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
 
-    <select name="input-class" id="input-class">
-        <option value="">Select Class</option>
-        {{#each classes}}
-        <option value="{{this.class_id}}">{{this.name}}</option>
-        {{/each}}
-    </select>
+        <select name="input-class" id="input-class">
+            <option value="">Select Class</option>
+            {{#each classes}}
+            <option value="{{this.class_id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
 
-    <!-- Disabled add character -->
-    <input type="submit" disabled="true">
+        <!-- Disabled add character -->
+        <input type="submit" disabled="true">
+    </fieldset>
 </form>
 
 <script src="./js/add_character.js"></script>
@@ -88,53 +93,69 @@
 <!-- Update row in Characters table -->
 <h2>Edit Character Information</h2>
 <form id="update-character-form">
-    <label for="input-character-name"></label>
-    <select name="input-character-name" id="selected-character">
-        <option value="test">Select A Character</option>
-        {{#each data}}
-        <option value="{{this.character_id}}">{{this.Name}}</option>
-        {{/each}}
-    </select>
+    <fieldset>
+        <legend>Edit Character</legend>
+        <label for="input-character-name"></label>
+        <select name="input-character-name" id="selected-character">
+            <option value="test">Select A Character</option>
+            {{#each data}}
+            <option value="{{this.character_id}}">{{this.Name}}</option>
+            {{/each}}
+        </select>
+        
+        <label for="input-lvl">Level: </label>
+        <input type="number" name="input-lvl" id="input-lvl-update" placeholder="Level Value">
+        
 
-    <label for="input-lvl">Level: </label>
-    <input type="number" name="input-lvl" id="input-lvl-update" placeholder="Level Value">
+        
+        <label for="input-str">Strength: </label>
+        <input type="number" name="input-str" id="input-str-update" placeholder="STR Value">
+        
 
-    <label for="input-str">Strength: </label>
-    <input type="number" name="input-str" id="input-str-update" placeholder="STR Value">
+        
+        <label for="input-dex">Dexterity: </label>
+        <input type="number" name="input-dex" id="input-dex-update" placeholder="DEX Value">
+        
+        
+        
+        <label for="input-con">Constitution: </label>
+        <input type="number" name="input-con" id="input-con-update" placeholder="CON Value">
+        <br>
 
-    <label for="input-dex">Dexterity: </label>
-    <input type="number" name="input-dex" id="input-dex-update" placeholder="DEX Value">
+        
+        <label for="input-int">Intelligence: </label>
+        <input type="number" name="input-int" id="input-int-update" placeholder="INT Value">
+        
 
-    <label for="input-con">Constitution: </label>
-    <input type="number" name="input-con" id="input-con-update" placeholder="CON Value">
+        
+        <label for="input-wis">Wisdom: </label>
+        <input type="number" name="input-wis" id="input-wis-update" placeholder="WIS Value">
 
-    <label for="input-int">Intelligence: </label>
-    <input type="number" name="input-int" id="input-int-update" placeholder="INT Value">
+        
+        <label for="input-chr">Charisma: </label>
+        <input type="number" name="input-chr" id="input-chr-update" placeholder="CHR Value"> 
+        
+        
+        <label for="input-character-race">Race: </label>
+        <select name="input-character-race" id="input-race-update">
+            <option>Select A New Race</option>
+            {{#each races}}
+            <option value="{{this.race_id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
 
-    <label for="input-wis">Wisdom: </label>
-    <input type="number" name="input-wis" id="input-wis-update" placeholder="WIS Value">
+        
+        <label for="input-character-class">Class: </label>
+        <select name="input-character-class" id="input-class-update">
+            <option>Select A New Class</option>
+            {{#each classes}}
+            <option value="{{this.class_id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
 
-    <label for="input-chr">Charisma: </label>
-    <input type="number" name="input-chr" id="input-chr-update" placeholder="CHR Value"> 
-
-    <label for="input-character-race">Race: </label>
-    <select name="input-character-race" id="input-race-update">
-        <option>Select A New Race</option>
-        {{#each races}}
-        <option value="{{this.race_id}}">{{this.name}}</option>
-        {{/each}}
-    </select>
-
-    <label for="input-character-class">Class: </label>
-    <select name="input-character-class" id="input-class-update">
-        <option>Select A New Class</option>
-        {{#each classes}}
-        <option value="{{this.class_id}}">{{this.name}}</option>
-        {{/each}}
-    </select>
-
-    <!-- Disabled update character -->
-    <input type="submit" disabled="true">   
+        <!-- Disabled update character -->
+        <input type="submit" disabled="true">
+    </fieldset>   
 </form>
 
 <script src="./js/update_character.js"></script>

@@ -1,0 +1,46 @@
+<!-- 
+// Citation for the following file:
+// Date: 11/7/2023
+// Adapted from OSU CS340 NodeJS Starter App
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+-->
+
+<!-- Show Races table -->
+<h1>Races Table</h1>
+<table id="races-table">.
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.race_id}}>
+            <td>{{this.race_id}}</td>
+            <td>{{this.Name}}</td>
+            <td>{{this.Description}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- Add row to Races table -->
+<form id="add-race-form">
+    <fieldset>
+        <legend>Add New Race</legend>
+        <label for="input-race-name">New Race: </label>
+        <input type="text" name="input-race-name" id="input-race-name" placeholder="Enter Race">
+
+        <label for="input-race-description">Description: </label>
+        <input type="text" name="input-race-description" id="input-race-description" placeholder="Enter Description">
+
+        <input type="submit">
+    </fieldset>
+</form>
+
+<script src="./js/add_race.js"></script>
