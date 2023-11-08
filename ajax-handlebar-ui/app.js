@@ -413,6 +413,43 @@ app.post('/add-event', function(req, res){
     })
 });
 
+// Skill Check Table - Update
+app.put('/update-event', function (req, res, next){
+    let data = req.body;
+    
+    // SANITIZE/FILTER INPUTS
+    let event = parseInt(data.event);
+    let roll = parseInt(data.roll);
+    if (isNaN(roll)){
+        roll=1;
+    }
+    let difficulty = parseInt(data.difficulty);
+    if(isNaN(difficulty)){
+        difficulty = NULL;
+    }
+
+    // NESTED DATABASE QUERIES
+    let queryUpdateMaster = `UPDATE SkillChecks SET roll_result = ?, difficulty_id = ? WHERE skill_check_id = ?;`;
+    let selectEvent = `SELECT skill_check_id, roll_result, value, EventDifficulties.description AS difficulty FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id WHERE skill_check_id = ?;`;
+
+    db.pool.query(queryUpdateMaster, [roll, difficulty, event], function(error, rows, fields){
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            db.pool.query(selectEvent, [event], function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+
 // Skill Check Details Table - Show
 app.get('/event-details', function(req, res){
     let query1 = "SELECT skill_check_details_id, Actions.name AS \"Action\", Characters.name AS \"Character\", Items.name AS \"Item\", SkillChecks.description AS \"Description\" FROM SkillCheckDetails JOIN Actions ON SkillCheckDetails.action_id = Actions.action_id JOIN Characters ON SkillCheckDetails.character_id = Characters.character_id JOIN Items ON SkillCheckDetails.item_id = Items.item_id JOIN SkillChecks ON SkillCheckDetails.skill_check_id = SkillChecks.skill_check_id ORDER BY skill_check_details_id ASC;";

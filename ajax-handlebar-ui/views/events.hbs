@@ -55,3 +55,33 @@
 </form>
 
 <script src="./js/add_event.js"></script>
+
+<!-- Update row in Skill Check Details table -->
+<h2>Edit Skill Check Event</h2>
+<form id="update-event-form">
+    <fieldset>
+        <legend>Edit Event</legend>
+        <label for="input-event-name"></label>
+        <select name="input-event-name" id="selected-event">
+            <option value="test">Select A Event</option>
+            {{#each data}}
+            <option value="{{this.skill_check_id}}">{{this.Description}}</option>
+            {{/each}}
+        </select>
+        
+        <label for="input-roll-value-update">Player Roll Value: </label>
+        <input type="number" name="input-roll-value-update" id="input-roll-value-update" placeholder="Enter Roll Value">
+
+        <select name="input-difficulty-update" id="input-difficulty-update">
+            <option value="">Select Difficulty</option>
+            {{#each difficulties}}
+            <option value="{{this.difficulty_id}}">{{this.description}}: {{this.value}}</option>
+            {{/each}}
+        </select>
+        
+        <!-- Disable update event -->
+        <input type="submit">
+    </fieldset>   
+</form>
+
+<script src="./js/update_event.js"></script>
