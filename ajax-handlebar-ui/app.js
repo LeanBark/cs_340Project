@@ -13,7 +13,7 @@ var app     = express();                        // We need to instantiate an exp
 app.use(express.json());                        // Allow express to handle JSON data
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
-PORT        = 8181;                             // Set a port number at the top so it's easy to change in the future
+PORT        = 8182;                             // Set a port number at the top so it's easy to change in the future
 
 // Setup Handlebars
 const { engine } = require('express-handlebars');
@@ -36,7 +36,7 @@ app.get('/', function(req,res){
 // Characters Table - Show 
 app.get('/characters', function(req, res)
     {
-        let query1 = "SELECT character_id, Characters.name AS Name, level AS Level, strength AS Strength, dexterity AS Dexterity, constitution AS Constitution, intelligence AS Intelligence, wisdom AS Wisdom, charisma AS Charisma, Races.name AS Race, Classes.name AS Class FROM Characters JOIN Races on Characters.Race_Id = Races.Race_Id JOIN Classes on Characters.Class_Id = Classes.Class_Id ORDER BY character_id ASC;"
+        let query1 = "SELECT character_id, Characters.name AS Name, level AS Level, strength AS Strength, dexterity AS Dexterity, constitution AS Constitution, intelligence AS Intelligence, wisdom AS Wisdom, charisma AS Charisma, Races.name AS Race, Classes.name AS Class FROM Characters JOIN Races on Characters.Race_Id = Races.Race_Id JOIN Classes on Characters.Class_Id = Classes.Class_Id ORDER BY character_id ASC;";
         let query2 = "SELECT * FROM Races ORDER BY race_id ASC;";
         let query3 = "SELECT * FROM Classes ORDER BY class_id ASC;";
         db.pool.query(query1, function(err, rows, fields){
@@ -99,14 +99,14 @@ app.post('/add-character', function(req, res)
     query2 = `INSERT INTO Characters (name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, race_id, class_id)
     VALUES ('${data.name}','${data.level}','${data.strength}','${data.dexterity}', '${data.constitution}', '${data.intelligence}', '${data.wisdom}',
     '${data.charisma}', '${data.race_id}', '${data.class_id}');`;
-    query2 = "SELECT * FROM Characters"
     db.pool.query(query2, function(error, rows, fields){
         if (error){
             console.log(error);
             res.sendStatus(400);
         } else 
         {
-            query3 = `SELECT * FROM Characters ORDER BY character_id ASC;`;
+            // query3 = `SELECT * FROM Characters ORDER BY character_id ASC;`;
+            query3 = "SELECT character_id, Characters.name as name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, Races.name AS race_id, Classes.name AS class_id FROM Characters JOIN Races ON Characters.race_id = Races.race_id JOIN Classes ON Characters.class_id = Classes.class_id ORDER BY character_id ASC;";
             db.pool.query(query3, function(error, rows, fields){
                 if(error){
                     console.log(error);
@@ -167,7 +167,7 @@ app.put('/update-character', function (req, res, next){
     // NESTED DATABASE QUERIES
     let queryUpdateMaster = `UPDATE Characters SET level = ?, strength = ?, dexterity = ?, constitution = ?, intelligence = ?, wisdom = ?, charisma = ?,
      race_id = ?, class_id = ? WHERE Characters.character_id = ?;`;
-    let selectCharacter = `SELECT * FROM Characters WHERE character_id = ?;`;
+    let selectCharacter = `SELECT level, strength, dexterity, constitution, intelligence, wisdom, charisma, Races.name AS race, Classes.name AS class FROM Characters JOIN Races ON Characters.race_id = Races.race_id JOIN Classes ON Characters.class_id = Classes.class_id WHERE character_id = ?;`;
 
     db.pool.query(queryUpdateMaster, [level, strength, dexterity, constitution, intelligence, wisdom, charisma, race_id, class_id, character], function(error, rows, fields){
         if (error) {
@@ -364,8 +364,6 @@ app.post('/add-action', function(req, res){
 });
 
 
-
-
 // Skill Checks Table - Show
 app.get('/events', function(req, res){
     let query1 = "SELECT skill_check_id, SkillChecks.description AS Description, roll_result AS \"Roll Result\", EventDifficulties.description AS Difficulty, EventDifficulties.value AS \"Difficulty Value\" FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id ORDER BY skill_check_id ASC;";
@@ -401,7 +399,7 @@ app.post('/add-event', function(req, res){
             res.sendStatus(400);
         } else 
         {
-            let query3 = `SELECT * FROM SkillChecks ORDER BY skill_check_id ASC;`;
+            let query3 = `SELECT * FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id ORDER BY skill_check_id ASC;`;
             db.pool.query(query3, function(error, rows, fields){
                 if(error){
                     console.log(error);
@@ -518,7 +516,7 @@ app.post('/add-item', function(req, res)
             res.sendStatus(400);
         } else 
         {
-            let query3 = `SELECT * FROM Items ORDER BY item_id ASC;`;
+            let query3 = `SELECT item_id, Items.name AS name, quantity, ItemTypes.name AS type FROM Items JOIN ItemTypes ON Items.item_type_id = ItemTypes.item_type_id ORDER BY item_id ASC;`;
             db.pool.query(query3, function(error, rows, fields){
                 if(error){
                     console.log(error);
@@ -549,7 +547,7 @@ app.put('/update-item', function (req, res, next){
 
     // NESTED DATABASE QUERIES
     let queryUpdateMaster = `UPDATE Items SET quantity = ?, item_type_id = ? WHERE Items.item_id = ?;`;
-    let selectItem = `SELECT * FROM Items WHERE item_id = ?;`;
+    let selectItem = `SELECT quantity, ItemTypes.name AS item_type_id FROM Items JOIN ItemTypes ON Items.item_type_id = ItemTypes.item_type_id WHERE item_id = ?;`;
 
     db.pool.query(queryUpdateMaster, [quantity, item_type, item], function(error, rows, fields){
         if (error) {

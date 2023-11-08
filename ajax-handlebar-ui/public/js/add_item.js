@@ -59,7 +59,7 @@ addRowToTable = (data) => {
     idCell.innerText = newRow.item_id;
     nameCell.innerText = newRow.name;
     quantityCell.innerText = newRow.quantity;
-    typeCell.innerText = newRow.item_type_id;
+    typeCell.innerText = newRow.type;
 
 
     row.appendChild(idCell);

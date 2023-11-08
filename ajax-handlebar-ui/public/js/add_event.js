@@ -55,18 +55,20 @@ addRowToTable = (data) => {
     let descriptionCell = document.createElement("TD");
     let rollCell = document.createElement("TD");
     let difficultyCell = document.createElement("TD");
-
+    let difficultyValueCell = document.createElement("TD")
 
     idCell.innerText = newRow.skill_check_id;
     descriptionCell.innerText = newRow.description;
     rollCell.innerText = newRow.roll_result;
-    difficultyCell.innerText = newRow.difficulty_id;
+    difficultyCell.innerText = newRow.description;
+    difficultyValueCell.innerText = newRow.value;
 
 
     row.appendChild(idCell);
     row.appendChild(descriptionCell);
     row.appendChild(rollCell);
     row.appendChild(difficultyCell);
+    row.appendChild(difficultyValueCell);
 
 
     row.setAttribute("data-value", newRow.skill_check_id)

@@ -94,8 +94,8 @@ function updateRow(data, characterID){
             intInd.innerHTML = parsedData[0].intelligence;
             wisInd.innerHTML = parsedData[0].wisdom;
             chrInd.innerHTML = parsedData[0].charisma;
-            raceInd.innerHTML = parsedData[0].race_id;
-            classInd.innerHTML = parsedData[0].class_id;
+            raceInd.innerHTML = parsedData[0].race;
+            classInd.innerHTML = parsedData[0].class;
         }
         
     }
