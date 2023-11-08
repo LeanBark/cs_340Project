@@ -1,0 +1,43 @@
+<!-- 
+// Citation for the following file:
+// Date: 11/7/2023
+// Adapted from OSU CS340 NodeJS Starter App
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+-->
+
+<!-- Show Item Types table -->
+<h1>Item Types Table</h1>
+<table id="item-types-table">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.item_type_id}}>
+            <td>{{this.item_type_id}}</td>
+            <td>{{this.Name}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- Add row to Item Types table -->
+<h2>Add a New Item Type</h2>
+<form id="add-item-type-form">
+    <fieldset>
+        <legend>Add New Item Type</legend>
+        <label for="input-type-name">New Item Type: </label>
+        <input type="text" name="input-type-name" id="input-type-name" placeholder="Enter Item Type">
+
+        <input type="submit">
+    </fieldset>
+</form>
+
+<script src="./js/add_item_type.js"></script>

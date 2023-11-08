@@ -224,7 +224,7 @@ app.post('/add-race', function(req, res)
 
 // Classes Table - display all classes
 app.get('/classes', function(req,res){
-    let query1 = 'SELECT class_id, Classes.name AS Name, Classes.description AS Description FROM Classes ORDER BY class_id ASC;';
+    let query1 = `SELECT class_id, Classes.name AS Name, Classes.description AS Description FROM Classes ORDER BY class_id ASC;`;
     db.pool.query(query1, function(err, rows, fields){
         res.render('classes', {data:rows});
     })
@@ -244,6 +244,78 @@ app.post('/add-class', function(req, res)
         } else 
         {
             query3 = `SELECT * FROM Classes ORDER BY class_id ASC;`;
+            db.pool.query(query3, function(error, rows, fields){
+                if(error){
+                    console.log(error);
+                    res.sendStatus(400);
+                } else 
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+// Actions Table - Show
+app.get('/actions', function(req, res){
+    let query1 = `SELECT action_id, Actions.name AS Name FROM Actions ORDER BY action_id ASC;`;
+    db.pool.query(query1, function(err, rows, fields){
+        res.render('actions', {data: rows});
+    })
+});
+
+// Actions Table - Insert Row
+app.post('/add-action', function(req, res){
+    let data = req.body;
+
+    // NESTED DATABASE QUERIES
+    let query2 = `INSERT INTO Actions (name) VALUES ('${data.name}');`;
+    db.pool.query(query2, function (error, rows, fields){
+        if (error){
+            console.log(error);
+            res.sendStatus(400);
+        } else 
+        {
+            let query3 = `SELECT * FROM Actions ORDER BY action_id ASC;`;
+            db.pool.query(query3, function(error, rows, fields){
+                if(error){
+                    console.log(error);
+                    res.sendStatus(400);
+                } else 
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+// Event Difficulties Table - display all event difficulties
+app.get('/difficulties', function(req,res){
+    let query1 = `SELECT difficulty_id, EventDifficulties.value AS Value, EventDifficulties.description AS Description FROM EventDifficulties ORDER BY difficulty_id ASC;`;
+    db.pool.query(query1, function(err, rows, fields){
+        res.render('difficulties', {data:rows});
+    })
+});
+
+// Event Difficulties Table - add a new event difficulty
+app.post('/add-difficulty', function(req, res)
+{
+    let data = req.body;
+    let rollValue = parseInt(data.value);
+    if (isNaN(rollValue)){
+        rollValue = 1;
+    }
+    // NESTED QUERIES
+    query2 = `INSERT INTO EventDifficulties (value, description) VALUES ('${data.value}','${data.description}');`;
+    db.pool.query(query2, function(error, rows, fields){
+        if (error){
+            console.log(error);
+            res.sendStatus(400);
+        } else 
+        {
+            query3 = `SELECT * FROM EventDifficulties ORDER BY difficulty_id ASC;`;
             db.pool.query(query3, function(error, rows, fields){
                 if(error){
                     console.log(error);
@@ -290,6 +362,9 @@ app.post('/add-action', function(req, res){
         }
     })
 });
+
+
+
 
 // Skill Checks Table - Show
 app.get('/events', function(req, res){
@@ -451,6 +526,40 @@ app.put('/update-item', function (req, res, next){
     })
 });
 
+
+// Item Types Table - display all item types
+app.get('/item-types', function(req,res){
+    let query1 = `SELECT item_type_id, ItemTypes.name AS Name FROM ItemTypes ORDER BY item_type_id ASC;`;
+    db.pool.query(query1, function(err, rows, fields){
+        res.render('item-types', {data:rows});
+    })
+});
+
+// Item Types Table - add a new item type
+app.post('/add-item-type', function(req, res)
+{
+    let data = req.body;
+    // NESTED QUERIES
+    query2 = `INSERT INTO ItemTypes (name) VALUES ('${data.name}');`;
+    db.pool.query(query2, function(error, rows, fields){
+        if (error){
+            console.log(error);
+            res.sendStatus(400);
+        } else 
+        {
+            query3 = `SELECT * FROM ItemTypes ORDER BY item_type_id ASC;`;
+            db.pool.query(query3, function(error, rows, fields){
+                if(error){
+                    console.log(error);
+                    res.sendStatus(400);
+                } else 
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 /*
      DEFINE LISTENER
 */

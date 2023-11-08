@@ -1,0 +1,47 @@
+<!-- 
+// Citation for the following file:
+// Date: 11/7/2023
+// Adapted from OSU CS340 NodeJS Starter App
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+-->
+
+<!-- Show Event Difficultiestable -->
+<h1>Event Difficulties Table</h1>
+<table id="difficulties-table">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.difficulty_id}}>
+            <td>{{this.difficulty_id}}</td>
+            <td>{{this.Value}}</td>
+            <td>{{this.Description}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- Add row to Event Difficulties table -->
+<h2>Add a New Event Difficulty</h2>
+<form id="add-difficulty-form">
+    <fieldset>
+        <legend>Add New Difficulty</legend>
+        <label for="input-difficulty-value">New Difficulty Value: </label>
+        <input type="number" name="input-difficulty-value" id="input-difficulty-value" placeholder="Enter Roll Value">
+
+        <label for="input-diff-description">Description: </label>
+        <input type="text" name="input-diff-description" id="input-diff-description" placeholder="Enter Description">
+
+        <input type="submit">
+    </fieldset>
+</form>
+
+<script src="./js/add_difficulty.js"></script>
