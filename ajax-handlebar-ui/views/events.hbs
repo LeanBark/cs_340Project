@@ -15,6 +15,7 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th></th>
         </tr>
     </thead>
     
@@ -26,10 +27,14 @@
             <td>{{[Roll Result]}}</td>            
             <td>{{this.Difficulty}}</td>
             <td>{{[Difficulty Value]}}</td>
+            <!-- Disable skill check delete -->
+            <td><button onclick="deleteEvent({{this.skill_check_id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+<script src="./js/delete_event.js"></script>
 
 <!-- Add row to Skill Check table -->
 <h2>Add A New Skill Check Event</h2> 

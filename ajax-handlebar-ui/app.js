@@ -449,6 +449,25 @@ app.put('/update-event', function (req, res, next){
     })
 });
 
+// Skill Check Table - Delete
+app.delete('/delete-event-ajax', function(req, res, next){
+    let data = req.body;
+    let skill_check_id = parseInt(data.id);
+    let query1 = "DELETE FROM SkillChecks WHERE skill_check_id = ?;";
+
+    // Run query
+    db.pool.query(query1, [skill_check_id], function(error, rows, fields){
+        if (error) {
+
+            // Log error
+            console.log(error);
+            res.sendStatus(400);
+        }
+        else {
+            res.sendStatus(204);
+        }    
+})});
+
 
 // Skill Check Details Table - Show
 app.get('/event-details', function(req, res){
@@ -505,7 +524,7 @@ app.post('/add-event-details', function(req, res){
 app.delete('/delete-event-details-ajax', function(req,res,next){
     let data = req.body;
     let skill_check_details_id = parseInt(data.id);
-    let query1 = "DELETE FROM SkillCheckDetails WhERE skill_check_details_id = ?";
+    let query1 = "DELETE FROM SkillCheckDetails WHERE skill_check_details_id = ?";
 
     // Run query
     db.pool.query(query1, [skill_check_details_id], function(error, rows, fields){

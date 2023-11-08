@@ -76,7 +76,7 @@ addRowToTable = (data) => {
         deleteEventDetails(newRow.skill_check_details_id);
     };
 
-    deleteCell.appendChild(deleteCellButton)
+    deleteCell.appendChild(deleteCellButton);
 
     row.appendChild(idCell);
     row.appendChild(actionCell);
@@ -85,7 +85,7 @@ addRowToTable = (data) => {
     row.appendChild(skillCheckCell);
     row.appendChild(deleteCell);
 
-    row.setAttribute("data-value", newRow.skill_check_details_id)
+    row.setAttribute("data-value", newRow.skill_check_details_id);
 
     currentTable.appendChild(row);
 }
