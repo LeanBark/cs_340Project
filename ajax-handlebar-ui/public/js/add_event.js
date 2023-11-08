@@ -69,7 +69,7 @@ addRowToTable = (data) => {
     row.appendChild(difficultyCell);
 
 
-    row.setAttribute("data-value", newRow.skill_check_id_id)
+    row.setAttribute("data-value", newRow.skill_check_id)
 
     currentTable.appendChild(row);
 }

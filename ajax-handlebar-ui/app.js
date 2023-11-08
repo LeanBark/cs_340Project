@@ -418,9 +418,51 @@ app.post('/add-event', function(req, res){
 // Skill Check Details Table - Show
 app.get('/event-details', function(req, res){
     let query1 = "SELECT skill_check_details_id, Actions.name AS \"Action\", Characters.name AS \"Character\", Items.name AS \"Item\", SkillChecks.description AS \"Description\" FROM SkillCheckDetails JOIN Actions ON SkillCheckDetails.action_id = Actions.action_id JOIN Characters ON SkillCheckDetails.character_id = Characters.character_id JOIN Items ON SkillCheckDetails.item_id = Items.item_id JOIN SkillChecks ON SkillCheckDetails.skill_check_id = SkillChecks.skill_check_id ORDER BY skill_check_details_id ASC;";
+    let query2 = "SELECT * FROM Actions ORDER BY action_id ASC;"
+    let query3 = "SELECT * FROM Characters ORDER BY character_id ASC;"
+    let query4 = "SELECT * FROM Items ORDER BY item_id ASC;"
+    let query5 = "SELECT * FROM SkillChecks ORDER BY skill_check_id ASC;"
     db.pool.query(query1, function(err, rows, fields){
         let checkEventDetails = rows;
-        return res.render('event-details', {data: checkEventDetails});
+        db.pool.query(query2, function(err, rows, fields){
+            let actions = rows;
+            db.pool.query(query3, function(err, rows, fields){
+                let characters = rows;
+                db.pool.query(query4, function(err, rows, fields){
+                    let items = rows;
+                    db.pool.query(query5, function(err, rows, fields){
+                        let skill_checks = rows;
+                        return res.render('event-details', {data: checkEventDetails, actions: actions, characters: characters, items: items, skill_checks: skill_checks});
+                    })
+                })
+            })
+        })
+    })
+});
+
+// Skill Check Details Table - Insert Row
+app.post('/add-event-details', function(req, res){
+    let data = req.body;
+
+    //NESTED DATABASE QUERIES
+    let query1 = `INSERT INTO SkillCheckDetails (action_id, character_id, item_id, skill_check_id) VALUES ('${data.action_id}','${data.character_id}', '${data.item_id}', '${data.skill_check_id}');`;
+    db.pool.query(query1, function (error, rows, fields){
+        if (error){
+            console.log(error);
+            res.sendStatus(400);
+        } else 
+        {
+            let query2 = "SELECT skill_check_details_id, Actions.name AS \"Action\", Characters.name AS \"Character\", Items.name AS \"Item\", SkillChecks.description AS \"Description\" FROM SkillCheckDetails JOIN Actions ON SkillCheckDetails.action_id = Actions.action_id JOIN Characters ON SkillCheckDetails.character_id = Characters.character_id JOIN Items ON SkillCheckDetails.item_id = Items.item_id JOIN SkillChecks ON SkillCheckDetails.skill_check_id = SkillChecks.skill_check_id ORDER BY skill_check_details_id ASC;";
+            db.pool.query(query2, function(error, rows, fields){
+                if(error){
+                    console.log(error);
+                    res.sendStatus(400);
+                } else 
+                {
+                    res.send(rows);
+                }
+            })
+        }
     })
 });
 
