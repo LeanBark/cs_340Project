@@ -189,7 +189,7 @@ app.put('/update-character', function (req, res, next){
 
 // Races Table - display all races
 app.get('/races', function(req,res){
-    let query1 = 'SELECT race_id, Races.name AS Name, Races.description AS Description FROM Races ORDER BY race_id ASC';
+    let query1 = 'SELECT race_id, Races.name AS Name, Races.description AS Description FROM Races ORDER BY race_id ASC;';
     db.pool.query(query1, function(err, rows, fields){
         res.render('races', {data:rows});
     })
@@ -222,6 +222,40 @@ app.post('/add-race', function(req, res)
     })
 });
 
+// Classes Table - display all classes
+app.get('/classes', function(req,res){
+    let query1 = 'SELECT class_id, Classes.name AS Name, Classes.description AS Description FROM Classes ORDER BY class_id ASC;';
+    db.pool.query(query1, function(err, rows, fields){
+        res.render('classes', {data:rows});
+    })
+});
+
+// Classes Table - add a new class
+app.post('/add-class', function(req, res)
+{
+    let data = req.body;
+
+    // NESTED QUERIES
+    query2 = `INSERT INTO Classes (name, description) VALUES ('${data.name}','${data.description}');`;
+    db.pool.query(query2, function(error, rows, fields){
+        if (error){
+            console.log(error);
+            res.sendStatus(400);
+        } else 
+        {
+            query3 = `SELECT * FROM Classes ORDER BY class_id ASC;`;
+            db.pool.query(query3, function(error, rows, fields){
+                if(error){
+                    console.log(error);
+                    res.sendStatus(400);
+                } else 
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 // Actions Table - Show
 app.get('/actions', function(req, res){

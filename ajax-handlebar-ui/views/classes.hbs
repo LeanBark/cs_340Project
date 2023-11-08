@@ -6,8 +6,8 @@
 -->
 
 <!-- Show Races table -->
-<h1>Races Table</h1>
-<table id="races-table">
+<h1>Classes Table</h1>
+<table id="classes-table">
     <thead>
         <tr>
             {{#each data.[0]}}
@@ -20,8 +20,8 @@
     
     <tbody>
         {{#each data}}
-        <tr data-value={{this.race_id}}>
-            <td>{{this.race_id}}</td>
+        <tr data-value={{this.class_id}}>
+            <td>{{this.class_id}}</td>
             <td>{{this.Name}}</td>
             <td>{{this.Description}}</td>
         </tr>
@@ -29,18 +29,19 @@
     </tbody>
 </table>
 
-<!-- Add row to Races table -->
-<form id="add-race-form">
-    <fieldset>
-        <legend>Add New Race</legend>
-        <label for="input-race-name">New Race: </label>
-        <input type="text" name="input-race-name" id="input-race-name" placeholder="Enter Race">
 
-        <label for="input-race-description">Description: </label>
-        <input type="text" name="input-race-description" id="input-race-description" placeholder="Enter Description">
+{{!-- add new class row --}}
+<form id="add-class-form">
+    <fieldset>
+        <legend>Add New Class</legend>
+        <label for="input-class-name">New Class: </label>
+        <input type="text" name="input-class-name" id="input-class-name" placeholder="Enter Class">
+
+        <label for="input-class-description">Description: </label>
+        <input type="text" name="input-class-description" id="input-class-description" placeholder="Enter Description">
 
         <input type="submit">
     </fieldset>
 </form>
 
-<script src="./js/add_race.js"></script>
+<script src="./js/add_class.js"></script>
