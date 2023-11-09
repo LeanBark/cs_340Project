@@ -13,7 +13,7 @@ var app     = express();                        // We need to instantiate an exp
 app.use(express.json());                        // Allow express to handle JSON data
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
-PORT        = 8182;                             // Set a port number at the top so it's easy to change in the future
+PORT        = 8181;                             // Set a port number at the top so it's easy to change in the future
 
 // Setup Handlebars
 const { engine } = require('express-handlebars');
@@ -366,13 +366,31 @@ app.post('/add-action', function(req, res){
 
 // Skill Checks Table - Show
 app.get('/events', function(req, res){
-    let query1 = "SELECT skill_check_id, SkillChecks.description AS Description, roll_result AS \"Roll Result\", EventDifficulties.description AS Difficulty, EventDifficulties.value AS \"Difficulty Value\" FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id ORDER BY skill_check_id ASC;";
+    let query1 = `SELECT skill_check_id, SkillChecks.description AS Description, Characters.name AS \"Character\", Actions.name AS \"Action\", Items.name AS \"Item\", SkillChecks.roll_result AS \"Roll Result\", EventDifficulties.description AS Difficulty, EventDifficulties.value AS \"Difficulty Value\" 
+    FROM ((((SkillCheckDetails 
+        INNER JOIN EventDifficulties ON SkillCheckDetails.difficulty_id = EventDifficulties.difficulty_id)
+        INNER JOIN Actions ON SkillCheckDetails.action_id = Actions.action_id)
+        INNER JOIN Characters ON SkillCheckDetails.character_id = Characters/character_id)
+        INNER JOIN Items ON SkillCheckDetails.item_id = Items.item_id)
+     ORDER BY skill_check_id ASC;`;
     let query2 = "SELECT * FROM EventDifficulties ORDER BY difficulty_id ASC;";
+    let query3 = `SELECT * FROM Actions ORDER BY action_id ASC;`;
+    let query4 = `SELECT * FROM Items ORDER BY item_id ASC;`;
+    let query5 = `SELECT * FROM Characters ORDER BY character_id ASC;`;
     db.pool.query(query1, function(err, rows, fields){
         let checkEvents = rows;
         db.pool.query(query2, function(err, rows, fields){
             let difficulties = rows;
-            return res.render('events', {data: checkEvents, difficulties: difficulties});
+            db.pool.query(query3, function(err, rows, fields){
+                let actions = rows;
+                db.pool.query(query4, function(err, rows, fields){
+                    let items = rows;
+                    db.pool.query(query5, function(err, rows, fields){
+                        let characters = rows;
+                        return res.render('events', {data: checkEvents, difficulties: difficulties, actions: actions, items: items, characters: characters});
+                    })
+                })
+            })
         })
     })
 });
