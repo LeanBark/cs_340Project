@@ -12,8 +12,6 @@ addEventForm.addEventListener("submit", function(e){
     let inputItem = document.getElementById("input-item");
     let inputSkillCheck = document.getElementById("input-skill-check");
 
-    console.log('Hello')
-
     let inputActionValue = inputAction.value;
     let inputCharacterValue = inputCharacter.value;
     let inputItemValue = inputItem.value;

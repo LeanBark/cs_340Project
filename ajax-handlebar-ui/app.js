@@ -399,7 +399,7 @@ app.post('/add-event', function(req, res){
             res.sendStatus(400);
         } else 
         {
-            let query3 = `SELECT * FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id ORDER BY skill_check_id ASC;`;
+            let query3 = `SELECT skill_check_id, SkillChecks.description AS description, roll_result, EventDifficulties.description AS difficulty, value FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id ORDER BY skill_check_id ASC;`;
             db.pool.query(query3, function(error, rows, fields){
                 if(error){
                     console.log(error);

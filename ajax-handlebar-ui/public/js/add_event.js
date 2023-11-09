@@ -61,7 +61,7 @@ addRowToTable = (data) => {
     idCell.innerText = newRow.skill_check_id;
     descriptionCell.innerText = newRow.description;
     rollCell.innerText = newRow.roll_result;
-    difficultyCell.innerText = newRow.description;
+    difficultyCell.innerText = newRow.difficulty;
     difficultyValueCell.innerText = newRow.value;
 
     deleteCellButton = document.createElement("button");
@@ -70,7 +70,7 @@ addRowToTable = (data) => {
         deleteEvent(newRow.skill_check_id);
     };
 
-    deleteCell.appendChild(deleteCellButton);
+    deleteCell.appendChild(deleteCellButton);    
 
     row.appendChild(idCell);
     row.appendChild(descriptionCell);
@@ -82,4 +82,17 @@ addRowToTable = (data) => {
     row.setAttribute("data-value", newRow.skill_check_id);
 
     currentTable.appendChild(row);
+
+    addDropDownMenu(newRow.skill_check_id, newRow.description);
+}
+
+function addDropDownMenu(skill_check_id, description){
+    
+    let selectMenu = document.getElementById("selected-event");
+    let newOption = document.createElement("option")
+
+    newOption.innerText = description
+    newOption.value = skill_check_id
+
+    selectMenu.appendChild(newOption)
 }
