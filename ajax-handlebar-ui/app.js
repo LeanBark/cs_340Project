@@ -329,41 +329,6 @@ app.post('/add-difficulty', function(req, res)
     })
 });
 
-// Actions Table - Show
-app.get('/actions', function(req, res){
-    let query1 = "SELECT action_id, Actions.name AS Name FROM Actions ORDER BY action_id ASC;";
-    db.pool.query(query1, function(err, rows, fields){
-        res.render('actions', {data: rows});
-    })
-});
-
-// Actions Table - Insert Row
-app.post('/add-action', function(req, res){
-    let data = req.body;
-
-    // NESTED DATABASE QUERIES
-    let query2 = `INSERT INTO Actions (name) VALUES ('${data.name}');`;
-    db.pool.query(query2, function (error, rows, fields){
-        if (error){
-            console.log(error);
-            res.sendStatus(400);
-        } else 
-        {
-            let query3 = `SELECT * FROM Actions ORDER BY action_id ASC;`;
-            db.pool.query(query3, function(error, rows, fields){
-                if(error){
-                    console.log(error);
-                    res.sendStatus(400);
-                } else 
-                {
-                    res.send(rows);
-                }
-            })
-        }
-    })
-});
-
-
 // Skill Checks Table - Show
 app.get('/events', function(req, res){
     let query1 = "SELECT skill_check_id, SkillChecks.description AS Description, roll_result AS \"Roll Result\", EventDifficulties.description AS Difficulty, EventDifficulties.value AS \"Difficulty Value\" FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id ORDER BY skill_check_id ASC;";
