@@ -27,11 +27,52 @@
             <td>{{this.Character}}</td>
             <td>{{this.Item}}</td>
             <td>{{this.Description}}</td>
-            <!--Disabled skill check details delete-->
-            <td><button onclick="deleteEventDetails({{this.skill_check_details_id}})" disabled="true">Delete</button></td>
+            <!--Disable skill check details delete-->
+            <td><button onclick="deleteEventDetails({{this.skill_check_details_id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
 
 <script src="./js/delete_event_details.js"></script>
+
+<!-- Add row to Skill Check Details table -->
+<h2>Add A New Skill Check Event Details</h2> 
+<form id="add-event-details-form">
+    <fieldset>
+        <legend>Add Event Details</legend>
+        <select name="input-action" id="input-action">
+            <option value="">Select Action</option>
+            {{#each actions}}
+            <option value="{{this.action_id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+
+        <select name="input-character" id="input-character">
+            <option value="">Select Character</option>
+            {{#each characters}}
+            <option value="{{this.character_id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+
+        <select name="input-item" id="input-item">
+            <option value="">Select Item</option>
+            {{#each items}}
+            <option value="{{this.item_id}}">{{this.name}}</option>
+            {{/each}}
+            <option value="NULL">None</option>
+        </select>
+
+        <select name="input-skill-check" id="input-skill-check">
+            <option value="">Select Skill Check</option>
+            {{#each skill_checks}}
+            <option value="{{this.skill_check_id}}">{{this.description}}</option>
+            {{/each}}
+        </select>
+
+        <!-- Disable add skill check details -->
+        <input type="submit">
+    </fieldset>
+</form>
+
+<script src="./js/add_event_details.js"></script>

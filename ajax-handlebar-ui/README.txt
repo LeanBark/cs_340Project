@@ -13,6 +13,12 @@ node app.js
 ensure that VPN to vpn.oregonstate.edu is active
 http://flipNUMBER.engr.oregonstate.edu:PORT/ 
 
+Using forever
+
+forever start app.js
+forever list
+forever stopall
+
 Setting up the database
 
 Use database/DDL.sql as the source
