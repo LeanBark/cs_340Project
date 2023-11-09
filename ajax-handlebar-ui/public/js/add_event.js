@@ -64,7 +64,7 @@ addRowToTable = (data) => {
     difficultyCell.innerText = newRow.difficulty;
     difficultyValueCell.innerText = newRow.value;
 
-    deleteCellButton = document.createElement("button");
+    let deleteCellButton = document.createElement("button");
     deleteCellButton.innerText = "Delete";
     deleteCellButton.onclick = function(){
         deleteEvent(newRow.skill_check_id);

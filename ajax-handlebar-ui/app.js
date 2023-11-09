@@ -523,6 +523,44 @@ app.post('/add-event-details', function(req, res){
     })
 });
 
+// Skill Check Details Table - Update
+app.put('/update-event-details-ajax', function (req, res, next){
+    let data = req.body;
+
+    let id = parseInt(data.id);
+    let action = parseInt(data.action);
+    let character = parseInt(data.character);
+    let item = parseInt(data.item);
+    if (isNaN(item)){
+        item = "NULL";
+    }
+    let skillCheck = parseInt(data.skillCheck);
+
+    let queryUpdateMaster = `UPDATE SkillCheckDetails SET action_id = ?, character_id = ?, item_id = ?, skill_check_id = ? WHERE skill_check_details_id = ?;`;
+    let selectEventDetails = "SELECT skill_check_details_id, Actions.name AS \"action\", Characters.name AS \"character\", IF(SkillCheckDetails.item_id IS NOT NULL, Items.name, \"None\") AS \"item\", SkillChecks.description AS \"skillCheck\" FROM SkillCheckDetails JOIN Actions ON SkillCheckDetails.action_id = Actions.action_id JOIN Characters ON SkillCheckDetails.character_id = Characters.character_id LEFT JOIN Items ON SkillCheckDetails.item_id = Items.item_id JOIN SkillChecks ON SkillCheckDetails.skill_check_id = SkillChecks.skill_check_id WHERE skill_check_details_id = ?;";
+    inputs = [action, character, item, skillCheck, id];
+    if (item == "NULL"){
+        queryUpdateMaster = `UPDATE SkillCheckDetails SET action_id = ?, character_id = ?, item_id = NULL, skill_check_id = ? WHERE skill_check_details_id = ?;`;
+        inputs = [action, character, skillCheck, id];
+    }
+    
+    db.pool.query(queryUpdateMaster, inputs, function(error, rows, fields){
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            db.pool.query(selectEventDetails, [id], function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
 // Skill Check Details Table - Delete
 app.delete('/delete-event-details-ajax', function(req,res,next){
     let data = req.body;
