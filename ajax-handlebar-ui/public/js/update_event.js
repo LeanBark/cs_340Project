@@ -5,6 +5,33 @@
 
 let updateEventForm = document.getElementById("update-event-form");
 
+let eventSelector = document.getElementById("selected-event");
+
+// difficulty selector listener
+
+
+// event listener for prefilling form data -- in progress
+eventSelector.addEventListener("change", (event) => {
+    let inputEvent = document.getElementById("selected-event");
+    let inputRoll = document.getElementById("input-roll-value-update");
+    let inputDifficulty = document.getElementById("input-difficulty-update");
+    let table = document.getElementById("events-table");
+    for (let i = 0, row; row = table.rows[i]; i++){
+        if (table.rows[i].getAttribute("data-value") == event.target.value){
+            let updateRowIndex = table.getElementsByTagName("tr")[i];
+            let rollInd = updateRowIndex.getElementsByTagName("td")[2];
+            let difficultyInd = updateRowIndex.getElementsByTagName("td")[3];
+            let difficultyValueInd = updateRowIndex.getElementsByTagName("td")[4];
+            
+            
+            inputRoll.value = rollInd.innerHTML;
+            // difficulty description
+            // difficulty roll value
+            
+        }
+   }
+})
+
 
 //------------Clicking submit button in edit event infromation form retrieves the input data for updating event----//
 updateEventForm.addEventListener("submit", function (e) {

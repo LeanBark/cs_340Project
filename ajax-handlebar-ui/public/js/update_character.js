@@ -4,7 +4,48 @@
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
 let updateCharacterForm = document.getElementById("update-character-form");
+let nameSelector = document.getElementById("selected-character");
+// race selector
+// class selector
 
+// event listener for prefilling form data -- in progress
+nameSelector.addEventListener("change", (e) => {
+    let inputCharacterName = document.getElementById("selected-character");
+    let inputLevel = document.getElementById("input-lvl-update");
+    let inputStr = document.getElementById("input-str-update");
+    let inputDex = document.getElementById("input-dex-update");
+    let inputCon = document.getElementById("input-con-update");
+    let inputInt = document.getElementById("input-int-update");
+    let inputWis = document.getElementById("input-wis-update");
+    let inputChr = document.getElementById("input-chr-update");
+    let inputRaceID = document.getElementById("input-race-update");
+    let inputClassID = document.getElementById("input-class-update");
+
+    let table = document.getElementById("characters-table");
+    for (let i = 0, row; row = table.rows[i]; i++){
+        if (table.rows[i].getAttribute("data-value") == e.target.value){
+            let updateRowIndex = table.getElementsByTagName("tr")[i];
+            let levelInd = updateRowIndex.getElementsByTagName("td")[2];
+            let strInd = updateRowIndex.getElementsByTagName("td")[3];
+            let dexInd = updateRowIndex.getElementsByTagName("td")[4];
+            let conInd = updateRowIndex.getElementsByTagName("td")[5];
+            let intInd = updateRowIndex.getElementsByTagName("td")[6];
+            let wisInd = updateRowIndex.getElementsByTagName("td")[7];
+            let chrInd = updateRowIndex.getElementsByTagName("td")[8];
+            let raceInd = updateRowIndex.getElementsByTagName("td")[9];
+            let classInd = updateRowIndex.getElementsByTagName("td")[10];
+            
+            inputLevel.value = levelInd.innerHTML;
+            inputStr.value = strInd.innerHTML;
+            inputDex.value = dexInd.innerHTML;
+            inputCon.value = conInd.innerHTML;
+            inputInt.value = intInd.innerHTML;
+            inputWis.value = wisInd.innerHTML;
+            inputChr.value = chrInd.innerHTML;
+        }
+    }
+    
+})
 
 //------------Clicking submit button in edit character infromation form retrieves the input data for updating character----//
 updateCharacterForm.addEventListener("submit", function (e) {

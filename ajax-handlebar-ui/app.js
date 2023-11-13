@@ -329,68 +329,15 @@ app.post('/add-difficulty', function(req, res)
     })
 });
 
-// Actions Table - Show
-app.get('/actions', function(req, res){
-    let query1 = "SELECT action_id, Actions.name AS Name FROM Actions ORDER BY action_id ASC;";
-    db.pool.query(query1, function(err, rows, fields){
-        res.render('actions', {data: rows});
-    })
-});
-
-// Actions Table - Insert Row
-app.post('/add-action', function(req, res){
-    let data = req.body;
-
-    // NESTED DATABASE QUERIES
-    let query2 = `INSERT INTO Actions (name) VALUES ('${data.name}');`;
-    db.pool.query(query2, function (error, rows, fields){
-        if (error){
-            console.log(error);
-            res.sendStatus(400);
-        } else 
-        {
-            let query3 = `SELECT * FROM Actions ORDER BY action_id ASC;`;
-            db.pool.query(query3, function(error, rows, fields){
-                if(error){
-                    console.log(error);
-                    res.sendStatus(400);
-                } else 
-                {
-                    res.send(rows);
-                }
-            })
-        }
-    })
-});
-
-
 // Skill Checks Table - Show
 app.get('/events', function(req, res){
-    let query1 = `SELECT skill_check_id, SkillChecks.description AS Description, Characters.name AS \"Character\", Actions.name AS \"Action\", Items.name AS \"Item\", SkillChecks.roll_result AS \"Roll Result\", EventDifficulties.description AS Difficulty, EventDifficulties.value AS \"Difficulty Value\" 
-    FROM ((((SkillCheckDetails 
-        INNER JOIN EventDifficulties ON SkillCheckDetails.difficulty_id = EventDifficulties.difficulty_id)
-        INNER JOIN Actions ON SkillCheckDetails.action_id = Actions.action_id)
-        INNER JOIN Characters ON SkillCheckDetails.character_id = Characters/character_id)
-        INNER JOIN Items ON SkillCheckDetails.item_id = Items.item_id)
-     ORDER BY skill_check_id ASC;`;
+    let query1 = "SELECT skill_check_id, SkillChecks.description AS Description, roll_result AS \"Roll Result\", EventDifficulties.description AS Difficulty, EventDifficulties.value AS \"Difficulty Value\" FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id ORDER BY skill_check_id ASC;";
     let query2 = "SELECT * FROM EventDifficulties ORDER BY difficulty_id ASC;";
-    let query3 = `SELECT * FROM Actions ORDER BY action_id ASC;`;
-    let query4 = `SELECT * FROM Items ORDER BY item_id ASC;`;
-    let query5 = `SELECT * FROM Characters ORDER BY character_id ASC;`;
     db.pool.query(query1, function(err, rows, fields){
         let checkEvents = rows;
         db.pool.query(query2, function(err, rows, fields){
             let difficulties = rows;
-            db.pool.query(query3, function(err, rows, fields){
-                let actions = rows;
-                db.pool.query(query4, function(err, rows, fields){
-                    let items = rows;
-                    db.pool.query(query5, function(err, rows, fields){
-                        let characters = rows;
-                        return res.render('events', {data: checkEvents, difficulties: difficulties, actions: actions, items: items, characters: characters});
-                    })
-                })
-            })
+            return res.render('events', {data: checkEvents, difficulties: difficulties});
         })
     })
 });
@@ -534,6 +481,44 @@ app.post('/add-event-details', function(req, res){
                     res.sendStatus(400);
                 } else 
                 {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+// Skill Check Details Table - Update
+app.put('/update-event-details-ajax', function (req, res, next){
+    let data = req.body;
+
+    let id = parseInt(data.id);
+    let action = parseInt(data.action);
+    let character = parseInt(data.character);
+    let item = parseInt(data.item);
+    if (isNaN(item)){
+        item = "NULL";
+    }
+    let skillCheck = parseInt(data.skillCheck);
+
+    let queryUpdateMaster = `UPDATE SkillCheckDetails SET action_id = ?, character_id = ?, item_id = ?, skill_check_id = ? WHERE skill_check_details_id = ?;`;
+    let selectEventDetails = "SELECT skill_check_details_id, Actions.name AS \"action\", Characters.name AS \"character\", IF(SkillCheckDetails.item_id IS NOT NULL, Items.name, \"None\") AS \"item\", SkillChecks.description AS \"skillCheck\" FROM SkillCheckDetails JOIN Actions ON SkillCheckDetails.action_id = Actions.action_id JOIN Characters ON SkillCheckDetails.character_id = Characters.character_id LEFT JOIN Items ON SkillCheckDetails.item_id = Items.item_id JOIN SkillChecks ON SkillCheckDetails.skill_check_id = SkillChecks.skill_check_id WHERE skill_check_details_id = ?;";
+    inputs = [action, character, item, skillCheck, id];
+    if (item == "NULL"){
+        queryUpdateMaster = `UPDATE SkillCheckDetails SET action_id = ?, character_id = ?, item_id = NULL, skill_check_id = ? WHERE skill_check_details_id = ?;`;
+        inputs = [action, character, skillCheck, id];
+    }
+    
+    db.pool.query(queryUpdateMaster, inputs, function(error, rows, fields){
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            db.pool.query(selectEventDetails, [id], function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
                     res.send(rows);
                 }
             })

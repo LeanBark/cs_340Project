@@ -6,6 +6,31 @@
 let updateItemForm = document.getElementById("update-item-form");
 
 
+let itemSelector = document.getElementById("selected-item");
+
+// item type selector
+
+// event listener for prefilling form data -- in progress
+itemSelector.addEventListener("change", (e) => {
+    let inputName = document.getElementById("selected-item");
+    let inputQuantity = document.getElementById("input-quantity-update");
+    let inputType = document.getElementById("input-type-update");
+
+
+    let table = document.getElementById("items-table");
+    for (let i = 0, row; row = table.rows[i]; i++){
+        if (table.rows[i].getAttribute("data-value") == e.target.value){
+            let updateRowIndex = table.getElementsByTagName("tr")[i];
+            let quantityInd = updateRowIndex.getElementsByTagName("td")[2];
+            let typeInd = updateRowIndex.getElementsByTagName("td")[3];
+            
+            inputQuantity.value = quantityInd.innerHTML;
+            //item_type
+        }
+    }
+    
+})
+
 //------------Clicking submit button in edit item infromation form retrieves the input data for updating item----//
 updateItemForm.addEventListener("submit", function (e) {
     e.preventDefault();
