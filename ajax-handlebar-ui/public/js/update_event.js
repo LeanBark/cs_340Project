@@ -33,6 +33,7 @@ eventSelector.addEventListener("change", (event) => {
 })
 
 
+
 //------------Clicking submit button in edit event infromation form retrieves the input data for updating event----//
 updateEventForm.addEventListener("submit", function (e) {
     e.preventDefault();
