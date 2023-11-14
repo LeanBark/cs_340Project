@@ -59,14 +59,23 @@ addRowToTable = (data) => {
     let actionCell = document.createElement("TD");
     let characterCell = document.createElement("TD");
     let itemCell = document.createElement("TD");
-    let skillCheckCell = document.createElement("TD")
-    let deleteCell = document.createElement("TD")
+    let skillCheckCell = document.createElement("TD");
+    let editCell = document.createElement("TD");
+    let deleteCell = document.createElement("TD");
 
     idCell.innerText = newRow.skill_check_details_id;
     actionCell.innerText = newRow.Action;
     characterCell.innerText = newRow.Character;
     itemCell.innerText = newRow.Item;
     skillCheckCell.innerText = newRow.Description;
+
+    editCellButton = document.createElement("button");
+    editCellButton.innerText = "Edit";
+    editCellButton.onclick = function(){
+        updateEventDetails(newRow.skill_check_details_id);
+    };
+
+    editCell.appendChild(editCellButton)
 
     deleteCellButton = document.createElement("button");
     deleteCellButton.innerText = "Delete";
@@ -81,6 +90,7 @@ addRowToTable = (data) => {
     row.appendChild(characterCell);
     row.appendChild(itemCell);
     row.appendChild(skillCheckCell);
+    row.appendChild(editCell);
     row.appendChild(deleteCell);
 
     row.setAttribute("data-value", newRow.skill_check_details_id);
