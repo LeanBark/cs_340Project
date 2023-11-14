@@ -5,7 +5,6 @@
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 -->
 
-<!-- Show Skill Checks Details table -->
 <h1>Skill Check Event Details</h1>
 <table id="event-details-table">
     <thead>
@@ -15,6 +14,7 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -27,6 +27,8 @@
             <td>{{this.Character}}</td>
             <td>{{this.Item}}</td>
             <td>{{this.Description}}</td>
+            <!-- Disable skill check details edit -->
+            <td><button onclick="updateEventDetails({{this.skill_check_details_id}})">Edit</button></td>
             <!--Disable skill check details delete-->
             <td><button onclick="deleteEventDetails({{this.skill_check_details_id}})">Delete</button></td>
         </tr>
@@ -34,6 +36,7 @@
     </tbody>
 </table>
 
+<script src="./js/update_event_details.js"></script>
 <script src="./js/delete_event_details.js"></script>
 
 <!-- Add row to Skill Check Details table -->
@@ -75,4 +78,40 @@
     </fieldset>
 </form>
 
-<script src="./js/add_event_details.js"></script>
+<!-- Update row in Skill Check Details table -->
+<form id="update-event-details-form" hidden>
+    <fieldset>
+        <legend>Edit Event Details</legend>
+        <select name="update-action" id="update-action">
+            <option value="">Select Action</option>
+            {{#each actions}}
+            <option value="{{this.action_id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+
+        <select name="update-character" id="update-character">
+            <option value="">Select Character</option>
+            {{#each characters}}
+            <option value="{{this.character_id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+
+        <select name="update-item" id="update-item">
+            <option value="">Select Item</option>
+            {{#each items}}
+            <option value="{{this.item_id}}">{{this.name}}</option>
+            {{/each}}
+            <option value="NULL">None</option>
+        </select>
+
+        <select name="update-skill-check" id="update-skill-check">
+            <option value="">Select Skill Check</option>
+            {{#each skill_checks}}
+            <option value="{{this.skill_check_id}}">{{this.description}}</option>
+            {{/each}}
+        </select>
+    </fieldset>
+</form>
+
+<script src="./js/update_event_details.js"></script>
+
