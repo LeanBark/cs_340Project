@@ -3,8 +3,10 @@
 // Adapted from OSU CS340 NodeJS Starter App
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
+
 function updateEventDetails(skill_check_details_id) {
     let table = document.getElementById("event-details-table");
+    
     for (let i = 0, row; row = table.rows[i]; i++){
         if (table.rows[i].getAttribute("data-value") == skill_check_details_id){
             let updateRowIndex = table.getElementsByTagName("tr")[i];
@@ -14,30 +16,62 @@ function updateEventDetails(skill_check_details_id) {
             let skillCheckInd = updateRowIndex.getElementsByTagName("td")[4];
             let editInd = updateRowIndex.getElementsByTagName("td")[5];
             
+            let actionOptions = document.getElementById("update-action");
+            
+            for(let i=0; i<actionOptions.length; i++){
+                let option = actionOptions.options[i];
+                if (option.text == actionInd.innerHTML){
+                    actionOptions.value = option.value;
+                    actionOptions.text = option.text;
+                }
+            }
+            actionInd.innerHTML= "";
+            actionInd.append(actionOptions);
+
+            let characterOptions = document.getElementById("update-character");
+            for(let i=0; i<characterOptions.length; i++){
+                let option = characterOptions.options[i];
+                if (option.text == characterInd.innerHTML){
+                    characterOptions.value = option.value;
+                    characterOptions.text = option.text;
+                }
+            }
+            characterInd.innerHTML = "";
+            characterInd.appendChild(characterOptions);
+
+            let itemOptions = document.getElementById("update-item");
+            for (let i=0; i<itemOptions.length; i++){
+                let option = itemOptions.options[i];
+                if (option.text == itemInd.innerHTML){
+                    itemOptions.value = option.value;
+                    itemOptions.text = option.text;
+                }
+            }
+            itemInd.innerHTML = "";
+            itemInd.appendChild(itemOptions)
+            
+            let skillCheckOptions = document.getElementById("update-skill-check");
+            for (let i=0; i<skillCheckOptions.length; i++){
+                let option = skillCheckOptions.options[i];
+                if (option.text == skillCheckInd.innerHTML){
+                    skillCheckOptions.value = option.value;
+                    skillCheckOptions.text = option.text;
+                }
+            }
+            skillCheckInd.innerHTML = "";
+            skillCheckInd.appendChild(skillCheckOptions)
+            
+
+            
             let submitButton = document.createElement("button");
             submitButton.innerText = "Submit";
             submitButton.onclick = function(){
                 submitEventDetails(skill_check_details_id);
             };
 
-            let actionOptions = document.getElementById("update-action");
-            actionInd.innerHTML = "";
-            actionInd.appendChild(actionOptions);
-
-            let characterOptions = document.getElementById("update-character");
-            characterInd.innerHTML = "";
-            characterInd.appendChild(characterOptions);
-
-            let itemOptions = document.getElementById("update-item");
-            itemInd.innerHTML = "";
-            itemInd.appendChild(itemOptions)
-            
-            let skillCheckOptions = document.getElementById("update-skill-check");
-            skillCheckInd.innerHTML = "";
-            skillCheckInd.appendChild(skillCheckOptions)
-            
             editInd.removeChild(editInd.children[0]);
             editInd.appendChild(submitButton)
+
         }
     }
 }
@@ -97,7 +131,11 @@ function updateRow(data, skill_check_details_id){
 
             let editButton = document.createElement("button");
             editButton.innerText = "Edit";
-            editButton.onclick = function(){
+            editButton.onclick = function(e){
+                // let skillCheckSelector = document.getElementById("update-skill-check")
+                // skillCheckSelector.addEventListener("change", (e) =>{
+
+                // })
                 updateEventDetails(skill_check_details_id);
             };
 
