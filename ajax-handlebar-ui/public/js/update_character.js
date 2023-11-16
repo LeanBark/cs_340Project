@@ -7,7 +7,6 @@ let updateCharacterForm = document.getElementById("update-character-form");
 let nameSelector = document.getElementById("selected-character");
 // race selector
 // class selector
-
 // event listener for prefilling form data -- in progress
 nameSelector.addEventListener("change", (e) => {
     let inputCharacterName = document.getElementById("selected-character");
@@ -42,10 +41,32 @@ nameSelector.addEventListener("change", (e) => {
             inputInt.value = intInd.innerHTML;
             inputWis.value = wisInd.innerHTML;
             inputChr.value = chrInd.innerHTML;
+
+            
+            // iterates over select options to find matching Race
+            for (let i = 0; i< inputRaceID.length; i++){
+                let option = inputRaceID.options[i];
+                if (option.text == raceInd.innerHTML){
+                    inputRaceID.value = option.value;
+                    inputRaceID.text = option.text;
+                }
+            }
+
+            // iterates over select options to find matching Class
+            for (let i=0; i<inputClassID.length; i++){
+                let option = inputClassID.options[i];
+                if (option.text == classInd.innerHTML){
+                    inputClassID.value = option.value;
+                    inputClassID.text = option.text;
+                }
+            }
+            
+            }
+
         }
     }
     
-})
+)
 
 //------------Clicking submit button in edit character infromation form retrieves the input data for updating character----//
 updateCharacterForm.addEventListener("submit", function (e) {

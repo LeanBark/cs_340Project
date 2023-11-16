@@ -25,8 +25,15 @@ eventSelector.addEventListener("change", (event) => {
             
             
             inputRoll.value = rollInd.innerHTML;
-            // difficulty description
-            // difficulty roll value
+
+            // iterates and follows format of text content to pass in values/locate appropriate option
+            for (let i=0; i<inputDifficulty.length; i++){
+                let option = inputDifficulty.options[i];
+                if (option.text == `${difficultyInd.innerHTML}: ${difficultyValueInd.innerHTML}`){
+                    inputDifficulty.text = option.text;
+                    inputDifficulty.value = option.value;
+                }
+            }
             
         }
    }

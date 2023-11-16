@@ -97,7 +97,7 @@
         <legend>Edit Character</legend>
         <label for="input-character-name"></label>
         <select name="input-character-name" id="selected-character">
-            <option value="test">Select A Character</option>
+            <option value="">Select A Character</option>
             {{#each data}}
             <option value="{{this.character_id}}">{{this.Name}}</option>
             {{/each}}
@@ -138,7 +138,7 @@
         
         <label for="input-character-race">Race: </label>
         <select name="input-character-race" id="input-race-update">
-            <option>Select A New Race</option>
+            <option value="">Select A New Race</option>
             {{#each races}}
             <option value="{{this.race_id}}">{{this.name}}</option>
             {{/each}}
@@ -147,7 +147,7 @@
         
         <label for="input-character-class">Class: </label>
         <select name="input-character-class" id="input-class-update">
-            <option>Select A New Class</option>
+            <option value="">Select A New Class</option>
             {{#each classes}}
             <option value="{{this.class_id}}">{{this.name}}</option>
             {{/each}}

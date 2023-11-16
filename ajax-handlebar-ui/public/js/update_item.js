@@ -25,7 +25,14 @@ itemSelector.addEventListener("change", (e) => {
             let typeInd = updateRowIndex.getElementsByTagName("td")[3];
             
             inputQuantity.value = quantityInd.innerHTML;
-            //item_type
+            
+            for (let i=0; i<inputType.length; i++){
+                let option = inputType.options[i];
+                if (option.text == typeInd.innerHTML){
+                    inputType.value = option.value;
+                    inputType.text = option.text;
+                }
+            }
         }
     }
     
