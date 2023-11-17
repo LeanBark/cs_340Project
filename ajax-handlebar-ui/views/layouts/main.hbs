@@ -5,6 +5,20 @@
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 -->
 
+<!--
+// Citation for the CSS to rotate an image using keyframes
+// Date: 11/16/2023
+// Adapted from Stack Overflow Post - How can I rotate an image for a specific time and then stopping it slowly
+// Source URL: https://stackoverflow.com/questions/55458757/how-can-i-rotate-an-image-for-a-specific-time-and-then-stopping-it-slowly
+-->
+
+<!--
+// Citation for navbar style
+// Date: 11/16/2023
+// Adapated from W3 Schools - How TO - Top Navigation
+// Soure URL: https://www.w3schools.com/howto/howto_js_topnav.asp
+-->
+
 <!-- Defines the layout and style for web pages-->
 
 <!DOCTYPE html>
@@ -17,6 +31,12 @@
         body {
             background-color: rgb(135, 173, 255);
             font-family:Verdana, Geneva, Tahoma, sans-serif;
+            border: #05583a;
+            border-width: 2px;
+            border-style: solid;
+            display: inline-block;
+            margin-left: 25%;
+            margin-right: 25%;
         }
         h1, h2{
         margin-left: auto;
@@ -69,7 +89,7 @@
             size:30px;
         }
         a {
-            display: block;
+            display: inline-block;
             font-family:Verdana, Geneva, Tahoma, sans-serif;
         }
         p {
@@ -100,19 +120,56 @@
             width: 16%;
         }
         .center-img {
+            background: none;
+            border: none;
+            cursor: pointer;
             display: block;
             margin-left: auto;
             margin-right: auto;            
+        }
+        .center-img:focus {
+            background: none;
+            outline: none;
+        }
+        .center-img:active {
+            background: none;
+            outline: none;
+        }
+        .rotate-img {
+            animation: rotate-animation 0.5s ease-out forwards;
+        }
+        @keyframes rotate-animation {
+            from {transform: rotate(0deg);}
+            to {transform: rotate(360deg);}
         }
         .center-text {
             margin: auto;
             text-align: center;
         }
+        .topnav {
+            background-color: #05583a;
+            overflow: hidden;
+            padding: 0px;
+            margin: 0px;
+            margin: auto;
+            display: inline-block;
+        }
+        .topnav a {
+            color: white;
+            float: center;
+            text-align: center;
+            padding: 10px;
+
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .topnav a:hover {
+            color: black;
+            background-color: white;
+        }
     legend{
         size 150px;
     }
-
-
     fieldset{
         margin-left: auto;
         margin-right:auto;
@@ -126,8 +183,8 @@
 
     </style>
 </head>
-<header>
-    <div class="center-text">
+<header class="center-text">
+    <div class="topnav">
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/characters">Characters</a></li>

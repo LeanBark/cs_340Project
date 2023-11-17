@@ -5,9 +5,23 @@
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 -->
 
+<!--
+Citation for the following images:
+Date: 11/16/2023
+Credit attributed to: 
+
+Dice 20 faces 20 icon by Delapouite under CC BY 3.0
+Source URL: https://game-icons.net/1x1/delapouite/dice-twenty-faces-twenty.html
+
+Dice 20 faces 1 icon by Delapouite under CC BY 3.0
+Source URL: https://game-icons.net/1x1/delapouite/dice-twenty-faces-one.html
+--> 
+
 <!-- Defines the body of the Home web page -->
 
 <h1 id="home-title" class="center-text">Welcome to Faeru Adventures!</h1>
-<img src="./img/d20_558_640.png" alt="D20 Dice" width="279" height="320" class="center-img">
-<p class="center-text">It's time to roll the dice!</p>
-
+<button onclick="rollDice()" class="center-img" id="main-img-button">
+    <img src="./img/d20_critical_success.png" alt="D20 Dice" width="320" height="320" id="main-img">
+</button>
+<p class="center-text">It's time to roll the dice. Give it a click!</p>
+<script src="./js/roll_dice.js"></script>
