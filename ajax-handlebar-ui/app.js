@@ -13,7 +13,7 @@ var app     = express();                        // We need to instantiate an exp
 app.use(express.json());                        // Allow express to handle JSON data
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
-PORT        = 8190;                             // Set a port number at the top so it's easy to change in the future
+PORT        = 8255;                             // Set a port number at the top so it's easy to change in the future
 
 // Setup Handlebars
 const { engine } = require('express-handlebars');
@@ -156,13 +156,10 @@ app.put('/update-character', function (req, res, next){
         charisma = 10;
     }
     let race_id = parseInt(data.race_id);
-    if (isNaN(race_id)){
-        race_id = NULL;
-    }
+
+    
     let class_id = parseInt(data.class_id);
-    if (isNaN(class_id)){
-        class_id = NULL;
-    }
+
 
     // NESTED DATABASE QUERIES
     let queryUpdateMaster = `UPDATE Characters SET level = ?, strength = ?, dexterity = ?, constitution = ?, intelligence = ?, wisdom = ?, charisma = ?,

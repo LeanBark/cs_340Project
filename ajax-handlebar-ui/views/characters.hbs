@@ -15,6 +15,7 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th></th>
         </tr>
     </thead>
     
@@ -32,10 +33,12 @@
             <td>{{this.Charisma}}</td>
             <td>{{this.Race}}</td>
             <td>{{this.Class}}</td>
+            <td><button onclick="updateCharacter({{this.character_id}})">Edit</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<script src="./js/update_character.js"></script>
 
 <!-- Add row to Characters table --> 
 <h2>Add A New Character to Your Party</h2> 
@@ -91,12 +94,12 @@
 
 
 <!-- Update row in Characters table -->
-<h2>Edit Character Information</h2>
-<form id="update-character-form">
+
+<form id="update-character-form" hidden>
     <fieldset>
-        <legend>Edit Character</legend>
-        <label for="input-character-name"></label>
-        <select name="input-character-name" id="selected-character">
+        {{!-- <legend>Edit Character</legend>
+        <label for="input-character-name"></label> --}}
+        <select name="selected-character" id="selected-character">
             <option value="">Select A Character</option>
             {{#each data}}
             <option value="{{this.character_id}}">{{this.Name}}</option>
@@ -136,8 +139,8 @@
         <input type="number" name="input-chr" id="input-chr-update" placeholder="CHR Value"> 
         
         
-        <label for="input-character-race">Race: </label>
-        <select name="input-character-race" id="input-race-update">
+        {{!-- <label for="input-character-race">Race: </label> --}}
+        <select name="input-race-update" id="input-race-update">
             <option value="">Select A New Race</option>
             {{#each races}}
             <option value="{{this.race_id}}">{{this.name}}</option>
@@ -145,8 +148,8 @@
         </select>
 
         
-        <label for="input-character-class">Class: </label>
-        <select name="input-character-class" id="input-class-update">
+        {{!-- <label for="input-character-class">Class: </label> --}}
+        <select name="input-class-update" id="input-class-update">
             <option value="">Select A New Class</option>
             {{#each classes}}
             <option value="{{this.class_id}}">{{this.name}}</option>

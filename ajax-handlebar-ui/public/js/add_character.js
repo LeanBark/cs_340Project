@@ -74,6 +74,7 @@ addRowToTable = (data) => {
     let newRowIndex = currentTable.rows.length;
 
     let parsedData = JSON.parse(data);
+    
     let newRow = parsedData[parsedData.length - 1];
 
     let row = document.createElement("TR");
@@ -88,6 +89,7 @@ addRowToTable = (data) => {
     let chrCell = document.createElement("TD");
     let raceidCell = document.createElement("TD");
     let classidCell = document.createElement("TD");
+    let editCell = document.createElement("TD");
 
     idCell.innerText = newRow.character_id;
     nameCell.innerText = newRow.name;
@@ -101,6 +103,14 @@ addRowToTable = (data) => {
     raceidCell.innerText = newRow.race_id;
     classidCell.innerText = newRow.class_id;
 
+    editCellButton = document.createElement("button");
+    editCellButton.innerText = "Edit";
+    editCellButton.onclick = function(){
+        updateCharacter(newRow.character_id);
+    };
+
+    editCell.appendChild(editCellButton);
+
     row.appendChild(idCell);
     row.appendChild(nameCell);
     row.appendChild(levelCell);
@@ -112,6 +122,7 @@ addRowToTable = (data) => {
     row.appendChild(chrCell);
     row.appendChild(raceidCell);
     row.appendChild(classidCell);
+    row.appendChild(editCell);
 
     row.setAttribute("data-value", newRow.character_id)
 

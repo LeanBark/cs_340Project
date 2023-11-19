@@ -59,7 +59,7 @@ function updateEventDetails(skill_check_details_id) {
                 }
             }
             skillCheckInd.innerHTML = "";
-            skillCheckInd.appendChild(skillCheckOptions)
+            skillCheckInd.appendChild(skillCheckOptions);
             
 
             
@@ -132,13 +132,9 @@ function updateRow(data, skill_check_details_id){
             let editButton = document.createElement("button");
             editButton.innerText = "Edit";
             editButton.onclick = function(e){
-                // let skillCheckSelector = document.getElementById("update-skill-check")
-                // skillCheckSelector.addEventListener("change", (e) =>{
-
-                // })
                 updateEventDetails(skill_check_details_id);
             };
-
+            console.log(parseData[0]);
             hiddenForm.appendChild(actionInd.removeChild(actionInd.children[0]));
             actionInd.innerHTML = parseData[0].action;
 
