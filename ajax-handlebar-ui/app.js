@@ -383,7 +383,9 @@ app.put('/update-event', function (req, res, next){
     let data = req.body;
     
     // SANITIZE/FILTER INPUTS
-    let event = parseInt(data.event);
+    let event = parseInt(data.id);
+    let description = data.description;
+
     let roll = parseInt(data.roll);
     if (isNaN(roll)){
         roll=1;
@@ -394,15 +396,15 @@ app.put('/update-event', function (req, res, next){
     }
 
     // NESTED DATABASE QUERIES
-    let queryUpdateMaster = `UPDATE SkillChecks SET roll_result = ?, difficulty_id = ? WHERE skill_check_id = ?;`;
-    let selectEvent = `SELECT skill_check_id, roll_result, value, EventDifficulties.description AS difficulty FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id WHERE skill_check_id = ?;`;
+    let queryUpdateMaster = `UPDATE SkillChecks SET roll_result = ?, difficulty_id = ?, description = ? WHERE skill_check_id = ?;`;
+    let selectUpdatedEvent = `SELECT skill_check_id, roll_result, value, SkillChecks.description AS description, EventDifficulties.description AS difficulty FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id WHERE skill_check_id = ?;`;
 
-    db.pool.query(queryUpdateMaster, [roll, difficulty, event], function(error, rows, fields){
+    db.pool.query(queryUpdateMaster, [roll, difficulty, description, event], function(error, rows, fields){
         if (error) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            db.pool.query(selectEvent, [event], function(error, rows, fields){
+            db.pool.query(selectUpdatedEvent, [event], function(error, rows, fields){
                 if (error) {
                     console.log(error);
                     res.sendStatus(400);

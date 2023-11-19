@@ -26,7 +26,7 @@ function updateEventDetails(skill_check_details_id) {
                 }
             }
             actionInd.innerHTML= "";
-            actionInd.append(actionOptions);
+            actionInd.appendChild(actionOptions);
 
             let characterOptions = document.getElementById("update-character");
             for(let i=0; i<characterOptions.length; i++){
@@ -70,7 +70,7 @@ function updateEventDetails(skill_check_details_id) {
             };
 
             editInd.removeChild(editInd.children[0]);
-            editInd.appendChild(submitButton)
+            editInd.appendChild(submitButton);
 
         }
     }

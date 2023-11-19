@@ -3,59 +3,72 @@
 // Adapted from OSU CS340 NodeJS Starter App
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
-let updateEventForm = document.getElementById("update-event-form");
 
-let eventSelector = document.getElementById("selected-event");
-
-// difficulty selector listener
-
-
-// event listener for prefilling form data -- in progress
-eventSelector.addEventListener("change", (event) => {
-    let inputEvent = document.getElementById("selected-event");
-    let inputRoll = document.getElementById("input-roll-value-update");
-    let inputDifficulty = document.getElementById("input-difficulty-update");
+function updateEvent(skill_check_id) {
     let table = document.getElementById("events-table");
-    for (let i = 0, row; row = table.rows[i]; i++){
-        if (table.rows[i].getAttribute("data-value") == event.target.value){
-            let updateRowIndex = table.getElementsByTagName("tr")[i];
-            let rollInd = updateRowIndex.getElementsByTagName("td")[2];
-            let difficultyInd = updateRowIndex.getElementsByTagName("td")[3];
-            let difficultyValueInd = updateRowIndex.getElementsByTagName("td")[4];
-            
-            
-            inputRoll.value = rollInd.innerHTML;
 
-            // iterates and follows format of text content to pass in values/locate appropriate option
-            for (let i=0; i<inputDifficulty.length; i++){
-                let option = inputDifficulty.options[i];
-                if (option.text == `${difficultyInd.innerHTML}: ${difficultyValueInd.innerHTML}`){
-                    inputDifficulty.text = option.text;
-                    inputDifficulty.value = option.value;
+    for (let i = 0, row; row = table.rows[i]; i++){
+        if (table.rows[i].getAttribute("data-value") == skill_check_id){
+            let updateRowIndex = table.getElementsByTagName("tr")[i];
+            let descriptionInd = updateRowIndex.getElementsByTagName("td")[1];
+            let rollResultInd = updateRowIndex.getElementsByTagName("td")[2];
+            let difficultyInd = updateRowIndex.getElementsByTagName("td")[3];
+            let editInd = updateRowIndex.getElementsByTagName("td")[5];
+
+            let descriptionInput = document.getElementById("input-description-update");
+            descriptionInput.value = descriptionInd.innerHTML;
+            descriptionInd.innerHTML = "";
+            descriptionInd.appendChild(descriptionInput);
+            
+            let rollResultInput = document.getElementById("input-roll-value-update");
+            rollResultInput.value = rollResultInd.innerHTML;
+            rollResultInd.innerHTML = "";
+            rollResultInd.appendChild(rollResultInput);
+
+            console.log(difficultyInd.innerHTML);
+
+            let difficultyOptions = document.getElementById("input-difficulty-update");
+            for (let i = 0; i < difficultyOptions.length; i++){
+                let option = difficultyOptions.options[i];
+                let text_array = option.text.split(":")
+                if (text_array[0] == difficultyInd.innerHTML){
+                    difficultyOptions.value = option.value;
+                    difficultyOptions.text = option.text;
                 }
             }
-            
+
+            difficultyInd.innerHTML = "";
+            difficultyInd.appendChild(difficultyOptions);
+
+            let submitButton = document.createElement("button");
+            submitButton.innerText = "Submit";
+            submitButton.onclick = function(){
+                submitEvent(skill_check_id);
+            };
+
+            editInd.removeChild(editInd.children[0]);
+            editInd.appendChild(submitButton);
+
         }
-   }
-})
+    }
 
-
+}
 
 //------------Clicking submit button in edit event infromation form retrieves the input data for updating event----//
-updateEventForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    let inputEvent = document.getElementById("selected-event");
+function submitEvent(skill_check_id){
+    let inputDescription = document.getElementById("input-description-update");
     let inputRoll = document.getElementById("input-roll-value-update");
     let inputDifficulty = document.getElementById("input-difficulty-update");
 
-
-    let inputEventValue = inputEvent.value;
+    let inputId = skill_check_id.toString();
+    let inputDescriptionValue = inputDescription.value;
     let inputRollValue = inputRoll.value;
     let inputDifficultyValue = inputDifficulty.value;
 
     //---- Organizes data according to their respective values to send as response to ajax request according to selected event name---//
     let data = {
-        event: inputEventValue,
+        id: inputId,
+        description: inputDescriptionValue,
         roll: inputRollValue,
         difficulty: inputDifficultyValue
     }
@@ -67,32 +80,51 @@ updateEventForm.addEventListener("submit", function (e) {
 
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
-            updateRow(xhttp.response, inputEventValue);
-            inputEvent.value = '';
-            inputRoll.value = '';
-            inputDifficulty.value = '';
-
+            updateRow(xhttp.response, skill_check_id);
         } else if (xhttp.readyState == 4 && xhttp.status != 200){
             console.log("Error in the input");
         }
     }
     xhttp.send(JSON.stringify(data));
-})
+}
 
 //--------------------Function is passed response data and Updates Input Values of selected event by their event_id---------------------//
-function updateRow(data, eventID){
+function updateRow(data, skill_check_id){
     let parsedData = JSON.parse(data);
     let table = document.getElementById("events-table");
     for (let i = 0, row; row = table.rows[i]; i++){
-        if (table.rows[i].getAttribute("data-value") == eventID){
+        if (table.rows[i].getAttribute("data-value") == skill_check_id){
             let updateRowIndex = table.getElementsByTagName("tr")[i];
+            let descriptionInd = updateRowIndex.getElementsByTagName("td")[1];
             let rollInd = updateRowIndex.getElementsByTagName("td")[2];
             let difficultyInd = updateRowIndex.getElementsByTagName("td")[3];
             let difficultyValueInd = updateRowIndex.getElementsByTagName("td")[4];
+            let editInd = updateRowIndex.getElementsByTagName("td")[5];
 
+            let hiddenForm = document.getElementById("update-event-form");
+
+            let editButton = document.createElement("button");
+            editButton.innerText = "Edit";
+            editButton.onclick = function(e){
+                updateEvent(skill_check_id);
+            }
+            
+            console.log(parsedData[0])
+
+            hiddenForm.appendChild(descriptionInd.removeChild(descriptionInd.children[0]));
+            descriptionInd.innerHTML = parsedData[0].description;
+
+            hiddenForm.appendChild(rollInd.removeChild(rollInd.children[0]));
             rollInd.innerHTML = parsedData[0].roll_result;
+            
+            hiddenForm.appendChild(difficultyInd.removeChild(difficultyInd.children[0]));
             difficultyInd.innerHTML = parsedData[0].difficulty;  // HTML for parsed data instead of text
+            
             difficultyValueInd.innerHTML = parsedData[0].value;
+            
+            editInd.removeChild(editInd.children[0]);
+            editInd.appendChild(editButton);
+
         }
         
     }

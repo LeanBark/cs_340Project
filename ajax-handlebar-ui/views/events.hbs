@@ -16,6 +16,7 @@
             </th>
             {{/each}}
             <th></th>
+            <th></th>
         </tr>
     </thead>
     
@@ -27,6 +28,8 @@
             <td>{{[Roll Result]}}</td>            
             <td>{{this.Difficulty}}</td>
             <td>{{[Difficulty Value]}}</td>
+            <!-- Disable skill check edit -->
+            <td><button onclick="updateEvent({{this.skill_check_id}})">Edit</button></td>
             <!-- Disable skill check delete -->
             <td><button onclick="deleteEvent({{this.skill_check_id}})">Delete</button></td>
         </tr>
@@ -34,6 +37,7 @@
     </tbody>
 </table>
 
+<script src="./js/update_event.js"></script>
 <script src="./js/delete_event.js"></script>
 
 <!-- Add row to Skill Check table -->
@@ -62,17 +66,11 @@
 <script src="./js/add_event.js"></script>
 
 <!-- Update row in Skill Check Details table -->
-<h2>Edit Skill Check Event</h2>
-<form id="update-event-form">
+<form id="update-event-form" hidden>
     <fieldset>
         <legend>Edit Event</legend>
-        <label for="input-event-name"></label>
-        <select name="input-event-name" id="selected-event">
-            <option value="">Select A Event</option>
-            {{#each data}}
-            <option value="{{this.skill_check_id}}">{{this.Description}}</option>
-            {{/each}}
-        </select>
+        <label for="input-description-update">Event Description: </label>
+        <input type="text" name="input-description-update" id="input-description-update" placeholder="Enter Description">
         
         <label for="input-roll-value-update">Player Roll Value: </label>
         <input type="number" name="input-roll-value-update" id="input-roll-value-update" placeholder="Enter Roll Value">
@@ -88,5 +86,3 @@
         <input type="submit">
     </fieldset>   
 </form>
-
-<script src="./js/update_event.js"></script>

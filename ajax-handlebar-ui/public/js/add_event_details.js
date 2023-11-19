@@ -69,7 +69,7 @@ addRowToTable = (data) => {
     itemCell.innerText = newRow.Item;
     skillCheckCell.innerText = newRow.Description;
 
-    editCellButton = document.createElement("button");
+    let editCellButton = document.createElement("button");
     editCellButton.innerText = "Edit";
     editCellButton.onclick = function(){
         updateEventDetails(newRow.skill_check_details_id);
