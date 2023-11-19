@@ -125,7 +125,9 @@ app.put('/update-character', function (req, res, next){
     let data = req.body;
     
     // SANITIE/FILTER INPUTS
-    let character = parseInt(data.name);
+    let id = parseInt(data.id);
+
+    let name = data.name;
     
     let level = parseInt(data.level);
     if (isNaN(level)){
@@ -165,16 +167,16 @@ app.put('/update-character', function (req, res, next){
     }
 
     // NESTED DATABASE QUERIES
-    let queryUpdateMaster = `UPDATE Characters SET level = ?, strength = ?, dexterity = ?, constitution = ?, intelligence = ?, wisdom = ?, charisma = ?,
+    let queryUpdateMaster = `UPDATE Characters SET name = ?, level = ?, strength = ?, dexterity = ?, constitution = ?, intelligence = ?, wisdom = ?, charisma = ?,
      race_id = ?, class_id = ? WHERE Characters.character_id = ?;`;
-    let selectCharacter = `SELECT level, strength, dexterity, constitution, intelligence, wisdom, charisma, Races.name AS race, Classes.name AS class FROM Characters JOIN Races ON Characters.race_id = Races.race_id JOIN Classes ON Characters.class_id = Classes.class_id WHERE character_id = ?;`;
+    let selectCharacterUpdate = `SELECT Characters.name AS name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, Races.name AS race, Classes.name AS class FROM Characters JOIN Races ON Characters.race_id = Races.race_id JOIN Classes ON Characters.class_id = Classes.class_id WHERE character_id = ?;`;
 
-    db.pool.query(queryUpdateMaster, [level, strength, dexterity, constitution, intelligence, wisdom, charisma, race_id, class_id, character], function(error, rows, fields){
+    db.pool.query(queryUpdateMaster, [name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, race_id, class_id, id], function(error, rows, fields){
         if (error) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            db.pool.query(selectCharacter, [character], function(error, rows, fields){
+            db.pool.query(selectCharacterUpdate, [id], function(error, rows, fields){
                 if (error) {
                     console.log(error);
                     res.sendStatus(400);

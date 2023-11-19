@@ -104,10 +104,6 @@ function submitEventDetails(skill_check_details_id) {
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             updateRow(xhttp.response, skill_check_details_id);
-            updateAction.value = '';
-            updateCharacter.value = '';
-            updateItem.value = '';
-            updateSkillCheck.value = '';
         } else if (xhttp.readyState == 4 && xhttp.status != 200){
             console.log("Error in the input");
         }

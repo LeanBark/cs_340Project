@@ -88,6 +88,7 @@ addRowToTable = (data) => {
     let chrCell = document.createElement("TD");
     let raceidCell = document.createElement("TD");
     let classidCell = document.createElement("TD");
+    let editCell = document.createElement("td");
 
     idCell.innerText = newRow.character_id;
     nameCell.innerText = newRow.name;
@@ -101,6 +102,13 @@ addRowToTable = (data) => {
     raceidCell.innerText = newRow.race_id;
     classidCell.innerText = newRow.class_id;
 
+    let editCellButton = document.createElement("button");
+    editCellButton.innerText = "Edit";
+    editCellButton.onclick = function(){
+        updateCharacter(newRow.character_id);
+    }
+    editCell.append(editCellButton);
+
     row.appendChild(idCell);
     row.appendChild(nameCell);
     row.appendChild(levelCell);
@@ -112,15 +120,18 @@ addRowToTable = (data) => {
     row.appendChild(chrCell);
     row.appendChild(raceidCell);
     row.appendChild(classidCell);
+    row.appendChild(editCell);
 
     row.setAttribute("data-value", newRow.character_id)
 
     currentTable.appendChild(row);
 
+    /*
     let selectMenu = document.getElementById("selected-character");
     let selectOption = document.createElement("option");
     selectOption.text = newRow.name;
     selectOption.value = newRow.character_id;
     selectMenu.add(selectOption);
+    */
 
 }

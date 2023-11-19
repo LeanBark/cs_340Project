@@ -25,8 +25,6 @@ function updateEvent(skill_check_id) {
             rollResultInd.innerHTML = "";
             rollResultInd.appendChild(rollResultInput);
 
-            console.log(difficultyInd.innerHTML);
-
             let difficultyOptions = document.getElementById("input-difficulty-update");
             for (let i = 0; i < difficultyOptions.length; i++){
                 let option = difficultyOptions.options[i];
@@ -109,8 +107,6 @@ function updateRow(data, skill_check_id){
                 updateEvent(skill_check_id);
             }
             
-            console.log(parsedData[0])
-
             hiddenForm.appendChild(descriptionInd.removeChild(descriptionInd.children[0]));
             descriptionInd.innerHTML = parsedData[0].description;
 
