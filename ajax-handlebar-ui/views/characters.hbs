@@ -33,11 +33,12 @@
             <td>{{this.Charisma}}</td>
             <td>{{this.Race}}</td>
             <td>{{this.Class}}</td>
+            <td><button onclick="updateCharacter({{this.ID}})">Edit</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-<script src="./js/update_character.js"></script>
+
 
 <!-- Add row to Characters table --> 
 <h2>Add A New Character to Your Party</h2> 
