@@ -598,7 +598,9 @@ app.put('/update-item', function (req, res, next){
     let data = req.body;
     
     // SANITIZE/FILTER INPUTS
-    let item = parseInt(data.name);
+    let id = parseInt(data.id);
+    let name = data.name;
+
     let quantity = parseInt(data.quantity);
     if (isNaN(quantity)){
         quantity=1;
@@ -609,15 +611,15 @@ app.put('/update-item', function (req, res, next){
     }
 
     // NESTED DATABASE QUERIES
-    let queryUpdateMaster = `UPDATE Items SET quantity = ?, item_type_id = ? WHERE Items.item_id = ?;`;
-    let selectItem = `SELECT quantity, ItemTypes.name AS item_type_id FROM Items JOIN ItemTypes ON Items.item_type_id = ItemTypes.item_type_id WHERE item_id = ?;`;
+    let queryUpdateMaster = `UPDATE Items SET name = ?, quantity = ?, item_type_id = ? WHERE Items.item_id = ?;`;
+    let selectItem = `SELECT Items.name AS name, quantity, ItemTypes.name AS item_type_id FROM Items JOIN ItemTypes ON Items.item_type_id = ItemTypes.item_type_id WHERE item_id = ?;`;
 
-    db.pool.query(queryUpdateMaster, [quantity, item_type, item], function(error, rows, fields){
+    db.pool.query(queryUpdateMaster, [name, quantity, item_type, id], function(error, rows, fields){
         if (error) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            db.pool.query(selectItem, [item], function(error, rows, fields){
+            db.pool.query(selectItem, [id], function(error, rows, fields){
                 if (error) {
                     console.log(error);
                     res.sendStatus(400);

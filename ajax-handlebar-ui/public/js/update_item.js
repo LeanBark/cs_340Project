@@ -3,55 +3,65 @@
 // Adapted from OSU CS340 NodeJS Starter App
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
-let updateItemForm = document.getElementById("update-item-form");
 
-
-let itemSelector = document.getElementById("selected-item");
-
-// item type selector
-
-// event listener for prefilling form data -- in progress
-itemSelector.addEventListener("change", (e) => {
-    let inputName = document.getElementById("selected-item");
-    let inputQuantity = document.getElementById("input-quantity-update");
-    let inputType = document.getElementById("input-type-update");
-
-
+function updateItem(item_id) {
     let table = document.getElementById("items-table");
     for (let i = 0, row; row = table.rows[i]; i++){
-        if (table.rows[i].getAttribute("data-value") == e.target.value){
+        if (table.rows[i].getAttribute("data-value") == item_id){
             let updateRowIndex = table.getElementsByTagName("tr")[i];
+            let nameInd = updateRowIndex.getElementsByTagName("td")[1];
             let quantityInd = updateRowIndex.getElementsByTagName("td")[2];
             let typeInd = updateRowIndex.getElementsByTagName("td")[3];
+            let editInd = updateRowIndex.getElementsByTagName("td")[4];
             
-            inputQuantity.value = quantityInd.innerHTML;
-            
-            for (let i=0; i<inputType.length; i++){
-                let option = inputType.options[i];
+            let nameInput = document.getElementById("update-item-name");
+            nameInput.value = nameInd.innerHTML;
+            nameInd.innerHTML = "";
+            nameInd.appendChild(nameInput);
+
+            let quantityInput = document.getElementById("update-item-quantity");
+            quantityInput.value = quantityInd.innerHTML;
+            quantityInd.innerHTML = "";
+            quantityInd.appendChild(quantityInput);
+
+            let typeOptions = document.getElementById("update-item-type");
+            for (let i = 0; i < typeOptions.length; i++){
+                let option = typeOptions.options[i];
                 if (option.text == typeInd.innerHTML){
-                    inputType.value = option.value;
-                    inputType.text = option.text;
+                    typeOptions.value = option.value;
+                    typeOptions.text = option.text;
                 }
             }
+
+            typeInd.innerHTML = "";
+            typeInd.appendChild(typeOptions);
+
+            let submitButton = document.createElement("button");
+            submitButton.innerHTML = "Submit";
+            submitButton.onclick = function(){
+                submitItem(item_id);
+            }
+
+            editInd.removeChild(editInd.children[0]);
+            editInd.appendChild(submitButton);
         }
     }
-    
-})
+}
 
 //------------Clicking submit button in edit item infromation form retrieves the input data for updating item----//
-updateItemForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    let inputName = document.getElementById("selected-item");
-    let inputQuantity = document.getElementById("input-quantity-update");
-    let inputType = document.getElementById("input-type-update");
+function submitItem(item_id){
+    let inputName = document.getElementById("update-item-name");
+    let inputQuantity = document.getElementById("update-item-quantity");
+    let inputType = document.getElementById("update-item-type");
 
-
+    let inputId = item_id.toString();
     let inputNameValue = inputName.value;
     let inputQuantityValue = inputQuantity.value;
     let inputTypeValue = inputType.value;
 
     //---- Organizes data according to their respective values to send as response to ajax request according to selected item name---//
     let data = {
+        id: inputId,
         name: inputNameValue,
         quantity: inputQuantityValue,
         item_type_id: inputTypeValue
@@ -64,30 +74,45 @@ updateItemForm.addEventListener("submit", function (e) {
 
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
-            updateRow(xhttp.response, inputNameValue);
-            inputName.value = '';
-            inputQuantity.value = '';
-            inputType.value = '';
-
+            updateRow(xhttp.response, item_id);
         } else if (xhttp.readyState == 4 && xhttp.status != 200){
             console.log("Error in the input");
         }
     }
     xhttp.send(JSON.stringify(data));
-})
+}
 
 //--------------------Function is passed response data and Updates Input Values of selected item by their item_id---------------------//
-function updateRow(data, itemID){
+function updateRow(data, item_id){
     let parsedData = JSON.parse(data);
     let table = document.getElementById("items-table");
     for (let i = 0, row; row = table.rows[i]; i++){
-        if (table.rows[i].getAttribute("data-value") == itemID){
+        if (table.rows[i].getAttribute("data-value") == item_id){
             let updateRowIndex = table.getElementsByTagName("tr")[i];
+            let nameInd = updateRowIndex.getElementsByTagName("td")[1];
             let quantityInd = updateRowIndex.getElementsByTagName("td")[2];
             let typeInd = updateRowIndex.getElementsByTagName("td")[3];
+            let editInd = updateRowIndex.getElementsByTagName("td")[4];
 
+            let hiddenForm = document.getElementById("update-item-form");
+
+            let editButton = document.createElement("button");
+            editButton.innerText = "Edit";
+            editButton.onclick = function(e){
+                updateItem(item_id);
+            }
+
+            hiddenForm.appendChild(nameInd.removeChild(nameInd.children[0]));
+            nameInd.innerHTML = parsedData[0].name;
+
+            hiddenForm.appendChild(quantityInd.removeChild(quantityInd.children[0]));
             quantityInd.innerHTML = parsedData[0].quantity;
-            typeInd.innerHTML = parsedData[0].item_type_id;  // HTML for parsed data instead of text
+
+            hiddenForm.appendChild(typeInd.removeChild(typeInd.children[0]));
+            typeInd.innerHTML = parsedData[0].item_type_id;
+
+            editInd.removeChild(editInd.children[0]);
+            editInd.appendChild(editButton);
         }
         
     }
