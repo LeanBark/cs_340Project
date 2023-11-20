@@ -26,7 +26,7 @@ function updateEventDetails(skill_check_details_id) {
                 }
             }
             actionInd.innerHTML= "";
-            actionInd.append(actionOptions);
+            actionInd.appendChild(actionOptions);
 
             let characterOptions = document.getElementById("update-character");
             for(let i=0; i<characterOptions.length; i++){
@@ -70,7 +70,7 @@ function updateEventDetails(skill_check_details_id) {
             };
 
             editInd.removeChild(editInd.children[0]);
-            editInd.appendChild(submitButton)
+            editInd.appendChild(submitButton);
 
         }
     }
@@ -104,10 +104,6 @@ function submitEventDetails(skill_check_details_id) {
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             updateRow(xhttp.response, skill_check_details_id);
-            updateAction.value = '';
-            updateCharacter.value = '';
-            updateItem.value = '';
-            updateSkillCheck.value = '';
         } else if (xhttp.readyState == 4 && xhttp.status != 200){
             console.log("Error in the input");
         }

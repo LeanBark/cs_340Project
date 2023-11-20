@@ -21,16 +21,16 @@
     
     <tbody>
         {{#each data}}
-        <tr data-value={{this.skill_check_details_id}}>
-            <td>{{this.skill_check_details_id}}</td>
+        <tr data-value={{this.ID}}>
+            <td>{{this.ID}}</td>
             <td>{{this.Action}}</td>
             <td>{{this.Character}}</td>
             <td>{{this.Item}}</td>
             <td>{{this.Description}}</td>
             <!-- Disable skill check details edit -->
-            <td><button onclick="updateEventDetails({{this.skill_check_details_id}})">Edit</button></td>
+            <td><button onclick="updateEventDetails({{this.ID}})">Edit</button></td>
             <!--Disable skill check details delete-->
-            <td><button onclick="deleteEventDetails({{this.skill_check_details_id}})">Delete</button></td>
+            <td><button onclick="deleteEventDetails({{this.ID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>

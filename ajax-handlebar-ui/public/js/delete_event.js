@@ -37,13 +37,14 @@ function deleteRow(skill_check_id){
         // delete the the row corresonding to the PK
         if (table.rows[i].getAttribute("data-value") == skill_check_id) {
             table.deleteRow(i);
-            deleteDropDownMenu(skill_check_id)
+            // deleteDropDownMenu(skill_check_id)
             break;
         }
     }
 
 }
 
+/*
 function deleteDropDownMenu(skill_check_id){
     let selectMenu = document.getElementById("selected-event");
     for (let i = 0; i < selectMenu.length; i++){
@@ -53,3 +54,4 @@ function deleteDropDownMenu(skill_check_id){
         }
     }
 }
+*/

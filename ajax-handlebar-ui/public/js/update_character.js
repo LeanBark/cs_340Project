@@ -3,117 +3,94 @@
 // Adapted from OSU CS340 NodeJS Starter App
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
-// race selector
-// class selector
-// event listener for prefilling form data -- in progress
 
 function updateCharacter(character_id) {
     let table = document.getElementById("characters-table");
-    
+
     for (let i = 0, row; row = table.rows[i]; i++){
         if (table.rows[i].getAttribute("data-value") == character_id){
             let updateRowIndex = table.getElementsByTagName("tr")[i];
+            let nameInd = updateRowIndex.getElementsByTagName("td")[1];
             let levelInd = updateRowIndex.getElementsByTagName("td")[2];
-            let strInd = updateRowIndex.getElementsByTagName("td")[3];
-            let dexInd = updateRowIndex.getElementsByTagName("td")[4];
-            let conInd = updateRowIndex.getElementsByTagName("td")[5];
-            let intInd = updateRowIndex.getElementsByTagName("td")[6];
-            let wisInd = updateRowIndex.getElementsByTagName("td")[7];
-            let chrInd = updateRowIndex.getElementsByTagName("td")[8];
+            let strengthInd = updateRowIndex.getElementsByTagName("td")[3];
+            let dexterityInd = updateRowIndex.getElementsByTagName("td")[4];
+            let constitutionInd = updateRowIndex.getElementsByTagName("td")[5];
+            let intelligenceInd = updateRowIndex.getElementsByTagName("td")[6];
+            let wisdomInd = updateRowIndex.getElementsByTagName("td")[7];
+            let charismaInd = updateRowIndex.getElementsByTagName("td")[8];
             let raceInd = updateRowIndex.getElementsByTagName("td")[9];
             let classInd = updateRowIndex.getElementsByTagName("td")[10];
             let editInd = updateRowIndex.getElementsByTagName("td")[11];
 
-            let inputCharacterName = document.getElementById("selected-character");
-            for (i=0; i < inputCharacterName.length; i++){
-                let option = inputCharacterName.options[i];
-                if (option.value == character_id){
-                    inputCharacterName.value = option.value;
-                    inputCharacterName.text = option.text;
-                }
-            }
+            let nameInput = document.getElementById("input-name-update");
+            nameInput.value = nameInd.innerHTML;
+            nameInd.innerHTML = "";
+            nameInd.appendChild(nameInput);
 
-            let inputLevel = document.getElementById("input-lvl-update");
-            inputLevel.value = levelInd.innerHTML;
-
+            let levelInput = document.getElementById("input-lvl-update");
+            levelInput.value = levelInd.innerHTML;
             levelInd.innerHTML = "";
-            levelInd.appendChild(inputLevel);
+            levelInd.appendChild(levelInput);
 
+            let strengthInput = document.getElementById("input-str-update");
+            strengthInput.value = strengthInd.innerHTML;
+            strengthInd.innerHTML = "";
+            strengthInd.appendChild(strengthInput);
 
-            let inputStr = document.getElementById("input-str-update");
-            inputStr.value = strInd.innerHTML;
+            let dexterityInput = document.getElementById("input-dex-update");
+            dexterityInput.value = dexterityInd.innerHTML;
+            dexterityInd.innerHTML = "";
+            dexterityInd.appendChild(dexterityInput);
 
-            strInd.innerHTML = "";
-            strInd.appendChild(inputStr);
+            let constitutionInput = document.getElementById("input-con-update");
+            constitutionInput.value = constitutionInd.innerHTML;
+            constitutionInd.innerHTML = "";
+            constitutionInd.appendChild(constitutionInput);
 
-            let inputDex = document.getElementById("input-dex-update");
-            inputDex.value = dexInd.innerHTML;
+            let intelligenceInput = document.getElementById("input-int-update");
+            intelligenceInput.value = intelligenceInd.innerHTML;
+            intelligenceInd.innerHTML = "";
+            intelligenceInd.appendChild(intelligenceInput);
 
-            dexInd.innerHTML = "";
-            dexInd.appendChild(inputDex);
+            let wisdomInput = document.getElementById("input-wis-update");
+            wisdomInput.value = wisdomInd.innerHTML;
+            wisdomInd.innerHTML = "";
+            wisdomInd.appendChild(wisdomInput);
 
-            let inputCon = document.getElementById("input-con-update");
-            inputCon.value = conInd.innerHTML;
+            let charismaInput = document.getElementById("input-chr-update");
+            charismaInput.value = charismaInd.innerHTML;
+            charismaInd.innerHTML = "";
+            charismaInd.appendChild(charismaInput);
 
-            conInd.innerHTML = "";
-            conInd.appendChild(inputCon);
-
-
-            let inputInt = document.getElementById("input-int-update");
-            inputInt.value = intInd.innerHTML;
-
-            intInd.innerHTML = "";
-            intInd.appendChild(inputInt);
-
-
-            let inputWis = document.getElementById("input-wis-update");
-            inputWis.value = wisInd.innerHTML;
-
-            wisInd.innerHTML = "";
-            wisInd.appendChild(inputWis);
-
-
-            let inputChr = document.getElementById("input-chr-update");
-            inputChr.value = chrInd.innerHTML;
-
-            chrInd.innerHTML = "";
-            chrInd.appendChild(inputChr);
-            
-            
-            let inputRaceID = document.getElementById("input-race-update");
-            for(let i=0; i<inputRaceID.length; i++){
-                
-                let option = inputRaceID.options[i];
-                if (option.text == raceInd.innerText){
-                    inputRaceID.value = option.value;
-                    inputRaceID.text = option.text;
+            let raceOptions = document.getElementById("input-race-update");
+            for (let i = 0; i < raceOptions.length; i++){
+                let option = raceOptions.options[i];
+                if (option.text == raceInd.innerHTML){
+                    raceOptions.value = option.value;
+                    raceOptions.text = option.text;
                 }
             }
-
-
 
             raceInd.innerHTML = "";
-            raceInd.appendChild(inputRaceID);
+            raceInd.appendChild(raceOptions);
 
-            let inputClassID = document.getElementById("input-class-update");
-            for(let i=0; i<inputClassID.length; i++){
-                let option = inputClassID.options[i];
-                if (option.text == classInd.innerText){
-                    inputClassID.value = option.value;
-                    inputClassID.text = option.text;
+            let classOptions = document.getElementById("input-class-update");
+            for (let i = 0; i < classOptions.length; i++){
+                let option = classOptions.options[i];
+                if (option.text == classInd.innerHTML){
+                    classOptions.value = option.value;
+                    classOptions.text = option.text;
                 }
             }
 
             classInd.innerHTML = "";
-            classInd.appendChild(inputClassID);
+            classInd.appendChild(classOptions);
 
-
-            
             let submitButton = document.createElement("button");
             submitButton.innerText = "Submit";
-            submitButton.onclick = function(e){
+            submitButton.onclick = function(){
                 submitCharacter(character_id);
-            };
+            }
 
             editInd.removeChild(editInd.children[0]);
             editInd.appendChild(submitButton);
@@ -122,9 +99,9 @@ function updateCharacter(character_id) {
     }
 }
 
-
-function submitCharacter(character_id){
-    let inputCharacterName = document.getElementById("selected-character");
+//------------Clicking submit button in edit character infromation form retrieves the input data for updating character----//
+function submitCharacter(character_id) {
+    let inputName = document.getElementById("input-name-update");
     let inputLevel = document.getElementById("input-lvl-update");
     let inputStr = document.getElementById("input-str-update");
     let inputDex = document.getElementById("input-dex-update");
@@ -135,15 +112,8 @@ function submitCharacter(character_id){
     let inputRaceID = document.getElementById("input-race-update");
     let inputClassID = document.getElementById("input-class-update");
 
-    for (let i = 0; i<inputCharacterName.length; i++){
-        let option = inputCharacterName.options[i];
-        if (option.value == character_id){
-            inputCharacterName.value = option.value;
-            inputCharacterName.text = option.text;
-        }
-    }
-
-    let inputNameValue = inputCharacterName.value;
+    let inputId = character_id.toString();
+    let inputNameValue = inputName.value;
     let inputLevelValue = inputLevel.value;
     let inputStrValue = inputStr.value;
     let inputDexValue = inputDex.value;
@@ -174,6 +144,7 @@ function submitCharacter(character_id){
     
     //---- Organizes data according to their respective values to send as response to ajax request according to selected character name---//
     let data = {
+        id: inputId,
         name: inputNameValue,
         level: inputLevelValue,
         strength: inputStrValue,
@@ -184,7 +155,7 @@ function submitCharacter(character_id){
         charisma: inputChrValue,
         race_id: inputRaceIDValue,
         class_id: inputClassIDValue
-    }
+    }    
 
 
 //---------------Places AJAX Request------------------------------//
@@ -194,18 +165,7 @@ function submitCharacter(character_id){
 
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
-            updateRow(xhttp.response, inputNameValue);
-            inputCharacterName.value = '';
-            inputLevel.value = '';
-            inputStr.value = '';
-            inputDex.value = '';
-            inputCon.value = '';
-            inputInt.value = '';
-            inputWis.value = '';
-            inputChr.value = '';
-            inputRaceID.value = '';
-            inputClassID.value = '';
-
+            updateRow(xhttp.response, character_id);
         } else if (xhttp.readyState == 4 && xhttp.status != 200){
             console.log("Error in the input");
         }
@@ -221,58 +181,60 @@ function updateRow(data, character_id){
     for (let i = 0, row; row = table.rows[i]; i++){
         if (table.rows[i].getAttribute("data-value") == character_id){
             let updateRowIndex = table.getElementsByTagName("tr")[i];
+            let nameInd = updateRowIndex.getElementsByTagName("td")[1]
             let levelInd = updateRowIndex.getElementsByTagName("td")[2];
-            let strInd = updateRowIndex.getElementsByTagName("td")[3];
-            let dexInd = updateRowIndex.getElementsByTagName("td")[4];
-            let conInd = updateRowIndex.getElementsByTagName("td")[5];
-            let intInd = updateRowIndex.getElementsByTagName("td")[6];
-            let wisInd = updateRowIndex.getElementsByTagName("td")[7];
-            let chrInd = updateRowIndex.getElementsByTagName("td")[8];
+            let strengthInd = updateRowIndex.getElementsByTagName("td")[3];
+            let dexterityInd = updateRowIndex.getElementsByTagName("td")[4];
+            let constitutionInd = updateRowIndex.getElementsByTagName("td")[5];
+            let intelligenceInd = updateRowIndex.getElementsByTagName("td")[6];
+            let wisdomInd = updateRowIndex.getElementsByTagName("td")[7];
+            let charismaInd = updateRowIndex.getElementsByTagName("td")[8];
             let raceInd = updateRowIndex.getElementsByTagName("td")[9];
             let classInd = updateRowIndex.getElementsByTagName("td")[10];
             let editInd = updateRowIndex.getElementsByTagName("td")[11];
-
+            
             let hiddenForm = document.getElementById("update-character-form");
 
             let editButton = document.createElement("button");
             editButton.innerText = "Edit";
             editButton.onclick = function(e){
                 updateCharacter(character_id);
-            };
+            }
 
+            hiddenForm.appendChild(nameInd.removeChild(nameInd.children[0]));
+            nameInd.innerHTML = parsedData[0].name;
 
             hiddenForm.appendChild(levelInd.removeChild(levelInd.children[0]));
             levelInd.innerHTML = parsedData[0].level;
 
-            hiddenForm.appendChild(strInd.removeChild(strInd.children[0]));
-            strInd.innerHTML= parsedData[0].strength;
+            hiddenForm.appendChild(strengthInd.removeChild(strengthInd.children[0]));
+            strengthInd.innerHTML = parsedData[0].strength;  // HTML for parsed data instead of text
+            
+            hiddenForm.appendChild(dexterityInd.removeChild(dexterityInd.children[0]));
+            dexterityInd.innerHTML = parsedData[0].dexterity;
+            
+            hiddenForm.appendChild(constitutionInd.removeChild(constitutionInd.children[0]));
+            constitutionInd.innerHTML = parsedData[0].constitution;
 
-            hiddenForm.appendChild(dexInd.removeChild(dexInd.children[0]));
-            dexInd.innerHTML = parsedData[0].dexterity;
+            hiddenForm.appendChild(intelligenceInd.removeChild(intelligenceInd.children[0]));
+            intelligenceInd.innerHTML = parsedData[0].intelligence;
 
-            hiddenForm.appendChild(conInd.removeChild(conInd.children[0]));
-            conInd.innerHTML = parsedData[0].constitution;
+            hiddenForm.appendChild(wisdomInd.removeChild(wisdomInd.children[0]));
+            wisdomInd.innerHTML = parsedData[0].wisdom;
 
-            hiddenForm.appendChild(intInd.removeChild(intInd.children[0]));
-            intInd.innerHTML = parsedData[0].intelligence;
-
-            hiddenForm.appendChild(wisInd.removeChild(wisInd.children[0]));
-            wisInd.innerHTML = parsedData[0].wisdom;
-
-            hiddenForm.appendChild(chrInd.removeChild(chrInd.children[0]));
-            chrInd.innerHTML = parsedData[0].charisma;
+            hiddenForm.appendChild(charismaInd.removeChild(charismaInd.children[0]));
+            charismaInd.innerHTML = parsedData[0].charisma;
 
             hiddenForm.appendChild(raceInd.removeChild(raceInd.children[0]));
             raceInd.innerHTML = parsedData[0].race;
-            
 
             hiddenForm.appendChild(classInd.removeChild(classInd.children[0]));
             classInd.innerHTML = parsedData[0].class;
 
-
             editInd.removeChild(editInd.children[0]);
             editInd.appendChild(editButton);
+        }
         
         }
     }
-}
+

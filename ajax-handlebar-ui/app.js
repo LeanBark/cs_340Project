@@ -36,7 +36,7 @@ app.get('/', function(req,res){
 // Characters Table - Show 
 app.get('/characters', function(req, res)
     {
-        let query1 = "SELECT character_id, Characters.name AS Name, level AS Level, strength AS Strength, dexterity AS Dexterity, constitution AS Constitution, intelligence AS Intelligence, wisdom AS Wisdom, charisma AS Charisma, Races.name AS Race, Classes.name AS Class FROM Characters JOIN Races on Characters.Race_Id = Races.Race_Id JOIN Classes on Characters.Class_Id = Classes.Class_Id ORDER BY character_id ASC;";
+        let query1 = "SELECT character_id AS ID, Characters.name AS Name, level AS Level, strength AS Strength, dexterity AS Dexterity, constitution AS Constitution, intelligence AS Intelligence, wisdom AS Wisdom, charisma AS Charisma, Races.name AS Race, Classes.name AS Class FROM Characters JOIN Races on Characters.Race_Id = Races.Race_Id JOIN Classes on Characters.Class_Id = Classes.Class_Id ORDER BY character_id ASC;";
         let query2 = "SELECT * FROM Races ORDER BY race_id ASC;";
         let query3 = "SELECT * FROM Classes ORDER BY class_id ASC;";
         db.pool.query(query1, function(err, rows, fields){
@@ -125,7 +125,9 @@ app.put('/update-character', function (req, res, next){
     let data = req.body;
     
     // SANITIE/FILTER INPUTS
-    let character = parseInt(data.name);
+    let id = parseInt(data.id);
+
+    let name = data.name;
     
     let level = parseInt(data.level);
     if (isNaN(level)){
@@ -162,16 +164,16 @@ app.put('/update-character', function (req, res, next){
 
 
     // NESTED DATABASE QUERIES
-    let queryUpdateMaster = `UPDATE Characters SET level = ?, strength = ?, dexterity = ?, constitution = ?, intelligence = ?, wisdom = ?, charisma = ?,
+    let queryUpdateMaster = `UPDATE Characters SET name = ?, level = ?, strength = ?, dexterity = ?, constitution = ?, intelligence = ?, wisdom = ?, charisma = ?,
      race_id = ?, class_id = ? WHERE Characters.character_id = ?;`;
-    let selectCharacter = `SELECT level, strength, dexterity, constitution, intelligence, wisdom, charisma, Races.name AS race, Classes.name AS class FROM Characters JOIN Races ON Characters.race_id = Races.race_id JOIN Classes ON Characters.class_id = Classes.class_id WHERE character_id = ?;`;
+    let selectCharacterUpdate = `SELECT Characters.name AS name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, Races.name AS race, Classes.name AS class FROM Characters JOIN Races ON Characters.race_id = Races.race_id JOIN Classes ON Characters.class_id = Classes.class_id WHERE character_id = ?;`;
 
-    db.pool.query(queryUpdateMaster, [level, strength, dexterity, constitution, intelligence, wisdom, charisma, race_id, class_id, character], function(error, rows, fields){
+    db.pool.query(queryUpdateMaster, [name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, race_id, class_id, id], function(error, rows, fields){
         if (error) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            db.pool.query(selectCharacter, [character], function(error, rows, fields){
+            db.pool.query(selectCharacterUpdate, [id], function(error, rows, fields){
                 if (error) {
                     console.log(error);
                     res.sendStatus(400);
@@ -186,7 +188,7 @@ app.put('/update-character', function (req, res, next){
 
 // Races Table - display all races
 app.get('/races', function(req,res){
-    let query1 = 'SELECT race_id, Races.name AS Name, Races.description AS Description FROM Races ORDER BY race_id ASC;';
+    let query1 = 'SELECT race_id AS ID, Races.name AS Name, Races.description AS Description FROM Races ORDER BY race_id ASC;';
     db.pool.query(query1, function(err, rows, fields){
         res.render('races', {data:rows});
     })
@@ -221,7 +223,7 @@ app.post('/add-race', function(req, res)
 
 // Classes Table - display all classes
 app.get('/classes', function(req,res){
-    let query1 = `SELECT class_id, Classes.name AS Name, Classes.description AS Description FROM Classes ORDER BY class_id ASC;`;
+    let query1 = `SELECT class_id AS ID, Classes.name AS Name, Classes.description AS Description FROM Classes ORDER BY class_id ASC;`;
     db.pool.query(query1, function(err, rows, fields){
         res.render('classes', {data:rows});
     })
@@ -256,7 +258,7 @@ app.post('/add-class', function(req, res)
 
 // Actions Table - Show
 app.get('/actions', function(req, res){
-    let query1 = `SELECT action_id, Actions.name AS Name FROM Actions ORDER BY action_id ASC;`;
+    let query1 = `SELECT action_id AS ID, Actions.name AS Name FROM Actions ORDER BY action_id ASC;`;
     db.pool.query(query1, function(err, rows, fields){
         res.render('actions', {data: rows});
     })
@@ -290,7 +292,7 @@ app.post('/add-action', function(req, res){
 
 // Event Difficulties Table - display all event difficulties
 app.get('/difficulties', function(req,res){
-    let query1 = `SELECT difficulty_id, EventDifficulties.value AS Value, EventDifficulties.description AS Description FROM EventDifficulties ORDER BY difficulty_id ASC;`;
+    let query1 = `SELECT difficulty_id AS ID, EventDifficulties.value AS Value, EventDifficulties.description AS Description FROM EventDifficulties ORDER BY difficulty_id ASC;`;
     db.pool.query(query1, function(err, rows, fields){
         res.render('difficulties', {data:rows});
     })
@@ -328,7 +330,7 @@ app.post('/add-difficulty', function(req, res)
 
 // Skill Checks Table - Show
 app.get('/events', function(req, res){
-    let query1 = "SELECT skill_check_id, SkillChecks.description AS Description, roll_result AS \"Roll Result\", EventDifficulties.description AS Difficulty, EventDifficulties.value AS \"Difficulty Value\" FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id ORDER BY skill_check_id ASC;";
+    let query1 = "SELECT skill_check_id AS ID, SkillChecks.description AS Description, roll_result AS \"Roll Result\", EventDifficulties.description AS Difficulty, EventDifficulties.value AS \"Difficulty Value\" FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id ORDER BY skill_check_id ASC;";
     let query2 = "SELECT * FROM EventDifficulties ORDER BY difficulty_id ASC;";
     db.pool.query(query1, function(err, rows, fields){
         let checkEvents = rows;
@@ -380,7 +382,9 @@ app.put('/update-event', function (req, res, next){
     let data = req.body;
     
     // SANITIZE/FILTER INPUTS
-    let event = parseInt(data.event);
+    let event = parseInt(data.id);
+    let description = data.description;
+
     let roll = parseInt(data.roll);
     if (isNaN(roll)){
         roll=1;
@@ -391,15 +395,15 @@ app.put('/update-event', function (req, res, next){
     }
 
     // NESTED DATABASE QUERIES
-    let queryUpdateMaster = `UPDATE SkillChecks SET roll_result = ?, difficulty_id = ? WHERE skill_check_id = ?;`;
-    let selectEvent = `SELECT skill_check_id, roll_result, value, EventDifficulties.description AS difficulty FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id WHERE skill_check_id = ?;`;
+    let queryUpdateMaster = `UPDATE SkillChecks SET roll_result = ?, difficulty_id = ?, description = ? WHERE skill_check_id = ?;`;
+    let selectUpdatedEvent = `SELECT skill_check_id, roll_result, value, SkillChecks.description AS description, EventDifficulties.description AS difficulty FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id WHERE skill_check_id = ?;`;
 
-    db.pool.query(queryUpdateMaster, [roll, difficulty, event], function(error, rows, fields){
+    db.pool.query(queryUpdateMaster, [roll, difficulty, description, event], function(error, rows, fields){
         if (error) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            db.pool.query(selectEvent, [event], function(error, rows, fields){
+            db.pool.query(selectUpdatedEvent, [event], function(error, rows, fields){
                 if (error) {
                     console.log(error);
                     res.sendStatus(400);
@@ -433,7 +437,7 @@ app.delete('/delete-event-ajax', function(req, res, next){
 
 // Skill Check Details Table - Show
 app.get('/event-details', function(req, res){
-    let query1 = "SELECT skill_check_details_id, Actions.name AS \"Action\", Characters.name AS \"Character\", IF(SkillCheckDetails.item_id IS NOT NULL, Items.name, \"None\") AS \"Item\", SkillChecks.description AS \"Description\" FROM SkillCheckDetails JOIN Actions ON SkillCheckDetails.action_id = Actions.action_id JOIN Characters ON SkillCheckDetails.character_id = Characters.character_id LEFT JOIN Items ON SkillCheckDetails.item_id = Items.item_id JOIN SkillChecks ON SkillCheckDetails.skill_check_id = SkillChecks.skill_check_id ORDER BY skill_check_details_id ASC;";
+    let query1 = "SELECT skill_check_details_id AS ID, Actions.name AS \"Action\", Characters.name AS \"Character\", IF(SkillCheckDetails.item_id IS NOT NULL, Items.name, \"None\") AS \"Item\", SkillChecks.description AS \"Description\" FROM SkillCheckDetails JOIN Actions ON SkillCheckDetails.action_id = Actions.action_id JOIN Characters ON SkillCheckDetails.character_id = Characters.character_id LEFT JOIN Items ON SkillCheckDetails.item_id = Items.item_id JOIN SkillChecks ON SkillCheckDetails.skill_check_id = SkillChecks.skill_check_id ORDER BY skill_check_details_id ASC;";
     let query2 = "SELECT * FROM Actions ORDER BY action_id ASC;"
     let query3 = "SELECT * FROM Characters ORDER BY character_id ASC;"
     let query4 = "SELECT * FROM Items ORDER BY item_id ASC;"
@@ -544,7 +548,7 @@ app.delete('/delete-event-details-ajax', function(req,res,next){
 
 // Items Table - Show
 app.get('/items', function(req,res){
-    let query1 = "SELECT item_id, Items.name AS Name, quantity as Quantity, ItemTypes.name As \"Item Type\" FROM Items JOIN ItemTypes ON Items.item_type_id = ItemTypes.item_type_id ORDER BY item_id ASC;";
+    let query1 = "SELECT item_id AS ID, Items.name AS Name, quantity as Quantity, ItemTypes.name As \"Item Type\" FROM Items JOIN ItemTypes ON Items.item_type_id = ItemTypes.item_type_id ORDER BY item_id ASC;";
     let query2 = "SELECT * FROM ItemTypes ORDER BY item_type_id ASC;";
     db.pool.query(query1, function(err, rows, fields){
         let items = rows;
@@ -628,7 +632,7 @@ app.put('/update-item', function (req, res, next){
 
 // Item Types Table - display all item types
 app.get('/item-types', function(req,res){
-    let query1 = `SELECT item_type_id, ItemTypes.name AS Name FROM ItemTypes ORDER BY item_type_id ASC;`;
+    let query1 = `SELECT item_type_id AS ID, ItemTypes.name AS Name FROM ItemTypes ORDER BY item_type_id ASC;`;
     db.pool.query(query1, function(err, rows, fields){
         res.render('item-types', {data:rows});
     })

@@ -56,6 +56,7 @@ addRowToTable = (data) => {
     let rollCell = document.createElement("TD");
     let difficultyCell = document.createElement("TD");
     let difficultyValueCell = document.createElement("TD");
+    let editCell = document.createElement("td");
     let deleteCell = document.createElement("td");
 
     idCell.innerText = newRow.skill_check_id;
@@ -63,6 +64,13 @@ addRowToTable = (data) => {
     rollCell.innerText = newRow.roll_result;
     difficultyCell.innerText = newRow.difficulty;
     difficultyValueCell.innerText = newRow.value;
+
+    let editCellButton = document.createElement("button");
+    editCellButton.innerText = "Edit";
+    editCellButton.onclick = function(){
+        updateEvent(newRow.skill_check_id);
+    }
+    editCell.append(editCellButton);
 
     let deleteCellButton = document.createElement("button");
     deleteCellButton.innerText = "Delete";
@@ -77,16 +85,17 @@ addRowToTable = (data) => {
     row.appendChild(rollCell);
     row.appendChild(difficultyCell);
     row.appendChild(difficultyValueCell);
+    row.appendChild(editCell);
     row.appendChild(deleteCell);
 
     row.setAttribute("data-value", newRow.skill_check_id);
 
     currentTable.appendChild(row);
 
-    addDropDownMenu(newRow.skill_check_id, newRow.description);
+    // addDropDownMenu(newRow.skill_check_id, newRow.description);
 }
 
-function addDropDownMenu(skill_check_id, description){
+/* function addDropDownMenu(skill_check_id, description){
     
     let selectMenu = document.getElementById("selected-event");
     let newOption = document.createElement("option")
@@ -96,3 +105,4 @@ function addDropDownMenu(skill_check_id, description){
 
     selectMenu.appendChild(newOption)
 }
+*/
