@@ -3,6 +3,13 @@
 // Adapted from OSU CS340 NodeJS Starter App
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
+//Citation for Icons:
+//Date: 11/20/2023
+// Icons for Submit, Delete, and Edit buttons were provided from svgrepo.com
+// Source URL for Edit Icons: https://www.svgrepo.com/svg/511904/edit-1479
+//Source URL for Submit Icons:https://www.svgrepo.com/svg/494419/submit-success-check-mark
+//Soruce Url for Delete Icons: https://www.svgrepo.com/svg/499905/delete
+
 /*
     SETUP WEB APP
 */
@@ -13,7 +20,7 @@ var app     = express();                        // We need to instantiate an exp
 app.use(express.json());                        // Allow express to handle JSON data
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
-PORT        = 8290;                             // Set a port number at the top so it's easy to change in the future
+PORT        = 8500;                             // Set a port number at the top so it's easy to change in the future
 
 // Setup Handlebars
 const { engine } = require('express-handlebars');
@@ -22,7 +29,7 @@ app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the han
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
 // Setup Database
-var db = require('./database/db-connector')
+var db = require('./database/db-connector');
 
 /*
     DEFINE ROUTES

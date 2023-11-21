@@ -3,6 +3,14 @@
 // Adapted from OSU CS340 NodeJS Starter App
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
+//Citation for Icons:
+//Date: 11/20/2023
+// Icons for Submit, Delete, and Edit buttons were provided from svgrepo.com
+// Source URL for Edit Icons: https://www.svgrepo.com/svg/511904/edit-1479
+//Source URL for Submit Icons:https://www.svgrepo.com/svg/494419/submit-success-check-mark
+//Soruce Url for Delete Icons: https://www.svgrepo.com/svg/499905/delete
+
+
 let addEventForm = document.getElementById('add-event-details-form');
 
 addEventForm.addEventListener("submit", function(e){
