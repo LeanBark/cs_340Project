@@ -17,6 +17,12 @@
 // Date: 11/16/2023
 // Adapated from W3 Schools - How TO - Top Navigation
 // Soure URL: https://www.w3schools.com/howto/howto_js_topnav.asp
+
+
+// Citation for Font Family
+//Date: 11/20/2023
+// Font Family ttf obtained from fontrepo.com
+//Source URL: https://www.fontrepo.com/font/360/adventure-request
 -->
 
 <!-- Defines the layout and style for web pages-->
@@ -31,12 +37,14 @@
 
     
     <style>
-        .btn {
-            <i>
+        @font-face {
+            font-family: importFont;
+            src: url('/img/adventure-request.ttf');
         }
+
         body {
             background-color: rgb(135, 173, 255);
-            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-family: importFont;
             display: inline-block;
             margin: auto 10%;
             width: 80%;
@@ -80,6 +88,9 @@
             background-color: #05583a;
             color: white;
         }
+        button:hover{
+            background-color: rgb(247, 247, 247);
+        }
 
         form, button {
             color: rgb(28, 32, 28);
@@ -90,6 +101,7 @@
         }
         input, select {
             size:30px;
+            font-family: importFont;
         }
         a {
             display: inline-block;
@@ -175,10 +187,10 @@
     fieldset{
         margin-left: auto;
         margin-right:auto;
-        width: 50%;
+        width: 60%;
         border: solid black 2px;
         padding: 50px;
-        text-align:center;
+        
         vertical-align: auto;
         color:darkred;
     }
