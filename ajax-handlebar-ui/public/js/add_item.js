@@ -57,7 +57,11 @@ addRowToTable = (data) => {
     let editCell = document.createElement("td");
 
     let editCellButton = document.createElement("button");
-    editCellButton.innerText = "Edit";
+    let editIcon = document.createElement("img");
+    editIcon.src = "/img/edit-icon.svg";
+    editIcon.width= 39;
+    editIcon.height = 30;
+    editCellButton.append(editIcon);
     editCellButton.onclick = function(){
         updateItem(newRow.item_id);
     }

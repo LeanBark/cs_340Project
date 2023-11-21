@@ -104,7 +104,11 @@ addRowToTable = (data) => {
     classidCell.innerText = newRow.class_id;
 
     let editCellButton = document.createElement("button");
-    editCellButton.innerText = "Edit";
+    let editIcon = document.createElement("img");
+    editIcon.src = "/img/edit-icon.svg";
+    editIcon.width= 39;
+    editIcon.height = 30;
+    editCellButton.append(editIcon);
     editCellButton.onclick = function(){
         updateCharacter(newRow.character_id);
     }

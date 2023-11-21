@@ -33,12 +33,11 @@
             <td>{{this.Charisma}}</td>
             <td>{{this.Race}}</td>
             <td>{{this.Class}}</td>
-            <td><button onclick="updateCharacter({{this.ID}})">Edit</button></td>
+            <td><button id="edit-btn" onclick="updateCharacter({{this.ID}})"><img src="/img/edit-icon.svg" width="39" height="30"></button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-
 
 <!-- Add row to Characters table --> 
 <h2>Add A New Character to Your Party</h2> 
@@ -94,8 +93,8 @@
 
 
 <!-- Update row in Characters table -->
-<h2>Edit Character Information</h2>
-<form id="update-character-form">
+
+<form id="update-character-form" hidden>
     <fieldset>
         <legend>Edit Character</legend>
         <label for="input-name-update">Character Name: </label>

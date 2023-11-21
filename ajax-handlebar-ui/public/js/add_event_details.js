@@ -70,15 +70,23 @@ addRowToTable = (data) => {
     skillCheckCell.innerText = newRow.Description;
 
     let editCellButton = document.createElement("button");
-    editCellButton.innerText = "Edit";
+    let editIcon = document.createElement("img");
+    editIcon.src = "/img/edit-icon.svg";
+    editIcon.width= 39;
+    editIcon.height = 30;
+    editCellButton.append(editIcon);
     editCellButton.onclick = function(){
         updateEventDetails(newRow.skill_check_details_id);
     };
 
     editCell.appendChild(editCellButton)
 
-    deleteCellButton = document.createElement("button");
-    deleteCellButton.innerText = "Delete";
+    let deleteCellButton = document.createElement("button");
+    let deleteIcon = document.createElement("img");
+    deleteIcon.src = "img/delete-icon.svg";
+    deleteIcon.width = 39;
+    deleteIcon.height = 30;
+    deleteCellButton.append(deleteIcon);
     deleteCellButton.onclick = function(){
         deleteEventDetails(newRow.skill_check_details_id);
     };

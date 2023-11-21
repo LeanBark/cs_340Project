@@ -29,9 +29,9 @@
             <td>{{this.Difficulty}}</td>
             <td>{{[Difficulty Value]}}</td>
             <!-- Disable skill check edit -->
-            <td><button onclick="updateEvent({{this.ID}})">Edit</button></td>
+            <td><button onclick="updateEvent({{this.ID}})"><img src="/img/edit-icon.svg" width="39" height="30"></button></td>
             <!-- Disable skill check delete -->
-            <td><button onclick="deleteEvent({{this.ID}})">Delete</button></td>
+            <td><button onclick="deleteEvent({{this.ID}})"><img src="img/delete-icon.svg" width="39" height="30"></button></td>
         </tr>
         {{/each}}
     </tbody>

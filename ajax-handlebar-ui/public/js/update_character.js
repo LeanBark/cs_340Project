@@ -87,7 +87,11 @@ function updateCharacter(character_id) {
             classInd.appendChild(classOptions);
 
             let submitButton = document.createElement("button");
-            submitButton.innerText = "Submit";
+            let submitIcon = document.createElement("img");
+            submitIcon.src = "/img/submit-icon.svg";
+            submitIcon.width= 39;
+            submitIcon.height = 30;
+            submitButton.append(submitIcon);
             submitButton.onclick = function(){
                 submitCharacter(character_id);
             }
@@ -196,7 +200,11 @@ function updateRow(data, character_id){
             let hiddenForm = document.getElementById("update-character-form");
 
             let editButton = document.createElement("button");
-            editButton.innerText = "Edit";
+            let editIcon = document.createElement("img");
+            editIcon.src = "/img/edit-icon.svg";
+            editIcon.width= 39;
+            editIcon.height = 30;
+            editButton.append(editIcon);
             editButton.onclick = function(e){
                 updateCharacter(character_id);
             }

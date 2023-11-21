@@ -64,7 +64,11 @@ function updateEventDetails(skill_check_details_id) {
 
             
             let submitButton = document.createElement("button");
-            submitButton.innerText = "Submit";
+            let submitIcon = document.createElement("img");
+            submitIcon.src = "/img/submit-icon.svg";
+            submitIcon.width= 39;
+            submitIcon.height = 30;
+            submitButton.append(submitIcon);
             submitButton.onclick = function(){
                 submitEventDetails(skill_check_details_id);
             };
@@ -126,7 +130,11 @@ function updateRow(data, skill_check_details_id){
             let hiddenForm = document.getElementById("update-event-details-form");
 
             let editButton = document.createElement("button");
-            editButton.innerText = "Edit";
+            let editIcon = document.createElement("img");
+            editIcon.src = "/img/edit-icon.svg";
+            editIcon.width= 39;
+            editIcon.height = 30;
+            editButton.append(editIcon);
             editButton.onclick = function(e){
                 updateEventDetails(skill_check_details_id);
             };

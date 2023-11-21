@@ -39,7 +39,11 @@ function updateEvent(skill_check_id) {
             difficultyInd.appendChild(difficultyOptions);
 
             let submitButton = document.createElement("button");
-            submitButton.innerText = "Submit";
+            let submitIcon = document.createElement("img");
+            submitIcon.src = "/img/submit-icon.svg";
+            submitIcon.width= 39;
+            submitIcon.height = 30;
+            submitButton.append(submitIcon);
             submitButton.onclick = function(){
                 submitEvent(skill_check_id);
             };
@@ -102,7 +106,11 @@ function updateRow(data, skill_check_id){
             let hiddenForm = document.getElementById("update-event-form");
 
             let editButton = document.createElement("button");
-            editButton.innerText = "Edit";
+            let editIcon = document.createElement("img");
+            editIcon.src = "/img/edit-icon.svg";
+            editIcon.width= 39;
+            editIcon.height = 30;
+            editButton.append(editIcon);
             editButton.onclick = function(e){
                 updateEvent(skill_check_id);
             }
