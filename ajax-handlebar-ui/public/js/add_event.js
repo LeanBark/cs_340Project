@@ -72,6 +72,18 @@ addRowToTable = (data) => {
     difficultyCell.innerText = newRow.difficulty;
     difficultyValueCell.innerText = newRow.value;
 
+    /*
+        if (rollCell.innerText == 1) {
+            
+            display or show hidden message or image for critical failure
+         } else if (rollCell.innerText == 20){
+            display or show hidden message or image for natural 20/critical success
+         }
+         
+     }
+
+    */
+
     let editCellButton = document.createElement("button");
     let editIcon = document.createElement("img");
     editIcon.src = "/img/edit-icon.svg";

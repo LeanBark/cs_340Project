@@ -96,21 +96,18 @@
     <fieldset>
         <legend>Edit Event Details</legend>
         <select name="update-action" id="update-action">
-            <option value="">Select Action</option>
             {{#each actions}}
             <option value="{{this.action_id}}">{{this.name}}</option>
             {{/each}}
         </select>
 
         <select name="update-character" id="update-character">
-            <option value="">Select Character</option>
             {{#each characters}}
             <option value="{{this.character_id}}">{{this.name}}</option>
             {{/each}}
         </select>
 
         <select name="update-item" id="update-item">
-            <option value="">Select Item</option>
             {{#each items}}
             <option value="{{this.item_id}}">{{this.name}}</option>
             {{/each}}
@@ -118,7 +115,6 @@
         </select>
 
         <select name="update-skill-check" id="update-skill-check">
-            <option value="">Select Skill Check</option>
             {{#each skill_checks}}
             <option value="{{this.skill_check_id}}">{{this.description}}</option>
             {{/each}}

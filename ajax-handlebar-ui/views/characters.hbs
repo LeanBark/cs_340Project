@@ -112,30 +112,29 @@
         <input type="text" name="input-name-update" id="input-name-update" placeholder="Name">
 
         <label for="input-lvl">Level: </label>
-        <input type="number" name="input-lvl" id="input-lvl-update" placeholder="Enter Level">
+        <input class="numbered" type="number" name="input-lvl" id="input-lvl-update" placeholder="Enter Level">
         
         <label for="input-str">Strength: </label>
-        <input type="number" name="input-str" id="input-str-update" placeholder="STR Value">
+        <input class="numbered" type="number" name="input-str" id="input-str-update" placeholder="STR Value">
         
         <label for="input-dex">Dexterity: </label>
-        <input type="number" name="input-dex" id="input-dex-update" placeholder="DEX Value">
+        <input class="numbered" type="number" name="input-dex" id="input-dex-update" placeholder="DEX Value">
         
         <label for="input-con">Constitution: </label>
-        <input type="number" name="input-con" id="input-con-update" placeholder="CON Value">
+        <input class="numbered" type="number" name="input-con" id="input-con-update" placeholder="CON Value">
         <br>
 
         <label for="input-int">Intelligence: </label>
-        <input type="number" name="input-int" id="input-int-update" placeholder="INT Value">
+        <input class="numbered" type="number" name="input-int" id="input-int-update" placeholder="INT Value">
         
         <label for="input-wis">Wisdom: </label>
-        <input type="number" name="input-wis" id="input-wis-update" placeholder="WIS Value">
+        <input class="numbered" type="number" name="input-wis" id="input-wis-update" placeholder="WIS Value">
 
         <label for="input-chr">Charisma: </label>
-        <input type="number" name="input-chr" id="input-chr-update" placeholder="CHR Value"> 
+        <input class="numbered" type="number" name="input-chr" id="input-chr-update" placeholder="CHR Value"> 
         
         {{!-- <label for="input-character-race">Race: </label> --}}
         <select name="input-race-update" id="input-race-update">
-            <option value="">Select A New Race</option>
             {{#each races}}
             <option value="{{this.race_id}}">{{this.name}}</option>
             {{/each}}
@@ -144,7 +143,6 @@
         
         {{!-- <label for="input-character-class">Class: </label> --}}
         <select name="input-class-update" id="input-class-update">
-            <option value="">Select A New Class</option>
             {{#each classes}}
             <option value="{{this.class_id}}">{{this.name}}</option>
             {{/each}}
