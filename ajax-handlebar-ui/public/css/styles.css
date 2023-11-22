@@ -16,6 +16,7 @@ body {
     width: 80%;
     letter-spacing: 1px;
 }
+
 h1, h2{
 margin-left: auto;
 margin-right:auto;
@@ -23,6 +24,15 @@ width: 50%;
 text-align: center;
 padding: 10px;
 color:darkred;
+}
+
+h3{
+    margin-left: auto;
+    margin-right:auto;
+    width: 50%;
+    text-align: center;
+    padding: 2px;
+    color:rgb(42, 1, 1);
 }
 #home-title{
     color:blue;
@@ -83,6 +93,17 @@ form, button {
 .numbered{
     width:39px;
 }
+
+#crit-fail iframe{
+    position: relative;
+    left: 50%;
+}
+
+#crit-success iframe{
+    position: relative;
+    left:50%;
+}
+
 input, select {
     size:30px;
     font-family: contentFont;

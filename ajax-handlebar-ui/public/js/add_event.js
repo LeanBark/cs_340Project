@@ -22,6 +22,23 @@ addEventForm.addEventListener("submit", function(e){
     let inputRollValue = inputRoll.value;
     let inputDiffValue = inputDiff.value;
 
+    let critFail = document.getElementById("crit-fail");
+    let critSuccess = document.getElementById("crit-success");
+    if (inputRollValue == 1) {
+        critSuccess.style.display='none';
+        critFail.style.display='block';
+        setTimeout(function () {
+            critFail.style.display = 'none';}, 8000)
+    } else if (inputRollValue == 20){
+        critSuccess.style.display='block';
+        setTimeout(function (){
+            critSuccess.style.display='none';}, 8000)
+        critFail.style.display='none';
+    }
+    else{
+        critFail.style.display='none';
+        critSuccess.style.display='none';
+    }
 
     let data = {
         description: inputDescValue,
@@ -72,18 +89,6 @@ addRowToTable = (data) => {
     difficultyCell.innerText = newRow.difficulty;
     difficultyValueCell.innerText = newRow.value;
 
-    /*
-        if (rollCell.innerText == 1) {
-            
-            display or show hidden message or image for critical failure
-         } else if (rollCell.innerText == 20){
-            display or show hidden message or image for natural 20/critical success
-         }
-         
-     }
-
-    */
-
     let editCellButton = document.createElement("button");
     let editIcon = document.createElement("img");
     editIcon.src = "/img/edit-icon.svg";
@@ -119,6 +124,17 @@ addRowToTable = (data) => {
 
     currentTable.appendChild(row);
 
+    // let critFail = document.getElementById("crit-fail");
+    // if (rollCell.innerText == "1") {
+    //     critFail.hidden=false;
+
+        
+    // } else if (rollCell.innerText == 20){
+    //     critFail.hidden=true;
+    // }
+    // else{
+    //     critFail.hidden=true;
+    // }
     // addDropDownMenu(newRow.skill_check_id, newRow.description);
 }
 

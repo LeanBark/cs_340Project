@@ -15,10 +15,23 @@
 //Date: 11/20/2023
 // Font Family ttf obtained from fontrepo.com
 //Source URL: https://www.fontrepo.com/font/360/adventure-request
+
+//Citation for GIFs
+//Date: 11/21/2023
+// GIFs for Critical Success and Critical Failure
+//Source URL for Critical Success GIF: https://giphy.com/gifs/hyperrpg-dnd-roguelike-rogue-like-8cGXy3fskyacePqILB
+//Source URL for Critical Failure GIF: https://giphy.com/gifs/dnd-d20-zxyllia-oOBTO2UcSoaBJewZT0
 -->
 
 <!-- Show Skill Checks table -->
 <h1>Skill Check Events</h1>
+
+<div id="crit-fail" hidden>
+    <iframe seamless src="https://giphy.com/embed/oOBTO2UcSoaBJewZT0" title="Critical Failure" width="480" height="480" frameBorder="0" class="giphy-embed"></iframe>
+</div>
+<div id="crit-success" hidden>
+    <iframe seamless src="https://giphy.com/embed/8cGXy3fskyacePqILB" title="Critical Success" width="480" height="480" frameBorder="0" class="giphy-embed" ></iframe>
+</div>
 <table id="events-table">
     <thead>
         <tr>
@@ -51,6 +64,8 @@
 
 <script src="./js/update_event.js"></script>
 <script src="./js/delete_event.js"></script>
+
+
 
 <!-- Add row to Skill Check table -->
 <h2>Add A New Skill Check Event</h2> 
@@ -95,5 +110,6 @@
         
         <!-- Disable update event -->
         <input type="submit">
-    </fieldset>   
+    </fieldset> 
 </form>
+
