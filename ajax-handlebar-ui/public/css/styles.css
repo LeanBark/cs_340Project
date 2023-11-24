@@ -94,16 +94,6 @@ form, button {
     width:39px;
 }
 
-#crit-fail iframe{
-    position: relative;
-    left: 50%;
-}
-
-#crit-success iframe{
-    position: relative;
-    left:50%;
-}
-
 input, select {
     size:30px;
     font-family: contentFont;

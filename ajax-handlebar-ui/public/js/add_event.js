@@ -22,23 +22,32 @@ addEventForm.addEventListener("submit", function(e){
     let inputRollValue = inputRoll.value;
     let inputDiffValue = inputDiff.value;
 
-    let critFail = document.getElementById("crit-fail");
-    let critSuccess = document.getElementById("crit-success");
+    //easter-egg event showing GIFs
+    let parentDiv = document.getElementById("skill-check-title");
     if (inputRollValue == 1) {
-        critSuccess.style.display='none';
-        critFail.style.display='block';
+        let failGIF = document.createElement("iframe");
+        failGIF.src="https://giphy.com/embed/oOBTO2UcSoaBJewZT0";
+        failGIF.title="Critical Failure"
+        failGIF.width="480";
+        failGIF.height="480";
+        failGIF.seamless=true;
+        failGIF.style.display="block";
+        parentDiv.appendChild(failGIF);
         setTimeout(function () {
-            critFail.style.display = 'none';}, 8000)
+            parentDiv.removeChild(failGIF);}, 4500)
     } else if (inputRollValue == 20){
-        critSuccess.style.display='block';
+        let successGIF = document.createElement("iframe");
+        successGIF.src="https://giphy.com/embed/8cGXy3fskyacePqILB";
+        successGIF.title="Critical Success";
+        successGIF.width="480";
+        successGIF.height="480";
+        successGIF.seamless=true;
+        successGIF.style.display="block";
+        parentDiv.appendChild(successGIF);
         setTimeout(function (){
-            critSuccess.style.display='none';}, 8000)
-        critFail.style.display='none';
+            parentDiv.removeChild(successGIF);}, 4500)
     }
-    else{
-        critFail.style.display='none';
-        critSuccess.style.display='none';
-    }
+
 
     let data = {
         description: inputDescValue,
@@ -123,19 +132,6 @@ addRowToTable = (data) => {
     row.setAttribute("data-value", newRow.skill_check_id);
 
     currentTable.appendChild(row);
-
-    // let critFail = document.getElementById("crit-fail");
-    // if (rollCell.innerText == "1") {
-    //     critFail.hidden=false;
-
-        
-    // } else if (rollCell.innerText == 20){
-    //     critFail.hidden=true;
-    // }
-    // else{
-    //     critFail.hidden=true;
-    // }
-    // addDropDownMenu(newRow.skill_check_id, newRow.description);
 }
 
 /* function addDropDownMenu(skill_check_id, description){
@@ -147,5 +143,6 @@ addRowToTable = (data) => {
     newOption.value = skill_check_id
 
     selectMenu.appendChild(newOption)
-}
+    }
+
 */
