@@ -55,6 +55,7 @@ addEventForm.addEventListener("submit", function(e){
         difficulty_id: inputDiffValue
     }
 
+    // Ajax Request/Response for Adding skill check events
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/add-event", true);
     xhttp.setRequestHeader("Content-type", "application/json");
@@ -75,6 +76,7 @@ addEventForm.addEventListener("submit", function(e){
 
 });
 
+// create new row for new skill check event to be added
 addRowToTable = (data) => {
     let currentTable = document.getElementById('events-table');
     
@@ -98,6 +100,7 @@ addRowToTable = (data) => {
     difficultyCell.innerText = newRow.difficulty;
     difficultyValueCell.innerText = newRow.value;
 
+    // Adds edit button to new row with icon
     let editCellButton = document.createElement("button");
     let editIcon = document.createElement("img");
     editIcon.src = "/img/edit-icon.svg";
@@ -109,6 +112,7 @@ addRowToTable = (data) => {
     }
     editCell.append(editCellButton);
 
+    // Adds delete button to new row with icon
     let deleteCellButton = document.createElement("button");
     let deleteIcon = document.createElement("img");
     deleteIcon.src = "/img/delete-icon.svg";
