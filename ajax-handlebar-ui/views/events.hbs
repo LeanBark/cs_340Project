@@ -66,12 +66,12 @@
     <fieldset>
         <legend>Add Event</legend>
         <label for="input-description">Event Description: </label>
-        <input type="text" name="input-description" id="input-description" placeholder="Enter Description">
+        <input type="text" name="input-description" id="input-description" placeholder="Enter Description" required>
 
         <label for="input-roll-value">Player Roll Value: </label>
-        <input type="number" name="input-roll-value" id="input-roll-value" placeholder="Enter Roll Value">
+        <input type="number" name="input-roll-value" id="input-roll-value" placeholder="Enter Roll Value" required>
 
-        <select name="input-difficulty" id="input-difficulty">
+        <select name="input-difficulty" id="input-difficulty" required>
             <option value="">Select Difficulty</option>
             {{#each difficulties}}
             <option value="{{this.difficulty_id}}">{{this.description}}: {{this.value}}</option>

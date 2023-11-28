@@ -50,12 +50,12 @@
     <fieldset>
         <legend>Add Item</legend>
         <label for="input-item-name">New Item Name: </label>
-        <input type="text" name="input-item-name" id="input-item-name" placeholder="Enter Name">
+        <input type="text" name="input-item-name" id="input-item-name" placeholder="Enter Name" required>
 
         <label for="input-quantity">Item Quantity</label>
         <input type="number" name="input-quantity" id="input-quantity" placeholder="Enter Quantity">
 
-        <select name="input-item-type" id="input-item-type">
+        <select name="input-item-type" id="input-item-type" required>
             <option value="">Select Item Type</option>
             {{#each types}}
             <option value="{{this.item_type_id}}">{{this.name}}</option>

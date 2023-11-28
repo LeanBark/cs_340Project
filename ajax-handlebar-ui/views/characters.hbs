@@ -57,7 +57,7 @@
     <fieldset>
         <legend>Add A New Character</legend>
         <label for="input-name">Character Name: </label>
-        <input type="text" name="input-name" id="input-name" placeholder="Name">
+        <input type="text" name="input-name" id="input-name" placeholder="Name" required>
 
         <label for="input-lvl">Level: </label>
         <input type="number" name="input-lvl" id="input-lvl" placeholder="Level Value">
@@ -81,14 +81,14 @@
         <input type="number" name="input-chr" id="input-chr" placeholder="CHR Value">
         <br>
 
-        <select name="input-race" id="input-race">
+        <select name="input-race" id="input-race" required>
             <option value="">Select Race</option>
             {{#each races}}
             <option value="{{this.race_id}}">{{this.name}}</option>
             {{/each}}
         </select>
 
-        <select name="input-class" id="input-class">
+        <select name="input-class" id="input-class" required>
             <option value="">Select Class</option>
             {{#each classes}}
             <option value="{{this.class_id}}">{{this.name}}</option>

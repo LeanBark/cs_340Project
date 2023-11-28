@@ -57,21 +57,21 @@
 <form id="add-event-details-form">
     <fieldset>
         <legend>Add Event Details</legend>
-        <select name="input-action" id="input-action">
+        <select name="input-action" id="input-action" required>
             <option value="">Select Action</option>
             {{#each actions}}
             <option value="{{this.action_id}}">{{this.name}}</option>
             {{/each}}
         </select>
 
-        <select name="input-character" id="input-character">
+        <select name="input-character" id="input-character" required>
             <option value="">Select Character</option>
             {{#each characters}}
             <option value="{{this.character_id}}">{{this.name}}</option>
             {{/each}}
         </select>
 
-        <select name="input-item" id="input-item">
+        <select name="input-item" id="input-item" required>
             <option value="">Select Item</option>
             {{#each items}}
             <option value="{{this.item_id}}">{{this.name}}</option>
@@ -79,7 +79,7 @@
             <option value="NULL">None</option>
         </select>
 
-        <select name="input-skill-check" id="input-skill-check">
+        <select name="input-skill-check" id="input-skill-check" required>
             <option value="">Select Skill Check</option>
             {{#each skill_checks}}
             <option value="{{this.skill_check_id}}">{{this.description}}</option>
