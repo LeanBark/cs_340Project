@@ -51,15 +51,3 @@ function deleteRow(skill_check_id){
     }
 
 }
-
-/*
-function deleteDropDownMenu(skill_check_id){
-    let selectMenu = document.getElementById("selected-event");
-    for (let i = 0; i < selectMenu.length; i++){
-        if (Number(selectMenu.options[i].value) === Number(skill_check_id)){
-            selectMenu[i].remove();
-            break;
-        }
-    }
-}
-*/

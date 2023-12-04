@@ -11,10 +11,11 @@
 //Source URL for Submit Icons:https://www.svgrepo.com/svg/494419/submit-success-check-mark
 //Soruce Url for Delete Icons: https://www.svgrepo.com/svg/499905/delete
 
-// Citation for Font Family
+// Citation for Font Families
 //Date: 11/20/2023
-// Font Family ttf obtained from fontrepo.com
+// Font Family ttfs obtained from fontrepo.com
 //Source URL: https://www.fontrepo.com/font/360/adventure-request
+//Source URL: https://www.fontrepo.com/fonts/adventure-subtitles/
 
 // Citation for Bootstrap:
 // Date: 12/4/2023
@@ -49,6 +50,7 @@
     </tbody>
 </table>
 
+<!---Button for Toggling Display of Add Form to user -->
 <div class="container">
     <div class="row"></div>
     <div class="row">
@@ -66,11 +68,9 @@
             <legend class="float-none w-auto">Add Item</legend>
             <div class="row">
                 <div class="col-4">
-                    {{!-- <label class="form-label" for="input-item-name">New Item Name: </label> --}}
                     <input type="text" class="form-control" name="input-item-name" id="input-item-name" placeholder="Enter Name" required>
                 </div>
                 <div class="col-4">
-                    {{!-- <label for="input-quantity" class="form-label">Item Quantity</label> --}}
                     <input type="number" class="form-control" name="input-quantity" id="input-quantity" placeholder="Enter Quantity" required>
                 </div>
                 <div class="col-4">
@@ -82,6 +82,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-12 text-center">
                     <button type="submit" class="btn btn-primary" id="add-item-btn">Add Item</button>
@@ -110,7 +111,6 @@
             {{/each}}
         </select>
 
-        <!-- Disable update Item -->
         <input type="submit">
     </fieldset>
 </form>

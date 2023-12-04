@@ -1,3 +1,21 @@
+/* Citations for styling applications
+
+// Citation for Font Families
+//Date: 11/20/2023
+// Font Family ttfs obtained from fontrepo.com
+//Source URL: https://www.fontrepo.com/font/360/adventure-request
+//Source URL: https://www.fontrepo.com/fonts/adventure-subtitles/
+
+
+
+// Citation for Bootstrap Layout Design:
+// Date: 12/4/2023
+// Bootstrap utility for layout design/styling obtained from https://getbootstrap.com
+// Source URL: https://getbootstrap.com/docs/5.3/getting-started/introduction/
+
+*/
+
+/* imported font styles */
 @font-face {
     font-family: importFont;
     src: url('/css/adventure-request.ttf');
@@ -17,19 +35,14 @@ body {
     letter-spacing: 1px;
 }
 
+ /* styling for headings */
 h1, h2{
-/* margin-left: auto;
-margin-right:auto;
-width: 50%; */
     text-align: center;
     padding: 10px;
     color:darkred;
 }
 
 h3{
-    /* margin-left: auto;
-    margin-right:auto;
-    width: 50%; */
     text-align: center;
     padding: 2px;
     color:rgb(42, 1, 1);
@@ -39,6 +52,7 @@ h3{
     padding: 40px;
 }
 
+/* styling for table elements */
 table {
     align-content: center;
     border-style: solid;
@@ -72,9 +86,8 @@ th {
     color: white;
     border: solid #a1a0a0;
 }
-button:hover{
-    background-color: rgb(247, 247, 247);
-}
+
+ /* form styling */
 .add-form{
     display: none;
 }
@@ -88,9 +101,10 @@ form {
     margin-right: auto;
     size: 30px;
 }
+
+/* styling for controlling size of different types of input elements according to content */
 .extended{
     width: 315px;
-
 }
 
 .length{
@@ -101,30 +115,45 @@ form {
     width:42px;
 }
 
+button:hover{
+    background-color: rgb(247, 247, 247);
+}
+
 input, select {
-    /* size:30px; */
     padding-bottom: 4px;
     font-family: contentFont;
-    /* letter-spacing: 1px; */
 }
+
+ /* styling for repeating body elements */
 a {
     display: inline-block;
     font-family:importFont;
     letter-spacing: 1px;
 }
+
 p {
     position: relative;
     margin: 10px;
     padding: 20px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
+
+fieldset{
+    margin-left: auto;
+    margin-right:auto;
+    width: 80%;
+    border: solid black;
+    vertical-align: auto;
+    color:darkred;
+}
+
 footer {
-    /* position: relative;
-    margin: auto; */
     padding: 20px;
     top: 50px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
+
+ /* styling for navigation bar */
 ul {
     list-style-type: none;
     display: inline-block;
@@ -134,49 +163,22 @@ ul {
     text-align: center;
     overflow: auto;
 }
+
 li {
     padding: 10px;
     float: left;
-    /* width: 16%;  */
 }
-.center-img {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;            
-}
-.center-img:focus {
-    background: none;
-    outline: none;
-}
-.center-img:active {
-    background: none;
-    outline: none;
-}
-.center-img:hover {
-    background: none;
-}
-.rotate-img {
-    animation: rotate-animation 0.5s ease-out forwards;
-}
-@keyframes rotate-animation {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}
-}
+
 .center-text {
-    /* margin: auto; */
     text-align: center;
 }
+
 .topnav {
     background-color: #05583a;
     overflow: hidden;
-    /* padding: 0px;
-    margin: 0px;
-    margin: auto; */
     display: inline-block;
 }
+
 .topnav a {
     color: white;
     float: center;
@@ -185,23 +187,41 @@ li {
     text-decoration: none;
     font-size: 16px;
 }
+
 .topnav a:hover {
     color: black;
     background-color: white;
 }
 
-
-/* legend{
-size: 150px;
-} */
-
-fieldset{
+/* styling for D20 dice homepage image */
+.center-img {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: block;
     margin-left: auto;
-    margin-right:auto;
-    width: 80%;
-    border: solid black;
-    /*
-    padding: 50px; */
-    vertical-align: auto;
-    color:darkred;
+    margin-right: auto;            
+}
+
+.center-img:focus {
+    background: none;
+    outline: none;
+}
+
+.center-img:active {
+    background: none;
+    outline: none;
+}
+
+.center-img:hover {
+    background: none;
+}
+
+.rotate-img {
+    animation: rotate-animation 0.5s ease-out forwards;
+}
+
+@keyframes rotate-animation {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
 }

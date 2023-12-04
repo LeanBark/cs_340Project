@@ -11,7 +11,7 @@
 //Soruce Url for Delete Icons: https://www.svgrepo.com/svg/499905/delete
 
 
-
+// Function updates submitted form data displayed in items table
 function updateItem(item_id) {
     let table = document.getElementById("items-table");
     for (let i = 0, row; row = table.rows[i]; i++){
@@ -60,7 +60,7 @@ function updateItem(item_id) {
     }
 }
 
-//------------Clicking submit button in edit item infromation form retrieves the input data for updating item----//
+// Clicking submit button in edit item infromation form retrieves the input data for updating item
 function submitItem(item_id){
     let inputName = document.getElementById("update-item-name");
     let inputQuantity = document.getElementById("update-item-quantity");
@@ -71,7 +71,7 @@ function submitItem(item_id){
     let inputQuantityValue = inputQuantity.value;
     let inputTypeValue = inputType.value;
 
-    //---- Organizes data according to their respective values to send as response to ajax request according to selected item name---//
+    // Organizes data according to their respective values to send as response to ajax request according to selected item name
     let data = {
         id: inputId,
         name: inputNameValue,
@@ -79,7 +79,7 @@ function submitItem(item_id){
         item_type_id: inputTypeValue
     }
 
-//---------------Places AJAX Request------------------------------//
+// Places AJAX Request
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", '/update-item', true);
     xhttp.setRequestHeader("Content-type", "application/json");
@@ -94,7 +94,7 @@ function submitItem(item_id){
     xhttp.send(JSON.stringify(data));
 }
 
-//--------------------Function is passed response data and Updates Input Values of selected item by their item_id---------------------//
+// Function is passed response data and Updates Input Values of selected item by their item_id
 function updateRow(data, item_id){
     let parsedData = JSON.parse(data);
     let table = document.getElementById("items-table");

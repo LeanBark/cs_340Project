@@ -5,6 +5,7 @@
 
 let addClassForm = document.getElementById("add-class-form");
 
+// toggles whether add form is displayed to user
 function displayForm (){
     if (addClassForm.style.display == "none"){
         addClassForm.style.display = "block";
@@ -12,8 +13,9 @@ function displayForm (){
         addClassForm.style.display = "none";
     }
 }
-displayForm();
+displayForm(); // must be called once to respond onf first click
 
+// submits input information for adding to database table
 addClassForm.addEventListener("submit", function(e){
     e.preventDefault();
 
@@ -46,6 +48,7 @@ addClassForm.addEventListener("submit", function(e){
 
 });
 
+// creates new row and adds it to existing HTML table
 addRowToTable = (data) => {
     let currentTable = document.getElementById('classes-table');
     

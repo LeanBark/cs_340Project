@@ -12,6 +12,7 @@
 
 let addEventForm = document.getElementById('add-event-form');
 
+// toggles whether add form is displayed to user
 function displayForm (){
     let eventsForm = document.getElementById("add-event-form");
     if (eventsForm.style.display == "none"){
@@ -22,6 +23,7 @@ function displayForm (){
 }
 displayForm();
 
+// submits input information for adding to database table
 addEventForm.addEventListener("submit", function(e){
     e.preventDefault();
     let inputDesc = document.getElementById("input-description");
@@ -147,16 +149,3 @@ addRowToTable = (data) => {
 
     currentTable.appendChild(row);
 }
-
-/* function addDropDownMenu(skill_check_id, description){
-    
-    let selectMenu = document.getElementById("selected-event");
-    let newOption = document.createElement("option")
-
-    newOption.innerText = description
-    newOption.value = skill_check_id
-
-    selectMenu.appendChild(newOption)
-    }
-
-*/

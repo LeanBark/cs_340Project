@@ -5,6 +5,7 @@
 
 let addTypeForm = document.getElementById("add-item-type-form");
 
+// toggles whether add form is displayed to user
 function displayForm (){
     if (addTypeForm.style.display == "none"){
         addTypeForm.style.display = "block";
@@ -14,6 +15,7 @@ function displayForm (){
 }
 displayForm();
 
+// submits input information for adding to database table
 addTypeForm.addEventListener("submit", function(e){
     e.preventDefault();
 
@@ -42,6 +44,7 @@ addTypeForm.addEventListener("submit", function(e){
 
 });
 
+// creates new row and adds it to existing HTML table
 addRowToTable = (data) => {
     let currentTable = document.getElementById('item-types-table');
     

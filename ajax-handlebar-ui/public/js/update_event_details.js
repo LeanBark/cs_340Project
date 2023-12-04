@@ -11,7 +11,7 @@
 //Soruce Url for Delete Icons: https://www.svgrepo.com/svg/499905/delete
 
 
-
+// Function updates submitted form data displayed in skill check event details table
 function updateEventDetails(skill_check_details_id) {
     let table = document.getElementById("event-details-table");
     
@@ -88,6 +88,8 @@ function updateEventDetails(skill_check_details_id) {
     }
 }
 
+
+// Clicking submit button in edit character information form retrieves the input data for updating skill check event details
 function submitEventDetails(skill_check_details_id) {
     let updateAction = document.getElementById("update-action");
     let updateCharacter = document.getElementById("update-character");
@@ -123,6 +125,7 @@ function submitEventDetails(skill_check_details_id) {
     xhttp.send(JSON.stringify(data));
 }
 
+// Function is passed response data and Updates Input Values of selected character by their skill_check_details_id
 function updateRow(data, skill_check_details_id){
     let parseData = JSON.parse(data);
     let table = document.getElementById("event-details-table");
@@ -146,7 +149,8 @@ function updateRow(data, skill_check_details_id){
             editButton.onclick = function(e){
                 updateEventDetails(skill_check_details_id);
             };
-            console.log(parseData[0]);
+
+             // hidden update form is appended to HTML table and displayed to user when edit button is clicked
             hiddenForm.appendChild(actionInd.removeChild(actionInd.children[0]));
             actionInd.innerHTML = parseData[0].action;
 

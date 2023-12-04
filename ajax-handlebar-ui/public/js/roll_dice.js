@@ -1,3 +1,5 @@
+
+//implements swapping between dice images when user clicks D20 dice image displayed on homepage(home.hbs)
 function rollDice() {
     let mainImg = document.getElementById("main-img");
     let mainImgButton = document.getElementById("main-img-button");

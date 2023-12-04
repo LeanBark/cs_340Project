@@ -13,6 +13,7 @@
 
 let addEventForm = document.getElementById('add-event-details-form');
 
+// toggles whether add form is displayed to user
 function displayForm (){
     let detailsForm = document.getElementById("add-event-details-form");
     if (detailsForm.style.display == "none"){
@@ -23,6 +24,7 @@ function displayForm (){
 }
 displayForm();
 
+// submits input information for adding to database table
 addEventForm.addEventListener("submit", function(e){
     e.preventDefault();
     let inputAction = document.getElementById("input-action");
@@ -63,6 +65,7 @@ addEventForm.addEventListener("submit", function(e){
 
 });
 
+// creates new row and adds it to existing HTML table
 addRowToTable = (data) => {
     let currentTable = document.getElementById('event-details-table');
     

@@ -5,6 +5,7 @@
 
 let addRaceForm = document.getElementById("add-race-form");
 
+// toggles whether add form is displayed to user
 function displayForm (){
     if (addRaceForm.style.display == "none"){
         addRaceForm.style.display = "block";
@@ -14,6 +15,7 @@ function displayForm (){
 }
 displayForm();
 
+// submits input information for adding to database table
 addRaceForm.addEventListener("submit", function(e){
     e.preventDefault();
 
@@ -46,6 +48,7 @@ addRaceForm.addEventListener("submit", function(e){
 
 });
 
+// creates new row and adds it to existing HTML table
 addRowToTable = (data) => {
     let currentTable = document.getElementById('races-table');
     

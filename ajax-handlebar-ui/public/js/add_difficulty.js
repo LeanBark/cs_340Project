@@ -5,6 +5,7 @@
 
 let addDiffForm = document.getElementById("add-difficulty-form");
 
+// toggles whether add form is displayed to user
 function displayForm (){
     if (addDiffForm.style.display == "none"){
         addDiffForm.style.display = "block";
@@ -14,6 +15,7 @@ function displayForm (){
 }
 displayForm();
 
+// submits input information for adding to database table
 addDiffForm.addEventListener("submit", function(e){
     e.preventDefault();
 
@@ -46,6 +48,7 @@ addDiffForm.addEventListener("submit", function(e){
 
 });
 
+// creates new row and adds it to existing HTML table
 addRowToTable = (data) => {
     let currentTable = document.getElementById('difficulties-table');
     

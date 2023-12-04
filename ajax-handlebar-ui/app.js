@@ -20,7 +20,7 @@ var app     = express();                        // We need to instantiate an exp
 app.use(express.json());                        // Allow express to handle JSON data
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
-PORT        = 8550;                             // Set a port number at the top so it's easy to change in the future
+PORT        = 8560;                             // Set a port number at the top so it's easy to change in the future
 
 // Setup Handlebars
 const { engine } = require('express-handlebars');
@@ -112,7 +112,6 @@ app.post('/add-character', function(req, res)
             res.sendStatus(400);
         } else 
         {
-            // query3 = `SELECT * FROM Characters ORDER BY character_id ASC;`;
             query3 = "SELECT character_id, Characters.name as name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, Races.name AS race_id, Classes.name AS class_id FROM Characters JOIN Races ON Characters.race_id = Races.race_id JOIN Classes ON Characters.class_id = Classes.class_id ORDER BY character_id ASC;";
             db.pool.query(query3, function(error, rows, fields){
                 if(error){
@@ -131,7 +130,7 @@ app.post('/add-character', function(req, res)
 app.put('/update-character', function (req, res, next){
     let data = req.body;
     
-    // SANITIE/FILTER INPUTS
+    // SANITIZE/FILTER INPUTS
     let id = parseInt(data.id);
 
     let name = data.name;

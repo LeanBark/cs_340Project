@@ -11,7 +11,7 @@
 //Soruce Url for Delete Icons: https://www.svgrepo.com/svg/499905/delete
 
 
-
+// Function updates submitted form data displayed in skill check events table
 function updateEvent(skill_check_id) {
     let table = document.getElementById("events-table");
 
@@ -64,7 +64,7 @@ function updateEvent(skill_check_id) {
 
 }
 
-//------------Clicking submit button in edit event infromation form retrieves the input data for updating event----//
+// Clicking submit button in edit event information form retrieves the input data for updating event
 function submitEvent(skill_check_id){
     let inputDescription = document.getElementById("input-description-update");
     let inputRoll = document.getElementById("input-roll-value-update");
@@ -75,7 +75,7 @@ function submitEvent(skill_check_id){
     let inputRollValue = inputRoll.value;
     let inputDifficultyValue = inputDifficulty.value;
 
-    //---- Organizes data according to their respective values to send as response to ajax request according to selected event name---//
+    // Organizes data according to their respective values to send as response to ajax request according to selected event name
     let data = {
         id: inputId,
         description: inputDescriptionValue,
@@ -83,7 +83,7 @@ function submitEvent(skill_check_id){
         difficulty: inputDifficultyValue
     }
 
-//---------------Places AJAX Request------------------------------//
+// Places AJAX Request
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", '/update-event', true);
     xhttp.setRequestHeader("Content-type", "application/json");
@@ -98,7 +98,7 @@ function submitEvent(skill_check_id){
     xhttp.send(JSON.stringify(data));
 }
 
-//--------------------Function is passed response data and Updates Input Values of selected event by their event_id---------------------//
+// Function is passed response data and Updates Input Values of selected event by their skill_check_id
 function updateRow(data, skill_check_id){
     let parsedData = JSON.parse(data);
     let table = document.getElementById("events-table");

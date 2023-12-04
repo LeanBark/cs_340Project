@@ -5,6 +5,7 @@
 
 let addActionForm = document.getElementById("add-action-form");
 
+// toggles whether add form is displayed to user
 function displayForm (){
     if (addActionForm.style.display == "none"){
         addActionForm.style.display = "block";
@@ -14,6 +15,7 @@ function displayForm (){
 }
 displayForm();
 
+// submits input information for adding to database table
 addActionForm.addEventListener("submit", function(e){
     e.preventDefault();
 
@@ -41,6 +43,7 @@ addActionForm.addEventListener("submit", function(e){
 
 });
 
+// creates new row and adds it to existing HTML table
 addRowToTable = (data) => {
     let currentTable = document.getElementById('actions-table');
     

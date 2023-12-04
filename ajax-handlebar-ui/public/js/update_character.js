@@ -10,7 +10,7 @@
 //Source URL for Submit Icons:https://www.svgrepo.com/svg/494419/submit-success-check-mark
 //Soruce Url for Delete Icons: https://www.svgrepo.com/svg/499905/delete
 
-//-------------Function updates submitted form data displayed in characters table---------------------------//
+//Function updates submitted form data displayed in characters table
 function updateCharacter(character_id) {
     let table = document.getElementById("characters-table");
 
@@ -110,7 +110,7 @@ function updateCharacter(character_id) {
     }
 }
 
-//------------Clicking submit button in edit character infromation form retrieves the input data for updating character----//
+//Clicking submit button in edit character information form retrieves the input data for updating character
 function submitCharacter(character_id) {
     let inputName = document.getElementById("input-name-update");
     let inputLevel = document.getElementById("input-lvl-update");
@@ -153,7 +153,7 @@ function submitCharacter(character_id) {
     }
     let inputClassIDValue = inputClassID.value;
     
-    //---- Organizes data according to their respective values to send as response to ajax request according to selected character name---//
+    // Organizes data according to their respective values to send as response to ajax request according to selected character name
     let data = {
         id: inputId,
         name: inputNameValue,
@@ -169,7 +169,7 @@ function submitCharacter(character_id) {
     }    
 
 
-//---------------Places AJAX Request------------------------------//
+// Places AJAX Request
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/update-character", true);
     xhttp.setRequestHeader("Content-type", "application/json");
@@ -184,7 +184,7 @@ function submitCharacter(character_id) {
     xhttp.send(JSON.stringify(data));
 }
 
-//--------------------Function is passed response data and Updates Input Values of selected character by their character_id---------------------//
+// Function is passed response data and Updates Input Values of selected character by their character_id
 function updateRow(data, character_id){
     let parsedData = JSON.parse(data);
 
@@ -215,7 +215,7 @@ function updateRow(data, character_id){
             editButton.onclick = function(e){
                 updateCharacter(character_id);
             }
-
+            // hidden update form is appended to HTML table and displayed to user when edit button is clicked
             hiddenForm.appendChild(nameInd.removeChild(nameInd.children[0]));
             nameInd.innerHTML = parsedData[0].name;
 

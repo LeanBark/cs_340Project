@@ -13,6 +13,7 @@
 
 let addCharacterForm = document.getElementById('add-character-form');
 
+// toggles whether add form is displayed to user
 function displayForm (){
     if (addCharacterForm.style.display == "none"){
         addCharacterForm.style.display = "block";
@@ -20,7 +21,9 @@ function displayForm (){
         addCharacterForm.style.display = "none";
     }
 }
-displayForm();
+displayForm(); // must be called once to respond on first click
+
+// submits input information for adding to database table
 addCharacterForm.addEventListener("submit", function(e){
     e.preventDefault();
 

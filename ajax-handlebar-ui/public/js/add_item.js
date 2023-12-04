@@ -13,6 +13,7 @@
 
 let addItemForm = document.getElementById("add-item-form");
 
+// toggles whether add form is displayed to user
 function displayForm (){
     if (addItemForm.style.display == "none"){
         addItemForm.style.display = "block";
@@ -22,6 +23,7 @@ function displayForm (){
 }
 displayForm();
 
+// submits input information for adding to database table
 addItemForm.addEventListener("submit", function(e){
     e.preventDefault();
     let inputItemName = document.getElementById("input-item-name");
@@ -58,6 +60,7 @@ addItemForm.addEventListener("submit", function(e){
 
 });
 
+// creates new row and adds it to existing HTML table
 addRowToTable = (data) => {
     let currentTable = document.getElementById('items-table');
     
@@ -99,11 +102,4 @@ addRowToTable = (data) => {
 
     currentTable.appendChild(row);
     
-    /*
-    let selectMenu = document.getElementById("selected-item");
-    let selectOption = document.createElement("option");
-    selectOption.text = newRow.name;
-    selectOption.value = newRow.item_id;
-    selectMenu.add(selectOption);
-    */
 }

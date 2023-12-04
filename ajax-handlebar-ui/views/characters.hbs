@@ -11,10 +11,11 @@
 //Source URL for Submit Icons:https://www.svgrepo.com/svg/494419/submit-success-check-mark
 //Soruce Url for Delete Icons: https://www.svgrepo.com/svg/499905/delete
 
-// Citation for Font Family
+// Citation for Font Families
 //Date: 11/20/2023
-// Font Family ttf obtained from fontrepo.com
+// Font Family ttfs obtained from fontrepo.com
 //Source URL: https://www.fontrepo.com/font/360/adventure-request
+//Source URL: https://www.fontrepo.com/fonts/adventure-subtitles/
 
 // Citation for Bootstrap:
 // Date: 12/4/2023
@@ -58,8 +59,7 @@
     </tbody>
 </table>
 
-
-<!-- Add row to Characters table -->
+<!---Button for Toggling Display of Add Form to user -->
 <div class="container">
     <div class="row"></div>
     <div class="row">
@@ -69,6 +69,7 @@
     </div>
 </div>
 
+<!-- Add row to Characters table -->
 <div class="container">
     <form class="add-form" id="add-character-form">
         <fieldset class="form-group border p-3">
@@ -143,7 +144,6 @@
 
 
 <!-- Update row in Characters table -->
-
 <form id="update-character-form" hidden>
     <fieldset>
         <legend>Edit Character</legend>
@@ -172,22 +172,18 @@
         <label for="input-chr">Charisma: </label>
         <input class="numbered" type="number" name="input-chr" id="input-chr-update" placeholder="CHR Value"> 
         
-        {{!-- <label for="input-character-race">Race: </label> --}}
         <select name="input-race-update" id="input-race-update">
             {{#each races}}
             <option value="{{this.race_id}}">{{this.name}}</option>
             {{/each}}
         </select>
 
-        
-        {{!-- <label for="input-character-class">Class: </label> --}}
         <select name="input-class-update" id="input-class-update">
             {{#each classes}}
             <option value="{{this.class_id}}">{{this.name}}</option>
             {{/each}}
         </select>
 
-        <!-- Disable update character -->
         <input type="submit">
     </fieldset>   
 </form>
