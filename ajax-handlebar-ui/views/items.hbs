@@ -44,9 +44,19 @@
     </tbody>
 </table>
 
+<div class="container">
+    <div class="row"></div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button id="show-items--btn" type="button" class="btn btn-default" onclick="displayForm()">Add Item</button>
+        </div>
+    </div>
+</div>
+
+
 <!-- Add row to Items table -->
 <div class="container">
-    <form id="add-item-form">
+    <form class="add-form" id="add-item-form">
         <fieldset class="form-group border p-3">
             <legend class="float-none w-auto">Add Item</legend>
             <div class="row">
@@ -56,7 +66,7 @@
                 </div>
                 <div class="col-4">
                     {{!-- <label for="input-quantity" class="form-label">Item Quantity</label> --}}
-                    <input type="number" class="form-control" name="input-quantity" id="input-quantity" placeholder="Enter Quantity">
+                    <input type="number" class="form-control" name="input-quantity" id="input-quantity" placeholder="Enter Quantity" required>
                 </div>
                 <div class="col-4">
                     <select class="form-select" name="input-item-type" id="input-item-type" required>

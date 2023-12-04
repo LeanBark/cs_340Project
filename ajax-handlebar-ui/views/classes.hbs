@@ -34,10 +34,18 @@
     </tbody>
 </table>
 
+<div class="container">
+    <div class="row"></div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button id="show-classes-btn" type="button" class="btn btn-default" onclick="displayForm()">Add Class</button>
+        </div>
+    </div>
+</div>
 
 {{!-- add new class row --}}
 <div class="container">
-    <form id="add-class-form">
+    <form class="add-form" id="add-class-form">
         <fieldset class="form-group border p-3">
             <legend class="float-none w-auto">Add New Class</legend>
             <div class="row text-center">
@@ -50,7 +58,7 @@
                     <input type="text" class="form-control" name="input-class-description" id="input-class-description" placeholder="Enter Description" required>
                 </div>
                     <div class="col-3">
-                        <button type="submit" class="btn btn-primary" id="add-class-btn">Add Character</button>
+                        <button type="submit" class="btn btn-primary" id="add-class-btn">Add Class</button>
                 </div>
             </div>
         </fieldset>

@@ -5,6 +5,15 @@
 
 let addActionForm = document.getElementById("add-action-form");
 
+function displayForm (){
+    if (addActionForm.style.display == "none"){
+        addActionForm.style.display = "block";
+    } else{
+        addActionForm.style.display = "none";
+    }
+}
+displayForm();
+
 addActionForm.addEventListener("submit", function(e){
     e.preventDefault();
 

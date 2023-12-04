@@ -5,6 +5,15 @@
 
 let addRaceForm = document.getElementById("add-race-form");
 
+function displayForm (){
+    if (addRaceForm.style.display == "none"){
+        addRaceForm.style.display = "block";
+    } else{
+        addRaceForm.style.display = "none";
+    }
+}
+displayForm();
+
 addRaceForm.addEventListener("submit", function(e){
     e.preventDefault();
 

@@ -13,6 +13,16 @@
 
 let addEventForm = document.getElementById('add-event-details-form');
 
+function displayForm (){
+    let detailsForm = document.getElementById("add-event-details-form");
+    if (detailsForm.style.display == "none"){
+        detailsForm.style.display = "block";
+    } else{
+        detailsForm.style.display = "none";
+    }
+}
+displayForm();
+
 addEventForm.addEventListener("submit", function(e){
     e.preventDefault();
     let inputAction = document.getElementById("input-action");

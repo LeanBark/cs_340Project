@@ -75,7 +75,7 @@ th {
 button:hover{
     background-color: rgb(247, 247, 247);
 }
-#add-character-form{
+.add-form{
     display: none;
 }
 

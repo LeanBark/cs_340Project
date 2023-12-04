@@ -5,6 +5,15 @@
 
 let addTypeForm = document.getElementById("add-item-type-form");
 
+function displayForm (){
+    if (addTypeForm.style.display == "none"){
+        addTypeForm.style.display = "block";
+    } else{
+        addTypeForm.style.display = "none";
+    }
+}
+displayForm();
+
 addTypeForm.addEventListener("submit", function(e){
     e.preventDefault();
 

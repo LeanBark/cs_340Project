@@ -5,6 +5,15 @@
 
 let addClassForm = document.getElementById("add-class-form");
 
+function displayForm (){
+    if (addClassForm.style.display == "none"){
+        addClassForm.style.display = "block";
+    } else{
+        addClassForm.style.display = "none";
+    }
+}
+displayForm();
+
 addClassForm.addEventListener("submit", function(e){
     e.preventDefault();
 

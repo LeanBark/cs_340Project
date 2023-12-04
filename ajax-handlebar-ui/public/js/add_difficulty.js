@@ -5,6 +5,15 @@
 
 let addDiffForm = document.getElementById("add-difficulty-form");
 
+function displayForm (){
+    if (addDiffForm.style.display == "none"){
+        addDiffForm.style.display = "block";
+    } else{
+        addDiffForm.style.display = "none";
+    }
+}
+displayForm();
+
 addDiffForm.addEventListener("submit", function(e){
     e.preventDefault();
 

@@ -14,11 +14,10 @@
 let addCharacterForm = document.getElementById('add-character-form');
 
 function displayForm (){
-    let characterForm = document.getElementById("add-character-form");
-    if (characterForm.style.display == "none"){
-        characterForm.style.display = "block";
+    if (addCharacterForm.style.display == "none"){
+        addCharacterForm.style.display = "block";
     } else{
-        characterForm.style.display = "none";
+        addCharacterForm.style.display = "none";
     }
 }
 displayForm();

@@ -13,6 +13,15 @@
 
 let addItemForm = document.getElementById("add-item-form");
 
+function displayForm (){
+    if (addItemForm.style.display == "none"){
+        addItemForm.style.display = "block";
+    } else{
+        addItemForm.style.display = "none";
+    }
+}
+displayForm();
+
 addItemForm.addEventListener("submit", function(e){
     e.preventDefault();
     let inputItemName = document.getElementById("input-item-name");

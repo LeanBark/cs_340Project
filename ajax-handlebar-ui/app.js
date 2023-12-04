@@ -176,6 +176,7 @@ app.put('/update-character', function (req, res, next){
     let selectCharacterUpdate = `SELECT Characters.name AS name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, Races.name AS race, Classes.name AS class FROM Characters JOIN Races ON Characters.race_id = Races.race_id JOIN Classes ON Characters.class_id = Classes.class_id WHERE character_id = ?;`;
 
     db.pool.query(queryUpdateMaster, [name, level, strength, dexterity, constitution, intelligence, wisdom, charisma, race_id, class_id, id], function(error, rows, fields){
+
         if (error) {
             console.log(error);
             res.sendStatus(400);

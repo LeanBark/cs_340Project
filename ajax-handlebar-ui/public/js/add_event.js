@@ -12,6 +12,16 @@
 
 let addEventForm = document.getElementById('add-event-form');
 
+function displayForm (){
+    let eventsForm = document.getElementById("add-event-form");
+    if (eventsForm.style.display == "none"){
+        eventsForm.style.display = "block";
+    } else{
+     eventsForm.style.display = "none";
+    }
+}
+displayForm();
+
 addEventForm.addEventListener("submit", function(e){
     e.preventDefault();
     let inputDesc = document.getElementById("input-description");
