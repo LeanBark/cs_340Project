@@ -61,27 +61,39 @@
 
 
 <!-- Add row to Skill Check table -->
-<h2>Add A New Skill Check Event</h2> 
-<form id="add-event-form">
-    <fieldset>
-        <legend>Add Event</legend>
-        <label for="input-description">Event Description: </label>
-        <input type="text" name="input-description" id="input-description" placeholder="Enter Description" required>
+<div class="container">
+    <form id="add-event-form">
+        <fieldset class="form-group border p-3">
+            <legend class="float-none w-auto">Add Skill Check Event</legend>
+            <div class="row text-center">
+                <div class="col-5">
+                    {{!-- <label for="input-description" class="form-label">Event Description: </label> --}}
+                    <input type="text" class="form-control" name="input-description" id="input-description" placeholder="Enter Description" required>
+                </div>
+                <div class="col-3">
+                    {{!-- <label for="input-roll-value" class="form-label">Player Roll Value: </label> --}}
+                    <input type="number" class="form-control" name="input-roll-value" id="input-roll-value" placeholder="Enter Roll Value" required>
+                </div>
+                <div class="col-4">
+                    <select class="form-select" name="input-difficulty" id="input-difficulty" required>
+                        <option value="">Select Difficulty</option>
+                        {{#each difficulties}}
+                        <option value="{{this.difficulty_id}}">{{this.description}}: {{this.value}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="row text-left">
+                <div class="col-12">
+                    <label for="add-event-btn" class="form-label"></label>
+                    <button type="submit" class="btn btn-primary" id="add-event-btn">Add Event</button>
+                </div>
+            </div>
 
-        <label for="input-roll-value">Player Roll Value: </label>
-        <input type="number" name="input-roll-value" id="input-roll-value" placeholder="Enter Roll Value" required>
-
-        <select name="input-difficulty" id="input-difficulty" required>
-            <option value="">Select Difficulty</option>
-            {{#each difficulties}}
-            <option value="{{this.difficulty_id}}">{{this.description}}: {{this.value}}</option>
-            {{/each}}
-        </select>
-
-        <!-- Disable add skill check -->
-        <input type="submit">
-    </fieldset>
-</form>
+            <!-- Disable add skill check -->
+        </fieldset>
+    </form>
+</div>
 
 <script src="./js/add_event.js"></script>
 

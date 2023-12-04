@@ -53,43 +53,59 @@
 <script src="./js/delete_event_details.js"></script>
 
 <!-- Add row to Skill Check Details table -->
-<h2>Add A New Skill Check Event Details</h2> 
-<form id="add-event-details-form">
-    <fieldset>
-        <legend>Add Event Details</legend>
-        <select name="input-action" id="input-action" required>
-            <option value="">Select Action</option>
-            {{#each actions}}
-            <option value="{{this.action_id}}">{{this.name}}</option>
-            {{/each}}
-        </select>
-
-        <select name="input-character" id="input-character" required>
-            <option value="">Select Character</option>
-            {{#each characters}}
-            <option value="{{this.character_id}}">{{this.name}}</option>
-            {{/each}}
-        </select>
-
-        <select name="input-item" id="input-item" required>
-            <option value="">Select Item</option>
-            {{#each items}}
-            <option value="{{this.item_id}}">{{this.name}}</option>
-            {{/each}}
-            <option value="NULL">None</option>
-        </select>
-
-        <select name="input-skill-check" id="input-skill-check" required>
-            <option value="">Select Skill Check</option>
-            {{#each skill_checks}}
-            <option value="{{this.skill_check_id}}">{{this.description}}</option>
-            {{/each}}
-        </select>
-
-        <!-- Disable add skill check details -->
-        <input type="submit">
-    </fieldset>
-</form>
+<div class="container"> 
+    <form id="add-event-details-form">
+        <fieldset class="form-group border p-3">
+            <legend class="float-none w-auto">Add Event Details</legend>
+            <div class="row text-left">
+                <div class="col-6">
+                    <select class="form-select" name="input-character" id="input-character" required>
+                        <option value="">Select Character</option>
+                        {{#each characters}}
+                        <option value="{{this.character_id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-4">
+                    <label for="input-action" class="form-label">Character Action</label>
+                    <select class="form-select" name="input-action" id="input-action" required>
+                        <option value="">Select Action</option>
+                        {{#each actions}}
+                        <option value="{{this.action_id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label for="input-item" class="form-label">Item Used</label>
+                    <select class="form-select" name="input-item" id="input-item" required>
+                        <option value="">Select Item</option>
+                        {{#each items}}
+                        <option value="{{this.item_id}}">{{this.name}}</option>
+                        {{/each}}
+                        <option value="NULL">None</option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label for="input-skil-check" class="form-label">Skill Check Event</label>
+                    <select class="form-select" name="input-skill-check" id="input-skill-check" required>
+                        <option value="">Select Skill Check</option>
+                        {{#each skill_checks}}
+                        <option value="{{this.skill_check_id}}">{{this.description}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary" id="add-details-btn">Add Event Details</button>
+                </div>
+            </div>
+            <!-- Disable add skill check details -->
+        </fieldset>
+    </form>
+</div>
 <script src="./js/add_event_details.js"></script>
 <!-- Update row in Skill Check Details table -->
 <form id="update-event-details-form" hidden>

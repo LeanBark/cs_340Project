@@ -18,7 +18,9 @@
 -->
 
 <!-- Show the Characters table -->
+
 <h1>Characters Table</h1>
+
 <table id="characters-table">
     <thead>
         <tr>
@@ -51,54 +53,86 @@
     </tbody>
 </table>
 
-<!-- Add row to Characters table --> 
-<h2>Add A New Character to Your Party</h2> 
-<form id="add-character-form">
-    <fieldset>
-        <legend>Add A New Character</legend>
-        <label for="input-name">Character Name: </label>
-        <input type="text" name="input-name" id="input-name" placeholder="Name" required>
 
-        <label for="input-lvl">Level: </label>
-        <input type="number" name="input-lvl" id="input-lvl" placeholder="Level Value">
+<!-- Add row to Characters table -->
+<div class="container">
+    <div class="row"></div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button id="show-char-btn" type="button" class="btn btn-default" onclick="displayForm()">Add A New Character</button>
+        </div>
+    </div>
+</div>
 
-        <label for="input-str">Strength: </label>
-        <input type="number" name="input-str" id="input-str" placeholder="STR Value">
+<div class="container">
+    <form id="add-character-form">
+        <fieldset class="form-group border p-3">
+            <legend class="float-none w-auto">Add A New Character</legend>
+            <div class="row">
+                <div class="col-6">
+                    <input type="text" class="form-control" name="input-name"  id="input-name" placeholder=" Character Name" required>
+                </div>
 
-        <label for="input-dex">Dexterity: </label>
-        <input type="number" name="input-dex" id="input-dex" placeholder="DEX Value">
+                <div class="col-3">
+                    <select name="input-race" class="form-select"  id="input-race" required>
+                        <option value="">Select Race</option>
+                        {{#each races}}
+                        <option value="{{this.race_id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
 
-        <label for="input-con">Constitution: </label>
-        <input type="number" name="input-con" id="input-con" placeholder="CON Value">
+                <div class="col-3">
+                    <select name="input-class" class="form-select" id="input-class" required>
+                        <option value="">Select Class</option>
+                        {{#each classes}}
+                        <option value="{{this.class_id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label for="input-lvl" class="form-label">Level: </label>
+                    <input type="number" class="form-control" name="input-lvl"  id="input-lvl" placeholder="Level Value">
+                </div>
+            
+                <div class="col-3">
+                    <label for="input-str" class="form-label">Strength: </label>
+                    <input type="number" class="form-control" name="input-str"  id="input-str" placeholder="STR Value">
+                </div>
+                <div class="col-3">
+                    <label for="input-dex" class="form-label">Dexterity: </label>
+                    <input type="number" class="form-control" name="input-dex"  id="input-dex" placeholder="DEX Value">
+                </div>
+                <div class="col-3">
+                    <label for="input-con" class="form-label">Constitution: </label>
+                    <input type="number" class="form-control" name="input-con"  id="input-con" placeholder="CON Value">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label for="input-int" class="form-label">Intelligence: </label>
+                    <input type="number" class="form-control" name="input-int"  id="input-int" placeholder="INT Value">
+                </div>
+                <div class="col-3">
+                    <label for="input-wis" class="form-label">Wisdom: </label>
+                    <input type="number" class="form-control" name="input-wis"  id="input-wis" placeholder="WIS Value">
+                </div>
+                <div class="col-3">
+                    <label for="input-chr" class="form-label">Charisma: </label>
+                    <input type="number" class="form-control" name="input-chr"  id="input-chr" placeholder="CHR Value">
+                </div>
 
-        <label for="input-int">Intelligence: </label>
-        <input type="number" name="input-int" id="input-int" placeholder="INT Value">
+                <div class="col-3">
+                    <label for="add-char-btn" class="form-label">Ready to Party? </label>
+                    <button type="submit" class="btn btn-primary" id="add-char-btn">Add Character</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
 
-        <label for="input-wis">Wisdom: </label>
-        <input type="number" name="input-wis" id="input-wis" placeholder="WIS Value">
-
-        <label for="input-chr">Charisma: </label>
-        <input type="number" name="input-chr" id="input-chr" placeholder="CHR Value">
-        <br>
-
-        <select name="input-race" id="input-race" required>
-            <option value="">Select Race</option>
-            {{#each races}}
-            <option value="{{this.race_id}}">{{this.name}}</option>
-            {{/each}}
-        </select>
-
-        <select name="input-class" id="input-class" required>
-            <option value="">Select Class</option>
-            {{#each classes}}
-            <option value="{{this.class_id}}">{{this.name}}</option>
-            {{/each}}
-        </select>
-
-        <!-- Disabled add character -->
-        <input type="submit">
-    </fieldset>
-</form>
 
 <script src="./js/add_character.js"></script>
 

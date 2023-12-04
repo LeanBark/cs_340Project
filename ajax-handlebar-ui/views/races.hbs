@@ -35,19 +35,25 @@
 </table>
 
 <!-- Add row to Races table -->
-<h2>Add a New Character Race</h2>
-<form id="add-race-form">
-    <fieldset>
-        <legend>Add New Race</legend>
-        <label for="input-race-name">New Race: </label>
-        <input type="text" name="input-race-name" id="input-race-name" placeholder="Enter Race" required>
-
-        <label for="input-race-description">Description: </label>
-        <input type="text" name="input-race-description" id="input-race-description" placeholder="Enter Description" required>
-
-        <!-- Disable add race -->
-        <input type="submit">
-    </fieldset>
-</form>
+<div class="container">
+    <form id="add-race-form">
+        <fieldset class="form-group border p-3">
+            <legend class="float-none w-auto">Add New Race</legend>
+            <div class="row text-center">
+                <div class="col-4">
+                    {{!-- <label for="input-race-name">New Race: </label> --}}
+                    <input class="form-control" type="text" name="input-race-name" id="input-race-name" placeholder="Enter Race" required>
+                </div>
+                <div class="col-5">
+                    {{!-- <label for="input-race-description">Description: </label> --}}
+                    <input class="form-control" type="text" name="input-race-description" id="input-race-description" placeholder="Enter Description" required>
+                </div>
+                <div class="col-3">
+                    <button type="submit" class="btn btn-primary" id="add-race-btn">Add Race</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
 
 <script src="./js/add_race.js"></script>

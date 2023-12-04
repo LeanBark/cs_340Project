@@ -36,19 +36,25 @@
 
 
 {{!-- add new class row --}}
-<h2>Add a New Character Class</h2>
-<form id="add-class-form">
-    <fieldset>
-        <legend>Add New Class</legend>
-        <label for="input-class-name">New Class: </label>
-        <input type="text" name="input-class-name" id="input-class-name" placeholder="Enter Class" required>
-
-        <label for="input-class-description">Description: </label>
-        <input type="text" name="input-class-description" id="input-class-description" placeholder="Enter Description" required>
-
-        <!-- Disable add class -->
-        <input type="submit">
-    </fieldset>
-</form>
+<div class="container">
+    <form id="add-class-form">
+        <fieldset class="form-group border p-3">
+            <legend class="float-none w-auto">Add New Class</legend>
+            <div class="row text-center">
+                <div class="col-4">
+                    {{!-- <label class="form-label" for="input-class-name">New Class: </label> --}}
+                    <input type="text" class="form-control" name="input-class-name" id="input-class-name" placeholder="Enter Class" required>
+                </div>
+                <div class="col-5">
+                    {{!-- <label class="form-label" for="input-class-description">Description: </label> --}}
+                    <input type="text" class="form-control" name="input-class-description" id="input-class-description" placeholder="Enter Description" required>
+                </div>
+                    <div class="col-3">
+                        <button type="submit" class="btn btn-primary" id="add-class-btn">Add Character</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
 
 <script src="./js/add_class.js"></script>

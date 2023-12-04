@@ -35,19 +35,27 @@
 </table>
 
 <!-- Add row to Event Difficulties table -->
-<h2>Add a New Event Difficulty</h2>
-<form id="add-difficulty-form">
-    <fieldset>
-        <legend>Add New Difficulty</legend>
-        <label for="input-difficulty-value">New Difficulty Value: </label>
-        <input type="number" name="input-difficulty-value" id="input-difficulty-value" placeholder="Enter Roll Value" required>
+<div class="container">
+    <form id="add-difficulty-form">
+        <fieldset class="form-group border p-3">
+            <legend class="float-none w-auto">Add New Difficulty</legend>
+            <div class="row text-center">
+                <div class="col-5">
+                    <label for="input-difficulty-value" class="form-label">New Difficulty Value: </label>
+                    <input type="number" class="form-control" name="input-difficulty-value" id="input-difficulty-value" placeholder="Enter Roll Value" required>
+                </div>
+                <div class="col-4">
+                    <label for="input-diff-description" class="form-label">Description: </label>
+                    <input type="text" class="form-control" name="input-diff-description" id="input-diff-description" placeholder="Enter Description" required>
+                </div>
+                <div class="col-3">
+                    <label for="add-difficulty-btn" class="form-label">Click to Add </label>
+                    <button type="submit" class="btn btn-primary" id="add-difficulty-btn">Add Difficulty</button>
+                </div>
+            </div>
 
-        <label for="input-diff-description">Description: </label>
-        <input type="text" name="input-diff-description" id="input-diff-description" placeholder="Enter Description" required>
-
-        <!-- Disable add difficulty -->
-        <input type="submit">
-    </fieldset>
-</form>
+        </fieldset>
+    </form>
+</div>
 
 <script src="./js/add_difficulty.js"></script>

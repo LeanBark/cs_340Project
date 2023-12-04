@@ -34,15 +34,22 @@
 </table>
 
 <!-- Add row to Actions table -->
-<h2>Add A New Character Action</h2>
-<form id="add-action-form">
-    <fieldset>
-        <label for="input-action-name">New Action: </label>
-        <input type="text" name="input-action-name" id="input-action-name" placeholder="Enter Action" required>
 
-        <!-- Disable add Action -->
-        <input type="submit">
-    </fieldset>
-</form>
-
+<div class="container">
+    <form id="add-action-form">
+        <fieldset class="form-group border p-3">
+            <legend class="float-none w-auto">Add A New Action</legend>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <input type="text" class="form-control" name="input-action-name" id="input-action-name" placeholder="Enter Action" required>
+                        </div>
+                        
+                        <div class="col-3">
+                            <label for="add-action-btn" class="form-label"></label>
+                            <button type="submit" class="btn btn-primary" id="add-action-btn">Add Action</button>
+                        </div>
+                    </div>
+        </fieldset>
+    </form>
+</div>
 <script src="./js/add_action.js"></script>

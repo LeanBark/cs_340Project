@@ -45,27 +45,36 @@
 </table>
 
 <!-- Add row to Items table -->
-<h2>Add A New Item</h2>
-<form id="add-item-form">
-    <fieldset>
-        <legend>Add Item</legend>
-        <label for="input-item-name">New Item Name: </label>
-        <input type="text" name="input-item-name" id="input-item-name" placeholder="Enter Name" required>
-
-        <label for="input-quantity">Item Quantity</label>
-        <input type="number" name="input-quantity" id="input-quantity" placeholder="Enter Quantity">
-
-        <select name="input-item-type" id="input-item-type" required>
-            <option value="">Select Item Type</option>
-            {{#each types}}
-            <option value="{{this.item_type_id}}">{{this.name}}</option>
-            {{/each}}
-        </select>
-
-        <!-- Disabled add Item -->
-        <input type="submit">
-    </fieldset>
-</form>
+<div class="container">
+    <form id="add-item-form">
+        <fieldset class="form-group border p-3">
+            <legend class="float-none w-auto">Add Item</legend>
+            <div class="row">
+                <div class="col-4">
+                    {{!-- <label class="form-label" for="input-item-name">New Item Name: </label> --}}
+                    <input type="text" class="form-control" name="input-item-name" id="input-item-name" placeholder="Enter Name" required>
+                </div>
+                <div class="col-4">
+                    {{!-- <label for="input-quantity" class="form-label">Item Quantity</label> --}}
+                    <input type="number" class="form-control" name="input-quantity" id="input-quantity" placeholder="Enter Quantity">
+                </div>
+                <div class="col-4">
+                    <select class="form-select" name="input-item-type" id="input-item-type" required>
+                        <option value="">Select Item Type</option>
+                        {{#each types}}
+                        <option value="{{this.item_type_id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary" id="add-item-btn">Add Item</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
 
 <script src="./js/add_item.js"></script>
 

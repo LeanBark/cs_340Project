@@ -13,6 +13,15 @@
 
 let addCharacterForm = document.getElementById('add-character-form');
 
+function displayForm (){
+    let characterForm = document.getElementById("add-character-form");
+    if (characterForm.style.display == "none"){
+        characterForm.style.display = "block";
+    } else{
+        characterForm.style.display = "none";
+    }
+}
+displayForm();
 addCharacterForm.addEventListener("submit", function(e){
     e.preventDefault();
 
@@ -114,8 +123,7 @@ addRowToTable = (data) => {
     editCell.append(editCellButton);
     row.appendChild(editCell);
 
-    row.setAttribute("data-value", newRow.character_id)
-
+    row.setAttribute("data-value", newRow.character_id);
     currentTable.appendChild(row);
 
 }

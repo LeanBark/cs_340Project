@@ -34,16 +34,21 @@
 </table>
 
 <!-- Add row to Item Types table -->
-<h2>Add a New Item Type</h2>
-<form id="add-item-type-form">
-    <fieldset>
-        <legend>Add New Item Type</legend>
-        <label for="input-type-name">New Item Type: </label>
-        <input type="text" name="input-type-name" id="input-type-name" placeholder="Enter Item Type" required>
-
-        <!-- Disable add item type -->
-        <input type="submit">
-    </fieldset>
-</form>
+<div class="container">
+    <form id="add-item-type-form">
+        <fieldset class="form-group border p-3">
+            <legend class="float-none w-auto">Add New Item Type</legend>
+            <div class="row">
+                <div class="col-6">
+                    {{!-- <label for="input-type-name" class="form-label">New Item Type: </label> --}}
+                    <input type="text" class="form-control" name="input-type-name" id="input-type-name" placeholder="Enter Item Type" required>
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary" id="add-item-type-btn">Add Item Type</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
 
 <script src="./js/add_item_type.js"></script>

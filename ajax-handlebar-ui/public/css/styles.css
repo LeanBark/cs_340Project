@@ -18,18 +18,18 @@ body {
 }
 
 h1, h2{
-margin-left: auto;
+/* margin-left: auto;
 margin-right:auto;
-width: 50%;
-text-align: center;
-padding: 10px;
-color:darkred;
+width: 50%; */
+    text-align: center;
+    padding: 10px;
+    color:darkred;
 }
 
 h3{
-    margin-left: auto;
+    /* margin-left: auto;
     margin-right:auto;
-    width: 50%;
+    width: 50%; */
     text-align: center;
     padding: 2px;
     color:rgb(42, 1, 1);
@@ -49,19 +49,20 @@ table {
     vertical-align: auto;
 }
     
-td, tr {
+td {
     size: 40px;
     padding: 8px;
-    background-color: antiquewhite;
+    
     text-align: center;
     font-family: contentFont;
     letter-spacing: 1px;
 }
 
-td, th {
-    border: solid #ddd;
+td,tr {
+    border: solid #a1a0a0;
     color: rgb(31, 63, 63);
     letter-spacing: 1px;
+    background: rgb(255, 255, 255);
 }
 
 th {
@@ -69,16 +70,22 @@ th {
     text-align: center;
     background-color: #05583a;
     color: white;
+    border: solid #a1a0a0;
 }
 button:hover{
     background-color: rgb(247, 247, 247);
 }
+#add-character-form{
+    display: none;
+}
 
-form, button {
+form {
     color: rgb(28, 32, 28);
     padding-top: 5px;
     padding-bottom: 5px;
     position: relative;
+    margin-left: auto;
+    margin-right: auto;
     size: 30px;
 }
 .extended{
@@ -91,13 +98,14 @@ form, button {
 }
 
 .numbered{
-    width:39px;
+    width:42px;
 }
 
 input, select {
-    size:30px;
+    /* size:30px; */
+    padding-bottom: 4px;
     font-family: contentFont;
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
 }
 a {
     display: inline-block;
@@ -111,8 +119,8 @@ p {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 footer {
-    position: relative;
-    margin: auto;
+    /* position: relative;
+    margin: auto; */
     padding: 20px;
     top: 50px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -129,7 +137,7 @@ ul {
 li {
     padding: 10px;
     float: left;
-    width: 16%;
+    /* width: 16%;  */
 }
 .center-img {
     background: none;
@@ -158,21 +166,21 @@ li {
     to {transform: rotate(360deg);}
 }
 .center-text {
-    margin: auto;
+    /* margin: auto; */
     text-align: center;
 }
 .topnav {
     background-color: #05583a;
     overflow: hidden;
-    padding: 0px;
+    /* padding: 0px;
     margin: 0px;
-    margin: auto;
+    margin: auto; */
     display: inline-block;
 }
 .topnav a {
     color: white;
     float: center;
-    text-align: center;
+    /* text-align: center; */
     padding: 10px;
     text-decoration: none;
     font-size: 16px;
@@ -182,16 +190,18 @@ li {
     background-color: white;
 }
 
-legend{
+
+/* legend{
 size: 150px;
-}
+} */
 
 fieldset{
-margin-left: auto;
-margin-right:auto;
-width: 80%;
-border: solid black 2px;
-padding: 50px;
-vertical-align: auto;
-color:darkred;
+    margin-left: auto;
+    margin-right:auto;
+    width: 80%;
+    border: solid black;
+    /*
+    padding: 50px; */
+    vertical-align: auto;
+    color:darkred;
 }
