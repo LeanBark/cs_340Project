@@ -7,8 +7,16 @@
 //Date: 11/20/2023
 // Icons for Submit, Delete, and Edit buttons were provided from svgrepo.com
 // Source URL for Edit Icons: https://www.svgrepo.com/svg/511904/edit-1479
-//Source URL for Submit Icons:https://www.svgrepo.com/svg/494419/submit-success-check-mark
-//Soruce Url for Delete Icons: https://www.svgrepo.com/svg/499905/delete
+// Source URL for Submit Icons:https://www.svgrepo.com/svg/494419/submit-success-check-mark
+// Source Url for Delete Icons: https://www.svgrepo.com/svg/499905/delete
+
+//Citation for GIFs
+//Date: 11/21/2023
+// GIFs for Critical Success and Critical Failure
+//Source URL for Critical Success GIF: https://giphy.com/gifs/hyperrpg-dnd-roguelike-rogue-like-8cGXy3fskyacePqILB
+//Source URL for Critical Failure GIF: https://giphy.com/gifs/dnd-d20-zxyllia-oOBTO2UcSoaBJewZT0
+
+
 
 let addEventForm = document.getElementById('add-event-form');
 

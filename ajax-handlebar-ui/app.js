@@ -20,7 +20,7 @@ var app     = express();                        // We need to instantiate an exp
 app.use(express.json());                        // Allow express to handle JSON data
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
-PORT        = 8560;                             // Set a port number at the top so it's easy to change in the future
+PORT        = 8860;                             // Set a port number at the top so it's easy to change in the future
 
 // Setup Handlebars
 const { engine } = require('express-handlebars');
@@ -40,7 +40,7 @@ app.get('/', function(req,res){
     res.render('home');
 });
 
-// Characters Table - Show 
+// Characters Table - Show Table - (SELECT/READ) ------------------------------------------------------------------------
 app.get('/characters', function(req, res)
     {
         let query1 = "SELECT character_id AS ID, Characters.name AS Name, level AS Level, strength AS Strength, dexterity AS Dexterity, constitution AS Constitution, intelligence AS Intelligence, wisdom AS Wisdom, charisma AS Charisma, Races.name AS Race, Classes.name AS Class FROM Characters JOIN Races on Characters.Race_Id = Races.Race_Id JOIN Classes on Characters.Class_Id = Classes.Class_Id ORDER BY character_id ASC;";
@@ -59,7 +59,7 @@ app.get('/characters', function(req, res)
         })
     });
 
-// Characters Table - Insert Row    
+// Characters Table - Insert Row - (CREATE)  -----------------------------------------------------------------
 app.post('/add-character', function(req, res)
 {
     let data = req.body;
@@ -126,7 +126,7 @@ app.post('/add-character', function(req, res)
     })
 });
 
-// Characters Table - Update Row 
+// Characters Table - Update Row - (UPDATE) ------------------------------------------------------------------
 app.put('/update-character', function (req, res, next){
     let data = req.body;
     
@@ -193,7 +193,7 @@ app.put('/update-character', function (req, res, next){
 });
 
 
-// Races Table - display all races
+// Races Table - Show Table - (SELECT/READ) ----------------------------------------------------------------
 app.get('/races', function(req,res){
     let query1 = 'SELECT race_id AS ID, Races.name AS Name, Races.description AS Description FROM Races ORDER BY race_id ASC;';
     db.pool.query(query1, function(err, rows, fields){
@@ -201,7 +201,7 @@ app.get('/races', function(req,res){
     })
 });
 
-// Races Table - add a new race
+// Races Table - Insert Row - (CREATE) -------------------------------------------------------------------
 app.post('/add-race', function(req, res)
 {
     let data = req.body;
@@ -228,7 +228,7 @@ app.post('/add-race', function(req, res)
     })
 });
 
-// Classes Table - display all classes
+// Classes Table - Show Table - (SELECT/READ) ------------------------------------------------------------
 app.get('/classes', function(req,res){
     let query1 = `SELECT class_id AS ID, Classes.name AS Name, Classes.description AS Description FROM Classes ORDER BY class_id ASC;`;
     db.pool.query(query1, function(err, rows, fields){
@@ -236,7 +236,7 @@ app.get('/classes', function(req,res){
     })
 });
 
-// Classes Table - add a new class
+// Classes Table - Insert Row - (CREATE) ----------------------------------------------------------------
 app.post('/add-class', function(req, res)
 {
     let data = req.body;
@@ -263,7 +263,7 @@ app.post('/add-class', function(req, res)
     })
 });
 
-// Actions Table - Show
+// Actions Table - Show Table - (SELECT/READ) -------------------------------------------------------
 app.get('/actions', function(req, res){
     let query1 = `SELECT action_id AS ID, Actions.name AS Name FROM Actions ORDER BY action_id ASC;`;
     db.pool.query(query1, function(err, rows, fields){
@@ -271,7 +271,7 @@ app.get('/actions', function(req, res){
     })
 });
 
-// Actions Table - Insert Row
+// Actions Table - Insert Row - (CREATE) ------------------------------------------------------------
 app.post('/add-action', function(req, res){
     let data = req.body;
 
@@ -297,7 +297,7 @@ app.post('/add-action', function(req, res){
     })
 });
 
-// Event Difficulties Table - display all event difficulties
+// Event Difficulties Table - Show Table - (SELECT/READ) ---------------------------------------------
 app.get('/difficulties', function(req,res){
     let query1 = `SELECT difficulty_id AS ID, EventDifficulties.value AS Value, EventDifficulties.description AS Description FROM EventDifficulties ORDER BY difficulty_id ASC;`;
     db.pool.query(query1, function(err, rows, fields){
@@ -305,7 +305,7 @@ app.get('/difficulties', function(req,res){
     })
 });
 
-// Event Difficulties Table - add a new event difficulty
+// Event Difficulties Table - Insert Row - (CREATE) --------------------------------------------------
 app.post('/add-difficulty', function(req, res)
 {
     let data = req.body;
@@ -335,7 +335,7 @@ app.post('/add-difficulty', function(req, res)
     })
 });
 
-// Skill Checks Table - Show
+// Skill Checks Table - Show Table - (SELECT/READ) --------------------------------------------------
 app.get('/events', function(req, res){
     let query1 = "SELECT skill_check_id AS ID, SkillChecks.description AS Description, roll_result AS \"Roll Result\", EventDifficulties.description AS Difficulty, EventDifficulties.value AS \"Difficulty Value\" FROM SkillChecks JOIN EventDifficulties ON SkillChecks.difficulty_id = EventDifficulties.difficulty_id ORDER BY skill_check_id ASC;";
     let query2 = "SELECT * FROM EventDifficulties ORDER BY difficulty_id ASC;";
@@ -348,7 +348,7 @@ app.get('/events', function(req, res){
     })
 });
 
-// Skill Check Table - Insert Row
+// Skill Checks Table - Insert Row - (CREATE) ---------------------------------------------------------
 app.post('/add-event', function(req, res){
     let data = req.body;
 
@@ -384,7 +384,7 @@ app.post('/add-event', function(req, res){
     })
 });
 
-// Skill Check Table - Update
+// Skill Checks Table - Update Row - (UPDATE) --------------------------------------------------------
 app.put('/update-event', function (req, res, next){
     let data = req.body;
     
@@ -422,7 +422,7 @@ app.put('/update-event', function (req, res, next){
     })
 });
 
-// Skill Check Table - Delete
+// Skill Check Table - Delete Row - (DELETE) --------------------------------------------------------
 app.delete('/delete-event-ajax', function(req, res, next){
     let data = req.body;
     let skill_check_id = parseInt(data.id);
@@ -442,7 +442,7 @@ app.delete('/delete-event-ajax', function(req, res, next){
 })});
 
 
-// Skill Check Details Table - Show
+// Skill Check Details Table - Show Table - (SELECT/CREATE) -------------------------------------------
 app.get('/event-details', function(req, res){
     let query1 = "SELECT skill_check_details_id AS ID, Actions.name AS \"Action\", Characters.name AS \"Character\", IF(SkillCheckDetails.item_id IS NOT NULL, Items.name, \"None\") AS \"Item\", SkillChecks.description AS \"Description\" FROM SkillCheckDetails JOIN Actions ON SkillCheckDetails.action_id = Actions.action_id JOIN Characters ON SkillCheckDetails.character_id = Characters.character_id LEFT JOIN Items ON SkillCheckDetails.item_id = Items.item_id JOIN SkillChecks ON SkillCheckDetails.skill_check_id = SkillChecks.skill_check_id ORDER BY skill_check_details_id ASC;";
     let query2 = "SELECT * FROM Actions ORDER BY action_id ASC;"
@@ -467,7 +467,7 @@ app.get('/event-details', function(req, res){
     })
 });
 
-// Skill Check Details Table - Insert Row
+// Skill Check Details Table - Insert Row - (CREATE) ------------------------------------------------
 app.post('/add-event-details', function(req, res){
     let data = req.body;
 
@@ -496,7 +496,7 @@ app.post('/add-event-details', function(req, res){
     })
 });
 
-// Skill Check Details Table - Update
+// Skill Check Details Table - Update Row - (UPDATE) ------------------------------------------------
 app.put('/update-event-details-ajax', function (req, res, next){
     let data = req.body;
 
@@ -534,7 +534,7 @@ app.put('/update-event-details-ajax', function (req, res, next){
     })
 });
 
-// Skill Check Details Table - Delete
+// Skill Check Details Table - Delete Row - (DELETE) ------------------------------------------------
 app.delete('/delete-event-details-ajax', function(req,res,next){
     let data = req.body;
     let skill_check_details_id = parseInt(data.id);
@@ -553,7 +553,7 @@ app.delete('/delete-event-details-ajax', function(req,res,next){
         }
 })});
 
-// Items Table - Show
+// Items Table - Show Table - (SELECT/READ) ---------------------------------------------------------
 app.get('/items', function(req,res){
     let query1 = "SELECT item_id AS ID, Items.name AS Name, quantity as Quantity, ItemTypes.name As \"Item Type\" FROM Items JOIN ItemTypes ON Items.item_type_id = ItemTypes.item_type_id ORDER BY item_id ASC;";
     let query2 = "SELECT * FROM ItemTypes ORDER BY item_type_id ASC;";
@@ -567,7 +567,7 @@ app.get('/items', function(req,res){
     })
 });
 
-// Items Table - Insert Row
+// Items Table - Insert Row - (CREATE) --------------------------------------------------------------
 app.post('/add-item', function(req, res)
 {
     let data = req.body;
@@ -600,7 +600,7 @@ app.post('/add-item', function(req, res)
     })
 });
 
-// Items Table - Update Row
+// Items Table - Update Row - (UPDATE) --------------------------------------------------------------
 app.put('/update-item', function (req, res, next){
     let data = req.body;
     
@@ -639,7 +639,7 @@ app.put('/update-item', function (req, res, next){
 });
 
 
-// Item Types Table - display all item types
+// Item Types Table - Show Table - (SELECT/READ) ----------------------------------------------------
 app.get('/item-types', function(req,res){
     let query1 = `SELECT item_type_id AS ID, ItemTypes.name AS Name FROM ItemTypes ORDER BY item_type_id ASC;`;
     db.pool.query(query1, function(err, rows, fields){
@@ -672,6 +672,7 @@ app.post('/add-item-type', function(req, res)
         }
     })
 });
+
 /*
      DEFINE LISTENER
 */
