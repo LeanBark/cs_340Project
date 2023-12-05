@@ -213,6 +213,12 @@ function updateRow(data, character_id){
             editIcon.height = 30;
             editButton.append(editIcon);
             editButton.onclick = function(e){
+                // let currentTable = doscument.getElementById("characters-table");
+                // for (let i=0, row; row = currentTable.rows[i]; i++){
+                //     if(currentTable.rows[i].getAttribute("data-value") != character_id){
+                //         // hide or disable edit button for unrelated rows
+                //     }
+                // }
                 updateCharacter(character_id);
             }
             // hidden update form is appended to HTML table and displayed to user when edit button is clicked
