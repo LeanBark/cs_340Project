@@ -50,6 +50,16 @@ function updateItem(item_id) {
             submitIcon.width= 39;
             submitIcon.height = 30;
             submitButton.append(submitIcon);
+
+            for (let i=1, row; row = table.rows[i]; i++){
+                if(table.rows[i].getAttribute("data-value") != item_id){
+                    let unselectedRow = table.getElementsByTagName("tr")[i];
+                    let rowLength = unselectedRow.getElementsByTagName("td").length;
+                    let endButton = unselectedRow.getElementsByTagName("td")[rowLength - 1];
+                    endButton.children[0].style.display = "none";
+                }
+            }
+
             submitButton.onclick = function(){
                 submitItem(item_id);
             }
@@ -114,6 +124,17 @@ function updateRow(data, item_id){
             editIcon.width= 39;
             editIcon.height = 30;
             editButton.append(editIcon);
+
+            // reveals previously hidden buttons
+            for (let i=1, row; row = table.rows[i]; i++){
+                if(table.rows[i].getAttribute("data-value") != item_id){
+                    let unselectedRow = table.getElementsByTagName("tr")[i];
+                    let rowLength = unselectedRow.getElementsByTagName("td").length;
+                    let endButton = unselectedRow.getElementsByTagName("td")[rowLength - 1];
+                    endButton.children[0].style.display = "block";
+                }
+            }
+
             editButton.onclick = function(e){
                 updateItem(item_id);
             }

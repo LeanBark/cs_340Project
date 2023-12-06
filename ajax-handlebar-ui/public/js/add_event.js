@@ -105,12 +105,12 @@ addRowToTable = (data) => {
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1];
 
-    let row = document.createElement("TR");
-    let idCell = document.createElement("TD");
-    let descriptionCell = document.createElement("TD");
-    let rollCell = document.createElement("TD");
-    let difficultyCell = document.createElement("TD");
-    let difficultyValueCell = document.createElement("TD");
+    let row = document.createElement("tr");
+    let idCell = document.createElement("td");
+    let descriptionCell = document.createElement("td");
+    let rollCell = document.createElement("td");
+    let difficultyCell = document.createElement("td");
+    let difficultyValueCell = document.createElement("td");
     let editCell = document.createElement("td");
     let deleteCell = document.createElement("td");
 

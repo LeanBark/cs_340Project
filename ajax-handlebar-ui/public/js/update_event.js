@@ -10,7 +10,6 @@
 //Source URL for Submit Icons:https://www.svgrepo.com/svg/494419/submit-success-check-mark
 //Soruce Url for Delete Icons: https://www.svgrepo.com/svg/499905/delete
 
-
 // Function updates submitted form data displayed in skill check events table
 function updateEvent(skill_check_id) {
     let table = document.getElementById("events-table");
@@ -52,6 +51,20 @@ function updateEvent(skill_check_id) {
             submitIcon.width= 39;
             submitIcon.height = 30;
             submitButton.append(submitIcon);
+
+            // hides edit and delete buttons in unselected rows
+            for (let i=1, row; row = table.rows[i]; i++){
+                if(table.rows[i].getAttribute("data-value") != skill_check_id){
+                    let unselectedRow = table.getElementsByTagName("tr")[i];
+                    let rowLength = unselectedRow.getElementsByTagName("td").length;
+                    let endButton = unselectedRow.getElementsByTagName("td")[rowLength - 1];
+                    let leftElement = unselectedRow.getElementsByTagName("td")[rowLength - 2];
+                    endButton.children[0].style.display = "none";
+                    if (leftElement.children[0].tagName == "BUTTON"){
+                        leftElement.children[0].style.display = "none";
+                    }
+                }
+            }
             submitButton.onclick = function(){
                 submitEvent(skill_check_id);
             };
@@ -119,6 +132,22 @@ function updateRow(data, skill_check_id){
             editIcon.width= 39;
             editIcon.height = 30;
             editButton.append(editIcon);
+
+            // reveals buttons that were hidden when a row was selected for editing
+            for (let i=1, row; row = table.rows[i]; i++){
+                if(table.rows[i].getAttribute("data-value") != skill_check_id){
+                    let unselectedRow = table.getElementsByTagName("tr")[i];
+                    let rowLength = unselectedRow.getElementsByTagName("td").length;
+                    
+                    let endButton = unselectedRow.getElementsByTagName("td")[rowLength - 1];
+                    let leftElement = unselectedRow.getElementsByTagName("td")[rowLength - 2];
+                    endButton.children[0].style.display = "block";
+                    if (leftElement.children[0].tagName == "BUTTON"){
+                        leftElement.children[0].style.display = "block";
+                    }
+                }
+            }
+
             editButton.onclick = function(e){
                 updateEvent(skill_check_id);
             }

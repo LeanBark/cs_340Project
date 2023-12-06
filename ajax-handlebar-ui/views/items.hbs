@@ -44,7 +44,7 @@
             <td>{{this.Name}}</td>
             <td>{{this.Quantity}}</td>
             <td>{{[Item Type]}}</td>
-            <td><button onclick="updateItem({{this.ID}})"><img src="/img/edit-icon.svg" wdith="39" height="30"></button></td>
+            <td><button id="edit-btn" onclick="updateItem({{this.ID}})"><img src="/img/edit-icon.svg" wdith="39" height="30"></button></td>
         </tr>
         {{/each}}
     </tbody>

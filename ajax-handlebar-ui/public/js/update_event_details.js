@@ -77,6 +77,21 @@ function updateEventDetails(skill_check_details_id) {
             submitIcon.width= 39;
             submitIcon.height = 30;
             submitButton.append(submitIcon);
+
+            // hides edit/delete buttons of unselected rows
+            for (let i=1, row; row = table.rows[i]; i++){
+                if(table.rows[i].getAttribute("data-value") != skill_check_details_id){
+                    let unselectedRow = table.getElementsByTagName("tr")[i];
+                    let rowLength = unselectedRow.getElementsByTagName("td").length;
+                    let endButton = unselectedRow.getElementsByTagName("td")[rowLength - 1];
+                    let leftElement = unselectedRow.getElementsByTagName("td")[rowLength - 2];
+                    endButton.children[0].style.display = "none";
+                    if (leftElement.children[0].tagName == "BUTTON"){
+                        leftElement.children[0].style.display = "none";
+                    }
+                }
+            }
+
             submitButton.onclick = function(){
                 submitEventDetails(skill_check_details_id);
             };
@@ -146,9 +161,27 @@ function updateRow(data, skill_check_details_id){
             editIcon.width= 39;
             editIcon.height = 30;
             editButton.append(editIcon);
+
+            // reveal previously hidden buttons 
+            for (let i=1, row; row = table.rows[i]; i++){
+                if(table.rows[i].getAttribute("data-value") != skill_check_details_id){
+                    let unselectedRow = table.getElementsByTagName("tr")[i];
+                    let rowLength = unselectedRow.getElementsByTagName("td").length;
+                    
+                    let endButton = unselectedRow.getElementsByTagName("td")[rowLength - 1];
+                    let leftElement = unselectedRow.getElementsByTagName("td")[rowLength - 2];
+                    endButton.children[0].style.display = "block";
+                    if (leftElement.children[0].tagName == "BUTTON"){
+                        leftElement.children[0].style.display = "block";
+                    }
+                }
+            }
+
             editButton.onclick = function(e){
                 updateEventDetails(skill_check_details_id);
             };
+
+
 
              // hidden update form is appended to HTML table and displayed to user when edit button is clicked
             hiddenForm.appendChild(actionInd.removeChild(actionInd.children[0]));

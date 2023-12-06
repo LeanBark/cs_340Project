@@ -47,9 +47,9 @@ Citation for Bootstrap:
             <td>{{this.Item}}</td>
             <td>{{this.Description}}</td>
             <!-- Disable skill check details edit -->
-            <td><button onclick="updateEventDetails({{this.ID}})"><img src="/img/edit-icon.svg" width="39" height="30"></button></td>
+            <td><button id="edit-btn" onclick="updateEventDetails({{this.ID}})"><img src="/img/edit-icon.svg" width="39" height="30"></button></td>
             <!--Disable skill check details delete-->
-            <td><button onclick="deleteEventDetails({{this.ID}})"><img src="/img/delete-icon.svg" width="39" height="30"></button></td>
+            <td><button id="delete-btn" onclick="deleteEventDetails({{this.ID}})"><img src="/img/delete-icon.svg" width="39" height="30"></button></td>
         </tr>
         {{/each}}
     </tbody>

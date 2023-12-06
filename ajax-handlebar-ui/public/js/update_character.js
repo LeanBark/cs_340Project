@@ -8,7 +8,7 @@
 // Icons for Submit, Delete, and Edit buttons were provided from svgrepo.com
 // Source URL for Edit Icons: https://www.svgrepo.com/svg/511904/edit-1479
 //Source URL for Submit Icons:https://www.svgrepo.com/svg/494419/submit-success-check-mark
-//Soruce Url for Delete Icons: https://www.svgrepo.com/svg/499905/delete
+//Source Url for Delete Icons: https://www.svgrepo.com/svg/499905/delete
 
 //Function updates submitted form data displayed in characters table
 function updateCharacter(character_id) {
@@ -99,6 +99,17 @@ function updateCharacter(character_id) {
             submitIcon.width= 39;
             submitIcon.height = 30;
             submitButton.append(submitIcon);
+
+            // hide or disable edit button for unrelated rows
+            for (let i=1, row; row = table.rows[i]; i++){
+                if(table.rows[i].getAttribute("data-value") != character_id){
+                    let otherRow = table.getElementsByTagName("tr")[i];
+                    let rowLength = otherRow.getElementsByTagName("td").length;
+                    console.log(otherRow.getElementsByTagName("td").length - 1);
+                    let otherButton = otherRow.getElementsByTagName("td")[rowLength - 1];
+                    otherButton.children[0].style.display = "none";
+                }
+            }
             submitButton.onclick = function(){
                 submitCharacter(character_id);
             }
@@ -207,18 +218,24 @@ function updateRow(data, character_id){
             let hiddenForm = document.getElementById("update-character-form");
 
             let editButton = document.createElement("button");
+            editButton.setAttribute("id", "edit-btn");
             let editIcon = document.createElement("img");
             editIcon.src = "/img/edit-icon.svg";
             editIcon.width= 39;
             editIcon.height = 30;
             editButton.append(editIcon);
+
+            // show edit buttons for uneditted rows upon submission of changes
+            for (let i=1, row; row = table.rows[i]; i++){
+                if(table.rows[i].getAttribute("data-value") != character_id){
+                    let otherRow = table.getElementsByTagName("tr")[i];
+                    console.log(otherRow);
+                    let otherButton = otherRow.getElementsByTagName("td")[11];
+                    otherButton.children[0].style.display = "block";
+                }
+            }
+
             editButton.onclick = function(e){
-                // let currentTable = doscument.getElementById("characters-table");
-                // for (let i=0, row; row = currentTable.rows[i]; i++){
-                //     if(currentTable.rows[i].getAttribute("data-value") != character_id){
-                //         // hide or disable edit button for unrelated rows
-                //     }
-                // }
                 updateCharacter(character_id);
             }
             // hidden update form is appended to HTML table and displayed to user when edit button is clicked
