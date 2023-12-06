@@ -23,32 +23,8 @@
 // Source URL: https://getbootstrap.com/docs/5.3/getting-started/introduction/
 -->
 
-<!-- Show the Items table -->
+
 <h1>Party Inventory List</h1>
-<table id="items-table">
-    <thead>
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-            <th></th>
-        </tr>
-    </thead>
-    
-    <tbody>
-        {{#each data}}
-        <tr data-value={{this.ID}}>
-            <td>{{this.ID}}</td>
-            <td>{{this.Name}}</td>
-            <td>{{this.Quantity}}</td>
-            <td>{{[Item Type]}}</td>
-            <td><button id="edit-btn" onclick="updateItem({{this.ID}})"><img src="/img/edit-icon.svg" wdith="39" height="30"></button></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
 
 <!---Button for Toggling Display of Add Form to user -->
 <div class="container">
@@ -94,18 +70,44 @@
 
 <script src="./js/add_item.js"></script>
 
+<!-- Show the Items table -->
+<table id="items-table">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.ID}}>
+            <td>{{this.ID}}</td>
+            <td>{{this.Name}}</td>
+            <td>{{this.Quantity}}</td>
+            <td>{{[Item Type]}}</td>
+            <td><button id="edit-btn" onclick="updateItem({{this.ID}})"><img src="/img/edit-icon.svg" wdith="39" height="30"></button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
 <!-- Update row in Items table-->
 <form id="update-item-form" hidden>
     <fieldset>
         <legend>Edit Item</legend>
         <label for="update-item-name">New Item Name: </label>
-        <input class="length" type="text" name="update-item-name" id="update-item-name" placeholder="Enter Name">
+        <input class="length" type="text" name="update-item-name" id="update-item-name" placeholder="Enter Name" required>
 
         <label for="update-item-quantity"> Item Quantity: </label>
-        <input class="numbered" type="number" name="update-item-quantity" id="update-item-quantity" placeholder="Quantity Value"> 
+        <input class="numbered" type="number" name="update-item-quantity" id="update-item-quantity" placeholder="Quantity Value" required> 
 
         <label for="update-item-type">Select Item Type </label>
-        <select name="update-item-type" id="update-item-type">
+        <select name="update-item-type" id="update-item-type" required>
             {{#each types}}
             <option value="{{this.item_type_id}}">{{this.name}}</option>
             {{/each}}

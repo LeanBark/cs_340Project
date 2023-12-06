@@ -23,29 +23,8 @@
 // Source URL: https://getbootstrap.com/docs/5.3/getting-started/introduction/
 -->
 
-<!-- Show Races table -->
+
 <h1>Races Table</h1>
-<table id="races-table">
-    <thead>
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-        </tr>
-    </thead>
-    
-    <tbody>
-        {{#each data}}
-        <tr data-value={{this.ID}}>
-            <td>{{this.ID}}</td>
-            <td>{{this.Name}}</td>
-            <td>{{this.Description}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
 
 <!---Button for Toggling Display of Add Form to user -->
 <div class="container">
@@ -80,3 +59,26 @@
 </div>
 
 <script src="./js/add_race.js"></script>
+
+<!-- Show Races table -->
+<table id="races-table">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.ID}}>
+            <td>{{this.ID}}</td>
+            <td>{{this.Name}}</td>
+            <td>{{this.Description}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
