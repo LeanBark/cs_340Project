@@ -1,3 +1,5 @@
+-- PURPOSE: THIS FILE IS A COLLECTION OF THE SQL QUERIES USED BY CS 340 GROUP 33's PORTFOLIO PROJECT
+
 -----------------------------CHARACTERS TABLE - SELECT-------------------
 SELECT character_id, Characters.name AS Name, level AS Level, strength AS Strength, dexterity AS Dexterity, constitution AS Constitution, intelligence AS Intelligence, wisdom AS Wisdom, charisma AS Charisma, Races.name AS Race, Classes.name AS Class 
 FROM Characters 
