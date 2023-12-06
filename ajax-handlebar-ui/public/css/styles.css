@@ -119,6 +119,7 @@ button:hover{
     background-color: rgb(247, 247, 247);
 }
 
+
 input, select {
     padding-bottom: 4px;
     font-family: contentFont;
@@ -182,7 +183,6 @@ li {
 .topnav a {
     color: white;
     float: center;
-    /* text-align: center; */
     padding: 10px;
     text-decoration: none;
     font-size: 16px;

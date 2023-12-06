@@ -103,11 +103,10 @@ function updateCharacter(character_id) {
             // hide or disable edit button for unrelated rows
             for (let i=1, row; row = table.rows[i]; i++){
                 if(table.rows[i].getAttribute("data-value") != character_id){
-                    let otherRow = table.getElementsByTagName("tr")[i];
-                    let rowLength = otherRow.getElementsByTagName("td").length;
-                    console.log(otherRow.getElementsByTagName("td").length - 1);
-                    let otherButton = otherRow.getElementsByTagName("td")[rowLength - 1];
-                    otherButton.children[0].style.display = "none";
+                    let unselectedRow = table.getElementsByTagName("tr")[i];
+                    let rowLength = unselectedRow.getElementsByTagName("td").length;
+                    let endButton = unselectedRow.getElementsByTagName("td")[rowLength - 1];
+                    endButton.children[0].style.display = "none";
                 }
             }
             submitButton.onclick = function(){
@@ -228,10 +227,10 @@ function updateRow(data, character_id){
             // show edit buttons for uneditted rows upon submission of changes
             for (let i=1, row; row = table.rows[i]; i++){
                 if(table.rows[i].getAttribute("data-value") != character_id){
-                    let otherRow = table.getElementsByTagName("tr")[i];
-                    console.log(otherRow);
-                    let otherButton = otherRow.getElementsByTagName("td")[11];
-                    otherButton.children[0].style.display = "block";
+                    let unselectedRow = table.getElementsByTagName("tr")[i];
+                    let rowLength = unselectedRow.getElementsByTagName("td").length;
+                    let endButton = unselectedRow.getElementsByTagName("td")[rowLength - 1];
+                    endButton.children[0].style.display = "block";
                 }
             }
 
