@@ -109,6 +109,37 @@ Citation for Bootstrap:
 
 <script src="./js/add_character.js"></script>
 
+<table id="characters-table">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.ID}}>
+            <td>{{this.ID}}</td>
+            <td>{{this.Name}}</td>
+            <td>{{this.Level}}</td>
+            <td>{{this.Strength}}</td>
+            <td>{{this.Dexterity}}</td>
+            <td>{{this.Constitution}}</td>
+            <td>{{this.Intelligence}}</td>
+            <td>{{this.Wisdom}}</td>
+            <td>{{this.Charisma}}</td>
+            <td>{{this.Race}}</td>
+            <td>{{this.Class}}</td>
+            <td><button id="edit-btn" onclick="updateCharacter({{this.ID}})"><img src="/img/edit-icon.svg" width="39" height="30"></button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
 
 <!-- Update row in Characters table -->
 <form id="update-character-form" hidden>
