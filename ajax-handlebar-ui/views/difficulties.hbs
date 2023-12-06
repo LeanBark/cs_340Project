@@ -23,29 +23,8 @@ Citation for Bootstrap:
 // Source URL: https://getbootstrap.com/docs/5.3/getting-started/introduction/
 -->
 
-<!-- Show Event Difficultiestable -->
+
 <h1>Event Difficulties Table</h1>
-<table id="difficulties-table">
-    <thead>
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-        </tr>
-    </thead>
-    
-    <tbody>
-        {{#each data}}
-        <tr data-value={{this.ID}}>
-            <td>{{this.ID}}</td>
-            <td>{{this.Value}}</td>
-            <td>{{this.Description}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
 
 <!---Button for Toggling Display of Add Form to user -->
 <div class="container">
@@ -82,3 +61,26 @@ Citation for Bootstrap:
 </div>
 
 <script src="./js/add_difficulty.js"></script>
+
+<!-- Show Event Difficulties table -->
+<table id="difficulties-table">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.ID}}>
+            <td>{{this.ID}}</td>
+            <td>{{this.Value}}</td>
+            <td>{{this.Description}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

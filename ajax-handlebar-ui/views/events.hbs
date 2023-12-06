@@ -29,40 +29,8 @@ Citation for Bootstrap:
 // Source URL: https://getbootstrap.com/docs/5.3/getting-started/introduction/
 -->
 
-<!-- Show Skill Checks table -->
-<h1 id="skill-check-title">Skill Check Events</h1>
-<table id="events-table">
-    <thead>
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    
-    <tbody>
-        {{#each data}}
-        <tr data-value={{this.ID}}>
-            <td>{{this.ID}}</td>
-            <td>{{this.Description}}</td>
-            <td>{{[Roll Result]}}</td>            
-            <td>{{this.Difficulty}}</td>
-            <td>{{[Difficulty Value]}}</td>
-            <!-- Disable skill check edit -->
-            <td><button id="edit-btn" onclick="updateEvent({{this.ID}})"><img src="/img/edit-icon.svg" width="39" height="30"></button></td>
-            <!-- Disable skill check delete -->
-            <td><button id="delete-btn" onclick="deleteEvent({{this.ID}})"><img src="img/delete-icon.svg" width="39" height="30"></button></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
 
-<script src="./js/update_event.js"></script>
-<script src="./js/delete_event.js"></script>
+<h1 id="skill-check-title">Skill Check Events</h1>
 
 <!---Button for Toggling Display of Add Form to user -->
 <div class="container">
@@ -108,6 +76,40 @@ Citation for Bootstrap:
 </div>
 
 <script src="./js/add_event.js"></script>
+
+<!-- Show Skill Checks table -->
+<table id="events-table">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.ID}}>
+            <td>{{this.ID}}</td>
+            <td>{{this.Description}}</td>
+            <td>{{[Roll Result]}}</td>            
+            <td>{{this.Difficulty}}</td>
+            <td>{{[Difficulty Value]}}</td>
+            <!-- Disable skill check edit -->
+            <td><button id="edit-btn" onclick="updateEvent({{this.ID}})"><img src="/img/edit-icon.svg" width="39" height="30"></button></td>
+            <!-- Disable skill check delete -->
+            <td><button id="delete-btn" onclick="deleteEvent({{this.ID}})"><img src="img/delete-icon.svg" width="39" height="30"></button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<script src="./js/update_event.js"></script>
+<script src="./js/delete_event.js"></script>
 
 <!-- Update row in Skill Check Details table -->
 <form id="update-event-form" hidden>
