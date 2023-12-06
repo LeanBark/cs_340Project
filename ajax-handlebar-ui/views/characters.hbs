@@ -146,37 +146,37 @@ Citation for Bootstrap:
     <fieldset>
         <legend>Edit Character</legend>
         <label for="input-name-update">Character Name: </label>
-        <input type="text" name="input-name-update" id="input-name-update" placeholder="Name">
+        <input type="text" name="input-name-update" id="input-name-update" placeholder="Name" required>
 
         <label for="input-lvl">Level: </label>
-        <input class="numbered" type="number" name="input-lvl" id="input-lvl-update" placeholder="Enter Level">
+        <input class="numbered" type="number" name="input-lvl" id="input-lvl-update" placeholder="Enter Level" required>
         
         <label for="input-str">Strength: </label>
-        <input class="numbered" type="number" name="input-str" id="input-str-update" placeholder="STR Value">
+        <input class="numbered" type="number" name="input-str" id="input-str-update" placeholder="STR Value" required>
         
         <label for="input-dex">Dexterity: </label>
-        <input class="numbered" type="number" name="input-dex" id="input-dex-update" placeholder="DEX Value">
+        <input class="numbered" type="number" name="input-dex" id="input-dex-update" placeholder="DEX Value" required>
         
         <label for="input-con">Constitution: </label>
-        <input class="numbered" type="number" name="input-con" id="input-con-update" placeholder="CON Value">
+        <input class="numbered" type="number" name="input-con" id="input-con-update" placeholder="CON Value" required>
         <br>
 
         <label for="input-int">Intelligence: </label>
-        <input class="numbered" type="number" name="input-int" id="input-int-update" placeholder="INT Value">
+        <input class="numbered" type="number" name="input-int" id="input-int-update" placeholder="INT Value" required>
         
         <label for="input-wis">Wisdom: </label>
-        <input class="numbered" type="number" name="input-wis" id="input-wis-update" placeholder="WIS Value">
+        <input class="numbered" type="number" name="input-wis" id="input-wis-update" placeholder="WIS Value" required>
 
         <label for="input-chr">Charisma: </label>
-        <input class="numbered" type="number" name="input-chr" id="input-chr-update" placeholder="CHR Value"> 
+        <input class="numbered" type="number" name="input-chr" id="input-chr-update" placeholder="CHR Value" required> 
         
-        <select name="input-race-update" id="input-race-update">
+        <select name="input-race-update" id="input-race-update" required>
             {{#each races}}
             <option value="{{this.race_id}}">{{this.name}}</option>
             {{/each}}
         </select>
 
-        <select name="input-class-update" id="input-class-update">
+        <select name="input-class-update" id="input-class-update" required>
             {{#each classes}}
             <option value="{{this.class_id}}">{{this.name}}</option>
             {{/each}}

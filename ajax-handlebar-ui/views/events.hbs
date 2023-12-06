@@ -116,12 +116,12 @@ Citation for Bootstrap:
     <fieldset>
         <legend>Edit Event</legend>
         <label for="input-description-update">Event Description: </label>
-        <input class="extended" type="text" name="input-description-update" id="input-description-update" placeholder="Enter Description">
+        <input class="extended" type="text" name="input-description-update" id="input-description-update" placeholder="Enter Description" required>
         
         <label for="input-roll-value-update">Player Roll Value: </label>
-        <input class="numbered" type="number" name="input-roll-value-update" id="input-roll-value-update" placeholder="Enter Roll Value">
+        <input class="numbered" type="number" name="input-roll-value-update" id="input-roll-value-update" placeholder="Enter Roll Value" required>
 
-        <select name="input-difficulty-update" id="input-difficulty-update">
+        <select name="input-difficulty-update" id="input-difficulty-update" required>
             {{#each difficulties}}
             <option value="{{this.difficulty_id}}">{{this.description}}: {{this.value}}</option>
             {{/each}}

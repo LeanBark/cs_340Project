@@ -101,13 +101,13 @@
     <fieldset>
         <legend>Edit Item</legend>
         <label for="update-item-name">New Item Name: </label>
-        <input class="length" type="text" name="update-item-name" id="update-item-name" placeholder="Enter Name">
+        <input class="length" type="text" name="update-item-name" id="update-item-name" placeholder="Enter Name" required>
 
         <label for="update-item-quantity"> Item Quantity: </label>
-        <input class="numbered" type="number" name="update-item-quantity" id="update-item-quantity" placeholder="Quantity Value"> 
+        <input class="numbered" type="number" name="update-item-quantity" id="update-item-quantity" placeholder="Quantity Value" required> 
 
         <label for="update-item-type">Select Item Type </label>
-        <select name="update-item-type" id="update-item-type">
+        <select name="update-item-type" id="update-item-type" required>
             {{#each types}}
             <option value="{{this.item_type_id}}">{{this.name}}</option>
             {{/each}}
