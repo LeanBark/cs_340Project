@@ -57,7 +57,7 @@ SELECT skill_check_details_id, Actions.name AS "Action", Characters.name AS "Cha
 FROM SkillCheckDetails 
 JOIN Actions ON SkillCheckDetails.action_id = Actions.action_id 
 JOIN Characters ON SkillCheckDetails.character_id = Characters.character_id 
-JOIN Items ON SkillCheckDetails.item_id = Items.item_id 
+LEFT JOIN Items ON SkillCheckDetails.item_id = Items.item_id 
 JOIN SkillChecks ON SkillCheckDetails.skill_check_id = SkillChecks.skill_check_id 
 ORDER BY skill_check_details_id ASC;
 
