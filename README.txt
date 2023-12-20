@@ -1,3 +1,10 @@
+About Project
+
+This project was created to store basic information that may be helpful to a Dungeon Master who wishes to track party progression during a DND-like campaign.
+This criteria was utilized to generate a relational schema focusing on the storage of information in terms of characters, party inventory, actions, and skill check events(and their outcomes).
+It utilizes a MariaDB relational database to store the information and an application built using a NodeJS framework and handlebars template to produce a locally or
+remotely hosted website whose UI allows for applying CRUD operations to the information stored in the database using SQL queries.
+
 Creating this app from a git clone
 
 Change directory to "ajax-handlebar-ui"
