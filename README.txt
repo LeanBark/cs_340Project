@@ -1,13 +1,18 @@
 Creating this app from a git clone
 
-npm init
-npm i express --save
-npm i forever --save
-alias forever='./node_modules/forever/bin/forever'
-npm i mysql --save
-npm i express-handlebars --save
+Change directory to "ajax-handlebar-ui"
+Enter "npm install" to add all packages listed as dependencies in package.json
+Create db-connector.js file inside "database" folder with format:
+  var mysql = require("mysql");
+  var pool = mysql.createPool({
+   hostname: "hosting server's address" if not "localhost",
+   user: "username associated with database",
+   password: "password associated with user",
+   database: "name of database to be accessed"
+   });
+   module.exports.pool = pool;
 
-Accessing the app
+Remotely Accessing the app using OSU Flip server:
 
 node app.js
 ensure that VPN to vpn.oregonstate.edu is active
@@ -22,6 +27,27 @@ forever stopall
 Setting up the database
 
 Use database/DDL.sql as the source
+
+
+
+Locally Accessing the app using a local machine as hosting server:
+
+Download the MariaDB server from https://mariadb.org/download/ to local machine
+ - NOTE: During installation process, make sure to set and record password to access local MariaDB and its location
+
+
+In MariaDB folder:
+ - Open Command Prompt
+ - Enter "mariadb -u your_username -p" then enter your password when prompted
+ - Enter "CREATE DATABASE new_database_name;" to create a new database
+ - Enter "USE new_database_name;" to select the new database
+ - Determine the file path between the .ini file in "data" folder and your git clone's "DDL.sql" file on your local machine
+ - Enter "source 'your_local_file_path';" to fill the new database with the DDL's tables and data
+
+In IDE terminal:
+- Enter "node app,js" to run Express server
+
+You should now be able to access a locally-hosted version of the app at the address "http://localhost:PORT"
 
 Citations
 
